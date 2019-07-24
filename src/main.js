@@ -8,9 +8,11 @@ import './assets/icon/iconfont.css'
 import Bottom from './components/Bottom'
 import { Swipe, SwipeItem } from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import Header from './components/Header'
 
 
 
+Vue.component("Header",Header)
 Vue.config.productionTip = false;
 Vue.component("bottom",Bottom);
 Vue.component('mt-swipe', Swipe);
@@ -22,7 +24,5 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
-
-
 
 

@@ -2,7 +2,7 @@
   <div class="describe">
 <ul class="imgList">
     <li v-for="(item,index) in arr " :key="index">
-        <i class="icon-fanhui"></i>
+        <i class="icon-shangyibu"></i>
         <img :src="item.url" alt="图片走丢啦">
     <i :class="{'icon-shoucang':true,'checked':like}" @click="changeClass"></i>
     </li>
@@ -128,7 +128,7 @@ width:3.75rem;
 height:3.5rem;
 float:left;
 }
-.icon-fanhui{
+.icon-shangyibu{
     font-size:30px;
     position:absolute;
     left:.1rem;

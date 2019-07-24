@@ -1,11 +1,12 @@
+
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import Search from '../components/Search'
-import Collect from '../components/collect'
-import CardList from '../components/CardList'
+import Home from '@/home/Home'
+import Search from '@/search/Search'
+import Collect from '@/collect/Collect'
 import My from '../components/My'
 import Describe from '../components/Describe'
+import GoodList from '../GoodList/GoodList'
 
 
 Vue.use(Router)
@@ -19,8 +20,8 @@ export default new Router({
     },
     {
       path:'/cardlist',
-      name:'CardList',
-      component:CardList
+      name:'GoodList',
+      component:GoodList
     },
     { 
       path:'/search',
@@ -47,3 +48,4 @@ export default new Router({
 
   ]
 })
+
