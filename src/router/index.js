@@ -4,10 +4,9 @@ import Router from 'vue-router'
 import Home from '@/home/Home'
 import Search from '@/search/Search'
 import Collect from '@/collect/Collect'
-import My from '../components/My'
+import My from '../my/My'
 import Describe from '../components/Describe'
 import GoodList from '../GoodList/GoodList'
-
 
 Vue.use(Router)
 

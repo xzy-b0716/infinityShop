@@ -177,4 +177,35 @@
 .icon-youjiantou:before {
   content: "\e68c";
 }
+.icon-bangzhu:before {
+  content: "\e603";
+}
+
+.icon-wode:before {
+  content: "\e666";
+}
+
+.icon-dizhi:before {
+  content: "\e641";
+}
+
+.icon-dingdan:before {
+  content: "\e637";
+}
+
+.icon-zhifu:before {
+  content: "\e8f9";
+}
+
+.icon-jiantou-zuo:before {
+  content: "\e62a";
+}
+
+.icon-icon-test:before {
+  content: "\e60e";
+}
+
+.icon-youjiantou:before {
+  content: "\e68c";
+}
 

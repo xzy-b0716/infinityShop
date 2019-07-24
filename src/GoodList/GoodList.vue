@@ -83,6 +83,7 @@
         </div>
     </div>
     </div>
+       <bottom class="bottom" :n="n"></bottom>
   </div>
 </template>
 
@@ -95,6 +96,7 @@ export default {
   },
   data () {
     return { 
+      n:3,
       Numshow: false,
       show1: false,
       count: 1,
@@ -211,6 +213,11 @@ export default {
 }
 </script>
 <style scoped lang="less">
+.bottom{
+    position:fixed;
+    bottom:0;
+
+}
     @width: 100%;
     @color: #fff;
     Header{
