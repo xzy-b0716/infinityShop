@@ -1,3 +1,20 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: Seven
+ * @Date: 2019-07-17 23:56:24
+ * @LastEditors: Seven
+ * @LastEditTime: 2019-07-17 23:56:24
+ -->
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: Seven
+ * @Date: 2019-07-17 23:56:24
+ * @LastEditors: Seven
+ * @LastEditTime: 2019-07-24 01:07:51
+ -->
+
 <template>
   <div id="app">   
  <router-view></router-view>
@@ -6,15 +23,14 @@
 </template>
 
 <script>
-import Home from './components/Home'
+
 
 export default {
   name: 'App',
-  components:{
-    "home":Home
-  }
+  
   
 }
+
 </script>
 
 <style>

@@ -7,7 +7,6 @@ import CardList from '../components/CardList'
 import My from '../components/My'
 import Describe from '../components/Describe'
 
-
 Vue.use(Router)
 
 export default new Router({
