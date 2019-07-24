@@ -1,3 +1,4 @@
+
 @font-face {font-family: "iconfont";
   src: url('iconfont.eot?t=1563972404631'); /* IE9 */
   src: url('iconfont.eot?t=1563972404631#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -6,13 +7,15 @@
   url('iconfont.ttf?t=1563972404631') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
   url('iconfont.svg?t=1563972404631#iconfont') format('svg'); /* iOS 4.1- */
 }
-[class^="icon-"], [class*="icon-"] {
-  font-family:"iconfont" !important;
-  font-size: 14px;
+[class^="icon-"],[class*="icon-"]{
+  font-family:"iconfont" !important; 
+   font-size: 14px;
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  }
+  margin-right: 5px;
+
+}
 
 .iconfont {
   font-family: "iconfont" !important;
