@@ -17,7 +17,7 @@
 
 <li v-for= "(item,index) in swip2" :key="index">
   <img :src="item.url" alt="">
-  <i :class="{'icon-shoucang':true,'checked':item.like}" @click.stop="addclass(index)" ></i>
+  <i :class="{'icon-shoucang':true,'icon-shoucang1':item.like}" @click.stop="addclass(index)" ></i>
 </li>
 
 
@@ -25,7 +25,7 @@
 </ul>
 
 </div>
-<p class="a" @click="go">hahahah</p>
+<p class="a" @click="go">hahahaha</p>
 <bottom class="bottom" :n="n"></bottom>
 
 
@@ -86,6 +86,15 @@ export default {
     go(){
       this.$router.push("/describe")
     }
+  },
+      beforeRouteEnter (to, from, next) {
+    next(vm => {
+      document.body.scrollTop = vm.scrollTop
+    })
+  },
+  beforeRouteLeave (to, from, next) {
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    next()
   }
 
   
@@ -95,6 +104,9 @@ export default {
 </script>
 
 <style scoped>
+.home{
+  padding-bottom:.6rem;
+}
 .bottom{
     position:fixed;
     bottom:0;
@@ -154,8 +166,14 @@ p{
   bottom:3px;
   right:3px;
 }
-.checked{
+.icon-shoucang1{
   color:red;
+
+}
+.a{
+  margin-top:500px;
+  height:80px;
+  background-color:red;
 
 }
 
