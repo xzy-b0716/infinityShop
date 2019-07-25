@@ -2,9 +2,9 @@
   <div class="describe">
 <ul class="imgList">
     <li v-for="(item,index) in arr " :key="index">
-        <i class="icon-shangyibu"></i>
+        <i class="icon-shangyibu" @click="$router.back(-1)"></i>
         <img :src="item.url" alt="图片走丢啦">
-    <i :class="{'icon-shoucang':true,'checked':like}" @click="changeClass"></i>
+    <i :class="{'icon-shoucang':true,'icon-shoucang1':like}" @click="changeClass"></i>
     </li>
 </ul>
     <div class="box">
@@ -31,9 +31,13 @@
 </div>
 </div> -->
 <ul class="product">
-<li v-for="(item,index) in product" :key="index">{{item.name}}</li>
+<li v-for="(item,index) in product" :key="index">
+   <p class="pname" @click="showContent(index)">{{item.name}}</p>
+   <p class="pcontent" v-if="item.show">{{item.content}}</p>
+</li>
 </ul>
 <p class="tuijian">Buy the look</p>
+
 
 
 
@@ -78,11 +82,15 @@ export default {
        name:"product details",
        content:"Long,long ago there lived a king.He loved horses. One day he asked an artist to draw him a beautiful horse. "  ,
        show:false     
-   }]
+   }],
+
     }
     
   },
   methods:{
+    //   back(){
+    //       this.$router.go(-1);
+    //   },
       changeClass(){
           this.like=!this.like;
       },
@@ -102,15 +110,23 @@ export default {
         setTimeout(function(){
         that.show1 = false;
         },2000)
+},
+showContent(n){
+    for(var i=0;i<4;i++){
+   this.product[i].show=false;
+    }
+ 
+    this.product[n].show=true;
 }
       }
+  
 
   }
 
 </script>
 
 <style scoped>
-.checked{
+.icon-shoucang1{
     color:red;
 }
 .describe{
@@ -284,13 +300,24 @@ to {opacity: 0;}
 
 }
 .product li{
-width:100%;
-height:.5rem;
-padding-left:5%;
-font-size:22px;
-line-height:.5rem;
 border-bottom:1px solid #EAEAEA;
+
 }
+.product li .pname{
+    margin:auto;
+    width:90%;
+    height:.5rem;
+    line-height:.5rem;
+    font-size:22px;
+}
+.product li .pcontent{
+    width:90%;
+    margin:auto;
+    padding-bottom:.1rem;
+}
+
+
+
 .tuijian{
     height:.6rem;
     padding-left:5%;
