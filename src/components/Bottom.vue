@@ -46,6 +46,7 @@ this.changeArr();
   justify-content: space-around;
   align-items: center;
   border:1px solid #cccccccc;
+  background-color:#FFFFFF;
 }
 i{
   padding:0.05rem;
