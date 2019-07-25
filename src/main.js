@@ -7,6 +7,7 @@ import Bottom from './components/Bottom'
 import { Swipe, SwipeItem } from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import Header from './components/Header'
+import fastClick from 'fastClick'
 
 
 
@@ -15,6 +16,8 @@ Vue.config.productionTip = false;
 Vue.component("bottom",Bottom);
 Vue.component('mt-swipe', Swipe);
 Vue.component('mt-swipe-item', SwipeItem);
+
+fastClick.attach(document.body);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
