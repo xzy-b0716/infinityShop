@@ -10,14 +10,12 @@ export default {
 </script>
 <style scoped lang="less">
     .Top{
-        height: 0.4rem;
-        line-height: 0.4rem;
+        height: 0.3rem;
+        line-height: 0.3rem;
         width: 100%;
+        text-align: center;
         background-color: #46aaff;
         font-size: 0.18rem;
-        position: absolute;
-        top: 0.5rem;
-        left: 0;
         z-index: 50;
     }
     span{

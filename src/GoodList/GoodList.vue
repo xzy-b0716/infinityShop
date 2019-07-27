@@ -2,7 +2,7 @@
   <div class="GoodList">
     <Header message="购物车"></Header>
     <top v-show= "count>0"></top>
-    <div class="empty">
+    <div class="empty" v-show= "count == 0">
       <div class="icon">
          <i class="icon-gouwucheweikong"></i>
       </div>
@@ -17,13 +17,13 @@
             <li class="list-item" v-for = "(item, index) in list" :key= "index" >
                 <div class="goods-list">
                     <div class="service-information">
-                        <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{iconduigou: item.isCheck}"></i>
+                        <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.isCheck}"></i>
                         <div class="name">{{item.shopname}}</div>
                         <i class="icon-guifanliebiaoxiayibu"></i>
                     </div>
                     <div class="goods-information">
                         <div class="left">
-                            <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{iconduigou: item.isCheck}"></i>
+                            <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.isCheck}"></i>
                             <img class="img" :src= "item.imgUrl" width="1">
                         </div>
                         <div class="right">
@@ -33,12 +33,12 @@
                             </div>
                             <div class="right-middle">
                                 <div class="color"></div>
-                                <a class="color-selection">change</a>
+                                <a class="color-selection" @click= "changeNum(index)">change</a>
                             </div>
                             <div class="right-bottom">
                                 <div class="size">
                                     <div>{{item.size}}</div>
-                                    <i class="icon-xia"></i>
+                                    <i class="icon-xia" @click= "changeNum(index)"></i>
                                 </div>
                                 <div class="number">
                                   <div>QTY:{{item.count}}</div>
@@ -48,14 +48,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="delete">
-                    <i class="icon-shanchu1"></i>
-                </div>
             </li>
         </ul>
       <div class="Foot">
         <div class="Foot-left">
-            <i class="check-all icon-weigouxuan" @click= "checkAll()" :class= "{iconduigou: checkall}"></i><span>全选</span>
+            <i class="icon-weigouxuan" @click= "checkAll()" :class= "{'icon-duigou': checkall}"></i><span>全选</span>
         </div>
         <div class="Foot-right">
             <div class="total">合计:￥<span>{{totalprice}}</span></div>
@@ -65,58 +62,80 @@
       <transition name="PopupTS">
         <div class="Popup" v-show= "show1">
           <div class="content">
-              <span>您还没有选择商品哦</span>
+              您还没有选择商品哦
           </div>
         </div>
       </transition>
+    </div>
       <div class="Numbers" v-show= "Numshow">
         <div class="numbers">
-            <div class="title">
-                数量 :
-                <i class="icon-shanchu1" @click= "CloseNum"></i>
-            </div>
-            <ul class="num_ul">
-                <li class="num_list" :class= "{broadside: Numnum==n}" v-for= "(n,num) in listNum" :key= "num" @click= "changeClass(num)">
-                    <span>{{n}}</span>
-                </li>
-            </ul>
+           <div class="num">
+             <i class="icon-guanbi" @click= "closeNum"></i>
+             <div class="num_title">
+               数量：
+               <div class="num_num">
+                 <i class="icon-jianhaob" @click= "decrease"></i>
+                 <span>{{this.Numnum}}</span>
+                 <i class="icon-jiahaob" @click = "increase"></i>
+               </div>
+             </div>
+           </div>
+           <div class="color">
+             <div class="num_color">
+               颜色：
+               <i class="icon-weigouxuan"></i>
+             </div>
+             <ul class="color_list"></ul>
+           </div>
+           <div class="size">
+             <div class="size_num">尺码：
+               <span>M</span>
+             </div>
+             <ul class="size_left"></ul>
+           </div>
+           <div class="define">
+             <button @click= "define">确定</button>
+           </div>
         </div>
     </div>
-    </div>
-       <bottom class="bottom" :n="n"></bottom>
+    <router-view></router-view>
+    <bottom class="bottom" :n="n"></bottom>
   </div>
 </template>
 
 <script>
 import Top from './Top'
+import Pay from './Pay'
 export default {
   name: 'GoodList',
   components: {
-    "top": Top
+    "top": Top,
+    "pay": Pay
   },
   data () {
     return { 
       n:3,
       Numshow: false,
       show1: false,
-      count: 1,
+      count: 2,
       totalprice: 0,
       totalnum: 0,
       checkall: false,
       Index: '',
       Numnum: '',
-      listNum: [1,2,3,4,5,6,7,8,9,10],
       list: [{
+          id: 0,
           price: 10,
           count: 3,
           size: "M",
           isCheck: false,
           imgUrl: require('../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"
-            
+          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
+          
         },
         {
+          id: 1,
           price: 15,
           count: 5,
           size: "M",
@@ -124,34 +143,36 @@ export default {
           imgUrl: require('../assets/image/4.png'),
           shopname: "韩舍家",
           describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"
-            
         },
         {
+          id: 2,
           price: 3,
           count: 6,
           size: "M",
           isCheck: false,
           imgUrl: require('../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"   
+          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"  
         },
         {
+          id: 3,
           price: 3,
           count: 6,
           size: "M",
           isCheck: false,
           imgUrl: require('../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"   
+          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"  
         },
         {
+          id: 4,
           price: 3,
           count: 6,
           size: "M",
           isCheck: false,
           imgUrl: require('../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"   
+          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"  
         }
         ]
     }
@@ -197,46 +218,68 @@ export default {
       },2000)
       if(this.totalnum === 0){
         this.show1 = true;
+      }else{
+        this.$router.push({path: '/Pay'});
       }
     },
     changeNum(index){
       this.Numshow = true;
+      this.Index = this.list[index].id;
       this.Numnum = this.list[index].count;
     },
-    CloseNum(){
+    decrease(){
+      if(this.Numnum>1){
+        this.Numnum --;
+      }else{
+        this.Numnum = 1;
+      }
+    },
+    increase(){
+      this.Numnum ++;
+    },
+    define(){
+      this.list[this.Index].count = this.Numnum;
       this.Numshow = false;
     },
-    changeClass(n){ 
-      this.Numnum = this.listNum[n];
+    closeNum(){
+      this.Numshow = false;
     }
   }
 }
 </script>
 <style scoped lang="less">
-.bottom{
-    position:fixed;
-    bottom:0;
-
-}
+    .bottom{
+        position:fixed;
+        bottom:0;
+    }
     @width: 100%;
     @color: #fff;
     Header{
-      width: @width;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    top{
+        position: fixed;
+        top: 0.4rem;
+        left: 0;
     }
     .empty{
       width: 100%;
       font-size: 0.19rem;
-  
       margin-top: 1rem;
-      display: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       .icon{
         width: 1rem;
         height: 1rem;
-        margin: 0 auto;
         background-color: #fcca47;
         border-radius: 50%;
-        line-height: 1rem;
         margin-bottom: 0.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       .icon-gouwucheweikong{
         font-size: 0.6rem;
@@ -246,6 +289,7 @@ export default {
       .word{
         margin-top: 0.2rem;
         margin-bottom: 0.1rem;
+        text-align: center;
       }
       span{
         display: inline-block;
@@ -261,17 +305,19 @@ export default {
         border-radius: 0.1rem;
         color: #fff;
         font-size: 0.2rem;
+        
       }
     } 
     .goods{
-        overflow: auto;
-        position: absolute;
-        top: 0.9rem;
-        bottom: 1.1rem;
+        overflow-y: auto;
+        position: fixed;
+        top: 0.7rem;
+        bottom: 1.1em;
+        width: 100%;
        .list-ul{
         .list-item{
             @color: #ccc;
-            height: 1.6rem;
+            height: 1.7rem;
             position: relative;
             border-bottom: 0.01rem #b2b2b2 solid;
             .goods-list{
@@ -299,6 +345,7 @@ export default {
                     justify-content: flex-start;
                     align-items: center;
                     height: 1.2rem;
+                    width: 100%;
                     .left{
                         width: 1.3rem;
                         display: flex;
@@ -322,6 +369,10 @@ export default {
                         .right-top{
                             width: 1.8rem;
                             text-align: left;
+                            .price{
+                              width: 1.8rem;
+                              font-size:0.18rem;
+                            }
                             .describe{
                                 width: 1.8rem;
                                 height: 0.4rem;
@@ -342,6 +393,7 @@ export default {
                             }
                             .color-selection{
                                 margin-left: 0.15rem;
+                                font-size: 0.14rem;
                             }
                         }
                         .right-bottom{
@@ -359,12 +411,7 @@ export default {
                               display: flex;
                               justify-content: space-between;
                               align-items: center;
-                              .message{
-                                  width: 0.6rem;
-                                  font-size: 0.14rem;
-                                  text-align: left;
-                                  padding-left: 0.05rem;
-                              }
+                              font-size: 0.15rem;
                               .icon-xia{
                                   width: 0.3rem;
                                   height: 0.3rem;
@@ -372,53 +419,43 @@ export default {
                                   text-align: center;
                                   background-color: #46aaff;
                                   border-radius: 0 0.05rem 0.05rem 0;
-                                  font-size: 0.2rem;
                                   color: #fff;
+                                  margin: 0;
                               }
                           }
                         }
                     }
                 }
             }
-        .delete{
-            width: 0.5rem;
-            height: 1.6rem;
-            line-height: 1.6rem;
-            text-align: center;
-            background-color: #ff3b2f;
-            box-shadow: 0 0.03rem 0.03rem @color;
-            position: absolute;
-            top: 0;
-            right: -0.55rem;
-            .icon-shanchu1{
-                font-size: 0.25rem;
-                color: #fff;
-            }
-        }
 			}   
   }
 }
     .Foot{
-          height: 0.6rem;
+          height: 0.5rem;
           width: 100%;
           border-top: 0.01rem solid #b7b7b7;
           position: fixed;
-          bottom: 0.5rem;
+          bottom: 0.59rem;
           left: 0;
           background-color: #81d654;
           display: flex;
           justify-content: space-between;
           align-items: center;
           margin: 0 auto;
-          .Foot-left .check-all{
-              font-size: 0.22rem;
+          .Foot-left{
+            height: 0.5rem;
+            width: 1rem;
+            padding-left: 0.1rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 0.22rem;
+            color: @color;
+            .icon-weigouxuan{
+              font-size: 0.25rem;
               color: @color;
-              margin-left: 0.2rem;
-          }
-          .Foot-left span{
-              font-size: 0.17rem;
-              color: @color;
-          }
+            }
+           }
           .Foot-right{
               width: 2rem;
               display: flex;
@@ -453,6 +490,10 @@ export default {
     button:active{
         box-shadow: inset 0 0 0.05rem #999;
     }
+    button:focus{
+        outline: none;
+        border-color: transparent;
+    }
      .Popup{
         position: fixed;
         top: 0;
@@ -470,10 +511,9 @@ export default {
             text-align: center;
             line-height: 0.4rem;
             border-radius: 0.1rem;
-            span{
-                font-size: 0.14rem;
-                color: #fff;
-            }
+            font-size: 0.14rem;
+            color: #fff;
+            
         }
      } 
     .PopupTS-enter-active {
@@ -494,7 +534,7 @@ export default {
       0% {opacity: 0.5;}
       to {opacity: 0;}
     }
-    .Numbers{
+     .Numbers{
         width: 100%;
         height: 100%;
         background-color: rgba(0,0,0,0.6);
@@ -502,48 +542,120 @@ export default {
         top: 0;
         left: 0;
         z-index: 97;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         .numbers{
-            width: 2rem;
-            height: 5rem;
+            width: 100%;
+            height: 4.5rem;
             background-color: #ffffff;
-            border-radius: 0.05rem;
-            position: relative;
-            .title{
-                height: 0.5rem;
-                padding-left: 0.5rem;
-                padding-right: 0.1rem;
+            border-radius: 0.1rem 0.1rem 0 0;
+            position: fixed;
+            bottom: 0rem;
+            left: 0;
+            z-index: 1111;
+            .define{
+              height: 0.5rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              button{
+                width: 90%;
+              }
+            }
+            .num{
+                height: 1rem;
+                position: relative;
+                border-radius: 0.05rem 0.05rem 0 0;
+                border-bottom: 0.01rem solid #ccc;
+                .num_title{
+                  position: absolute;
+                  left: 0.2rem;
+                  top: 0.4rem;
+                  width: 1.8rem;
+                  height: 0.5rem;
+                  display: flex;
+                  font-size: 0.20rem;
+                  justify-content: space-between;
+                  align-items: center;
+                  .num_num{
+                    width: 1rem;
+                    height: 0.3rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border: 0.01rem #ccc solid;
+                    span{
+                      width: 0.4rem;
+                      height: 0.3rem;
+                      line-height: 0.3rem;
+                      text-align: center;
+                      border-left: 0.01rem #ccc solid;
+                      border-right: 0.01rem #ccc solid;
+                      font-size: 0.18rem;
+                    }
+                    i{
+                      height: 0.3rem;
+                      width: 0.3rem;
+                      text-align: center;
+                      line-height: 0.3rem;
+                      font-size: 0.20rem;
+                      margin: 0;
+                    }
+                  }
+                }
+                .icon-guanbi{
+                  font-size: 0.22rem;
+                  width: 0.3rem;
+                  height: 0.3rem;
+                  position: absolute;
+                  right: 0.1rem;
+                  top: 0.1rem;
+                  text-align: center;
+                  line-height: 0.3rem;
+                  color: #ccc;
+                }
+            }
+            .color{
+              width: 100%;
+              height: 1.5rem;
+              border-bottom: 0.01rem solid #ccc;
+              padding-left: 0.2rem;
+              .num_color{
+                width: 1.8rem;
+                height: 0.7rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 font-size: 0.2rem;
-                background-color: #f0f2f1;
-                border-radius: 0.05rem 0.05rem 0 0;
-                display: absolute;
-                left: 0;
-                top: 0;
-            }
-            .num_ul{
-                width: 100%;
-                height: 4.5rem;
-                position: absolute;
-                top: 0.5rem;
-                left: 0;
-                overflow: auto;
-                .num_list{
-                    height: 0.5rem; 
-                    border-top: 0.01rem #e9ebea solid;
-                    line-height: 0.5rem;
-                    text-align: center;
+                .icon-weigouxuan{
+                  width: 1rem;
+                  font-size: 0.25rem;
+                  display: inline-block;
+                  height: 0.3rem;
+                  text-align: center;
+                  line-height: 0.3rem;
                 }
-                .broadside{
-                    border-left: 0.06rem solid #46aaff;
-                    font-size: 0.22rem;
-                }
+              }
             }
-           
+            .size{
+              width: 100%;
+              height: 1.5rem;
+              padding-left: 0.2rem;
+              border-bottom: 0.01rem solid #ccc;
+              .size_num{
+                width: 1.8rem;
+                height: 0.7rem;
+                font-size: 0.2rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                span{
+                  width: 1rem;
+                  height: 0.7rem;
+                  line-height: 0.7rem;
+                  text-align: center;
+                }
+              }
+            }
+            
         }
     }
     
