@@ -1,29 +1,25 @@
 <template>
   <div class="home">
-      <mt-swipe :auto="4000" class="mt-swipe">
-  <mt-swipe-item class="mt-swipe-item">
-      <img :src="arr[0].url" alt="图片走丢啦">
-  </mt-swipe-item>
-  <mt-swipe-item class="mt-swipe-item">
-       <img :src="arr[1].url" alt="图片走丢啦">
-  </mt-swipe-item>
-  <mt-swipe-item class="mt-swipe-item">
-       <img :src="arr[2].url" alt="图片走丢啦">
-  </mt-swipe-item>
-</mt-swipe>
+<div class="swiper">
+<ul>
+  <li v-for="(item,index) in arr " :key="index">
+    <img :src="item.url" alt="图片走丢啦">
+  </li>
+</ul>
+<div class="point">
+  <p v-for="(item,index) in arr" :key="index"></p>
+</div>
+
+</div>
+
 <div class="recently-viewed">
   <p>Recently Viewed</p>
 <ul class="view">
-
 <li v-for= "(item,index) in swip2" :key="index">
   <img :src="item.url" alt="">
   <i :class="{'icon-shoucang':true,'icon-shoucang1':item.like}" @click.stop="addclass(index)" ></i>
 </li>
-
-
-
 </ul>
-
 </div>
 <p class="a" @click="go">hahahaha</p>
 <bottom class="bottom" :n="n"></bottom>
@@ -35,17 +31,12 @@
 </template>
 
 <script>
-$(function(){
-$(".a").on("tap",function(){
-  $(this).hide();
-});
-})
-
 export default {
   name: 'Home',
   data () {
     return {
       n:0,
+      scrollTop:'',
         arr:[{
           url:require("../assets/img/1.jpg")
         },{
@@ -84,18 +75,17 @@ export default {
    
     },
     go(){
-      this.$router.push("/describe")
+      this.$router.push({path:'/describe'})
     }
   },
-      beforeRouteEnter (to, from, next) {
-    next(vm => {
-      document.body.scrollTop = vm.scrollTop
-    })
-  },
-  beforeRouteLeave (to, from, next) {
-    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-    next()
-  }
+//       beforeRouteEnter (to, from, next) {
+//  document.body.scrollTop = 0;
+//    next();
+//   },
+  // beforeRouteLeave (to, from, next) {
+  //   this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  //   next()
+  // }
 
   
  
@@ -113,18 +103,49 @@ export default {
 
 }
 
-.mt-swipe{
-    width:100%;
+.swiper{
+  position:relative;
     height:2.5rem;
     border-bottom: 1px solid #cccccc;
     margin-bottom: 0.1rem;
+    overflow:hidden;
+}
+.swiper ul{
+  width:18.75rem;
+  height:2.5rem;
 
 }
-.mt-swipe-item{
+.swiper ul li{
+  width:3.75rem;
+  height:2.5rem;
+  list-style:none;
+  background-color:red;
+  float:left;
+
+
+}
+.point{
   width:100%;
-  height:100%;
+  position:absolute;
+  height:.15rem;
+  /* background-color: red; */
+  bottom:.08rem;
+  z-index:99;
+  margin: auto;
+  display:flex;
+  justify-content: center;
 
 }
+.point p{
+  width:.4rem;
+  height:.08rem;
+  border-radius:.08rem;
+  background-color:white;
+  margin-right:.1rem;
+
+}
+
+
 img{
   width:100%;
   height:100%;

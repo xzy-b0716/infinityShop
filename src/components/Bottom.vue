@@ -22,7 +22,7 @@ export default {
   },
   methods:{
     go(route){
-this.$router.push(route);
+this.$router.push(route)
 
         },
    changeArr(){

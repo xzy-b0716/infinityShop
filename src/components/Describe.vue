@@ -2,7 +2,7 @@
   <div class="describe">
 <ul class="imgList">
     <li v-for="(item,index) in arr " :key="index">
-        <i class="icon-shangyibu" @click="$router.back(-1)"></i>
+        <i class="icon-shangyibu" @click="back()"></i>
         <img :src="item.url" alt="图片走丢啦">
     <i :class="{'icon-shoucang':true,'icon-shoucang1':like}" @click="changeClass"></i>
     </li>
@@ -88,9 +88,9 @@ export default {
     
   },
   methods:{
-    //   back(){
-    //       this.$router.go(-1);
-    //   },
+      back(){
+          this.$router.go(-1);
+      },
       changeClass(){
           this.like=!this.like;
       },
@@ -118,7 +118,14 @@ showContent(n){
  
     this.product[n].show=true;
 }
-      }
+      },
+    //  created(){
+    //       document.body.scrollTop = 0;
+    //   }
+//           beforeRouteEnter (to, from, next) {
+//           document.body.scrollTop = 0;
+//           next();
+//   },
   
 
   }

@@ -8,6 +8,8 @@ import { Swipe, SwipeItem } from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import Header from './components/Header'
 import fastClick from 'fastclick'
+import { Script } from 'vm';
+
 
 
 fastClick.attach(document.body)
@@ -21,7 +23,11 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  
+  
 })
+
+
 
 
