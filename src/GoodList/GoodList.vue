@@ -331,6 +331,10 @@ export default {
                         font-size: 0.25rem;
                         color: @color;
                     }
+                    .icon-duigou{
+                        font-size: 0.25rem;
+                        color: #46aaff;
+                    }
                     .name{
                         font-size: 0.16rem;
                         margin: 0 0.1rem 0 0.15rem;
@@ -355,6 +359,9 @@ export default {
                             font-size: 0.25rem;
                             color: @color;
                         }
+                        .icon-duigou{
+                          color: #46aaff;
+                         }
                         .img{
                             display: block;
                             width: 1rem;
@@ -437,7 +444,7 @@ export default {
           position: fixed;
           bottom: 0.59rem;
           left: 0;
-          background-color: #81d654;
+          background-color: #46aaff;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -484,7 +491,7 @@ export default {
       margin-left: 0.05rem;
       font-size: 0.2rem;
       color: @color;
-      background-color: #81d654;
+      background-color: #46aaff;
       box-shadow: inset 0 0 0.03rem @color;
     }
     button:active{

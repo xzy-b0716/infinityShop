@@ -14,7 +14,8 @@ export default {
         line-height: 0.3rem;
         width: 100%;
         text-align: center;
-        background-color: #46aaff;
+        background-color: #81d654;
+        
         font-size: 0.18rem;
         z-index: 50;
     }

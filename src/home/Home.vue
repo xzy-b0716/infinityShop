@@ -84,7 +84,7 @@ export default {
    
     },
     go(){
-      this.$router.push("/describe")
+      this.$router.push({path:"/describe"})
     }
   },
       beforeRouteEnter (to, from, next) {
