@@ -12,6 +12,8 @@ import Orders from '../my/Orders/Orders'
 import Payment from '../my/Orders/Payment'
 import Deliver from '../my/Orders/Deliver'
 import Receive from '../my/Orders/Receive'
+import SecKill from '../home/SecKill'
+import SecDescribe from '../components/SecDescribe'
 
 Vue.use(Router)
 
@@ -72,8 +74,24 @@ export default new Router({
       path: '/receive',
       name: 'receive',
       component: Receive
+    },{
+      path:'/seckill',
+      name:'seckill',
+      component: SecKill
     },
+    {
+      path:'/secdescribe',
+      name:'secdescribe',
+      component:SecDescribe
+    }
+    
 
-  ]
+  ],
+    scrollBehavior (to, from, savedPosition) {
+      // return 期望滚动到哪个的位置
+      return { x: 0, y: 0 }
+    }
+
+
 })
 

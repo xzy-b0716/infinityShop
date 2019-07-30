@@ -22,7 +22,7 @@ export default {
   },
   methods:{
     go(route){
-this.$router.push(route);
+this.$router.push(route)
 
         },
    changeArr(){
@@ -53,7 +53,7 @@ i{
   font-size:0.3rem;
 }
 .checked{
-background-color:cornflowerblue;
+background-color:#46AAFF;
 border-radius:50%;
 } 
 

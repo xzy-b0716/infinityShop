@@ -45,7 +45,7 @@ export default {
     width:3.5rem;
     height:0.38rem;
     border-radius: 10px;
-    background-color:cornflowerblue; 
+    background-color:#46AAFF; 
     }
 input{
     padding-left:0.1rem;
@@ -55,7 +55,7 @@ input{
     line-height: 0.38rem;
     width:3.2rem;
     font-size:16px;
-    background-color:cornflowerblue;
+    background-color:#46AAFF;
     outline:none;
     color:white;
     }
