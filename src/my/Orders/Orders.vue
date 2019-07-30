@@ -56,7 +56,7 @@ export default {
             },
             {
                 name: '待付款',
-                Url: '/Payment'
+                Url: '/Payments'
             },
             {
                 name: '待发货',

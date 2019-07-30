@@ -3,7 +3,8 @@
   <Header :message="message"></Header>
   <ul class="content">
     <li v-for="(list,index) in lists" :key="index" class="li">
-      <input type="text" :placeholder="list.warning" class="init">
+      <textarea rows="4" cols="18" wrap="hard" :placeholder="list.warning" class="init"></textarea>
+
       <div class="c-right">
         <i :class="list.icon" class="i"></i>
       </div> 
@@ -13,6 +14,7 @@
     <p>设为默认地址</p>
 
   </div>
+  
   <div class="down">
     <button class="btn" @click="save">保存</button>
   </div>
@@ -30,26 +32,23 @@ export default{
       message:"添加收货地址",
       lists:[
         {
-          warning:"收货人",
-          icon:""
+          warning:"收货人"
         },
         {
-          warning:"手机号码",
-          icon:"icon-guifanliebiaoxiayibu"
+          warning:"手机号码"
         },
         {
-          warning:"所在地区",
-          icon:"icon-guifanliebiaoxiayibu"
+          warning:"所在地区"
         },
         {
-          warning:"详细地址：如道路、门牌号、小区、楼栋号、单元室等",
-          icon:""
+          warning:"详细地址：如道路、门牌号、小区、楼栋号、单元室等"
         }
       ]
     }
   },
   methods:{
     save(){
+
       alert(1);
     }
 
@@ -72,9 +71,12 @@ export default{
         padding-left:.16rem;
         margin-right:.2rem;
         font-size:.18rem;
-        height:.5rem;
+        height:100%;
+        overflow:hidden;
+        resize:none;
         border: 0;  
         outline: none;
+        
         background-color: rgba(0, 0, 0, 0);
 
         }
