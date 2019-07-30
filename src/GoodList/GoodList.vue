@@ -1,7 +1,6 @@
 <template>
   <div class="GoodList">
     <Header message="购物车"></Header>
-    <top v-show= "count>0"></top>
     <div class="empty" v-show= "count == 0">
       <div class="icon">
          <i class="icon-gouwucheweikong"></i>
@@ -67,7 +66,7 @@
         </div>
       </transition>
     </div>
-      <div class="Numbers" v-show= "Numshow">
+    <div class="Numbers" v-show= "Numshow">
         <div class="numbers">
            <div class="num">
              <i class="icon-guanbi" @click= "closeNum"></i>
@@ -104,12 +103,10 @@
 </template>
 
 <script>
-import Top from './Top'
 import Pay from './Pay'
 export default {
   name: 'GoodList',
   components: {
-    "top": Top,
     "pay": Pay
   },
   data () {
@@ -117,7 +114,7 @@ export default {
       n:3,
       Numshow: false,
       show1: false,
-      count: 2,
+      count: 3,
       totalprice: 0,
       totalnum: 0,
       checkall: false,
@@ -254,16 +251,6 @@ export default {
     }
     @width: 100%;
     @color: #fff;
-    Header{
-      position: fixed;
-      top: 0;
-      left: 0;
-    }
-    top{
-        position: fixed;
-        top: 0.4rem;
-        left: 0;
-    }
     .empty{
       width: 100%;
       font-size: 0.19rem;
@@ -311,8 +298,8 @@ export default {
     .goods{
         overflow-y: auto;
         position: fixed;
-        top: 0.7rem;
-        bottom: 1.1em;
+        top: 0.5rem;
+        bottom: 1.1rem;
         width: 100%;
        .list-ul{
         .list-item{

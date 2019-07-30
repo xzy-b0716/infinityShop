@@ -8,6 +8,10 @@ import My from '../my/My'
 import Describe from '../components/Describe'
 import GoodList from '../GoodList/GoodList'
 import Pay from '../GoodList/Pay'
+import Orders from '../my/Orders/Orders'
+import Payment from '../my/Orders/Payment'
+import Deliver from '../my/Orders/Deliver'
+import Receive from '../my/Orders/Receive'
 
 Vue.use(Router)
 
@@ -48,8 +52,27 @@ export default new Router({
       path: '/pay',
       name: 'pay',
       component: Pay
-    }
-    
+    },
+    {
+      path: '/orders',
+      name: 'orders',
+      component: Orders
+    },
+    {
+      path: '/payment',
+      name: 'payment',
+      component: Payment
+    },
+    {
+      path: '/deliver',
+      name: 'deliver',
+      component: Deliver
+    },
+    {
+      path: '/receive',
+      name: 'receive',
+      component: Receive
+    },
 
   ]
 })

@@ -24,22 +24,27 @@ export default {
 <style scoped lang="less">
     .Header{
         width: 100%;
-        height: 0.4rem;
-        color: #353838;
+        height: 0.5rem;
+        color: #f3f3f3;
         border-bottom: 0.01rem solid #b7b7b7;
-        line-height: 0.4rem;
+        line-height: 0.5rem;
         font-size: 0.23rem;
         display: flex;
         justify-content: space-between;
         z-index: 66;
+        background-color: #46aaff;
+        span{
+            font-size: 0.23rem;
+        }
+        .icon-shangyibu{
+            width: 0.5rem;
+            font-size: 0.28rem;
+        }
+        .control{
+            width: 0.5rem;
+            font-size: 0.16rem
+        }
     }
-    .icon-shangyibu{
-        width: 0.5rem;
-        font-size: 0.28rem;
-    }
-    .control{
-        width: 0.5rem;
-        font-size: 0.16rem
-    }
+    
     
 </style>

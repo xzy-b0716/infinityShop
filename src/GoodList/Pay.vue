@@ -74,6 +74,7 @@
             </div>
             <button>提交订单</button>
         </footer>
+        <router-view></router-view>
     </div>
 </template>
 <script>
@@ -96,14 +97,10 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-    Header{
-        position: fixed;
-        top: 0;
-    }
     .content{
         width: 100%;
         position: fixed;
-        top: 0.4rem;
+        top: 0.5rem;
         bottom: 0.6rem;
         overflow: auto;
         background-color: #f3f3f3;

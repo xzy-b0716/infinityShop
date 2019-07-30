@@ -10,12 +10,14 @@ import Header from './components/Header'
 import fastClick from 'fastclick'
 
 
+
 fastClick.attach(document.body)
 Vue.component("Header",Header)
 Vue.config.productionTip = false;
 Vue.component("bottom",Bottom);
 Vue.component('mt-swipe', Swipe);
 Vue.component('mt-swipe-item', SwipeItem);
+
 
 fastClick.attach(document.body);
 /* eslint-disable no-new */
