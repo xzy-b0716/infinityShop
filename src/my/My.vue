@@ -1,13 +1,19 @@
 <template>
 
   <div id="my">
+    
     <header class="top">
-      <img class="back_img" :src="url1">
+      <div>
+        <i class="icon-iconset0415" id="icoleft"></i>
+        <p class="uname">{{username}}</p>
+        <p class="logout">退出</p>
+        <img class="back_img" :src="url1">
+      </div>
       <img class="head_img" :src="url2">
       <p class="setence">你想要做什么？</p>
     </header>
     <ul class="ul">
-      <li v-for="(list,index) in lists" :key="index" class="li">
+      <li v-for="(list,index) in lists" :key="index" class="li" @click="routeTo(index)">
           <div class="m-left">
             <div id="icon1"><i :class="list.iconf1" id="ico1"></i></div>
             <p class="words">{{list.word}}</p>
@@ -16,8 +22,12 @@
              <i :class="list.iconf2" id="ico2"></i>
           </div> 
       </li>
+
+      
     </ul>
     <img class="bottom_img" :src="url3">
+    <router-view></router-view>  
+
     <bottom class="bottom" :n="n"></bottom>
   </div>
 </template>
@@ -28,19 +38,60 @@ export default {
   data(){
     return{
           n:4,
+         
       lists:[
-         {iconf1:'icon-wodedingdan',word:'我的订单',iconf2:'icon-youjiantou'},
-         {iconf1:'icon-04',word:'个人信息',iconf2:'icon-youjiantou'},
-         {iconf1:'icon-zhifu',word:'支付方式',iconf2:'icon-youjiantou'},
-         {iconf1:'icon-dizhi',word:'收货地址',iconf2:'icon-youjiantou'},
-         {iconf1:'icon-yiwen',word:'帮助',iconf2:'icon-youjiantou'},
-         {iconf1:'icon-shezhi',word:'设置',iconf2:'icon-youjiantou'}
+         {iconf1:'icon-wodedingdan',
+         word:'我的订单',
+         iconf2:'icon-youjiantou',
+         link:'orders',
+         name:'Orders'},
+         {iconf1:'icon-04',
+         word:'个人信息',
+         iconf2:'icon-youjiantou',
+         link:'details',
+         name:'Details'},
+         {iconf1:'icon-zhifu',
+         word:'支付方式',
+         iconf2:'icon-youjiantou',
+         link:'payment',
+         name:'Payment'
+         },
+         {iconf1:'icon-dizhi',
+         word:'收货地址',
+         iconf2:'icon-youjiantou',
+         link:'address',
+         name:'Address'
+         },
+         {iconf1:'icon-yiwen',
+         word:'帮助',
+         iconf2:'icon-youjiantou',
+         link:'help',
+         name:'Help'
+         },
+         {iconf1:'icon-shezhi',
+         word:'设置',
+         iconf2:'icon-youjiantou',
+         link:'settings',
+         name:'Settings'
+         }
       ],
       url1:require('../assets/img/3.png'),
       url2:require('../assets/img/2.png'),
-      url3:require('../assets/img/1.png')
+      url3:require('../assets/img/1.png'),
+      username:"Jennifer"
     }
-  }
+  },
+  methods:{
+    routeTo(index){
+      this.$router.push(this.lists[index].link);
+    }
+    // routeTo(list){
+    //   this.$router.push({
+    //     path:'/my/$(list.id)'
+    //   })
+    // }
+      
+    }
 }
 </script>
 
@@ -59,14 +110,32 @@ export default {
   position:relative;
   height:3rem;
   overflow:hidden;
-  .back_img{
-  height:2rem;
-  width:100%;
-}
+  div{
+    display:relative;
+    .icoleft{
+      display:absolute;
+      float:left;
+      padding-left:.14rem;
+    }
+    .uname{
+      position:absolute;
+      left:50%;
+      top:0;
+    }
+    .logout{
+      float:right;
+      padding-right:.14rem;
+    }
+    .back_img{
+      height:2rem;
+      width:100%;
+    }
+  }
+  
 .head_img{
   position:absolute;
-  width:1rem;
-  height:1rem;
+  width:.85rem;
+  height:.85rem;
   border-radius:50%;
   top:1.6rem;
   left:50%;
@@ -74,11 +143,10 @@ export default {
 }
 .setence{
   text-align:center;
-  line-height:1.6rem;
+  line-height:1.4rem;
 }
 }
 .ul{
-  margin-top:.15rem;
   border-top:1px solid silver;
   margin-bottom:.2rem;
 
@@ -100,7 +168,7 @@ export default {
     .words{
     font-size:.20rem;
     font-weight:bloder;
-  }
+    }
   #icon1{
   border:.01rem solid silver;
   border-radius:50%;
