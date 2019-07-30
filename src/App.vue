@@ -20,6 +20,13 @@ export default {
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-size:0.16rem;
+}
+body{
+    margin:0;
+    padding:0;
+    box-sizing:border-box; 
+     font-size:0.16rem;
 }
 
 

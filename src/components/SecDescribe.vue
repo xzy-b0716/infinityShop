@@ -7,6 +7,13 @@
     <i :class="{'icon-shoucang':true,'icon-shoucang1':like}" @click="changeClass"></i>
     </li>
 </ul>
+<div class="time">
+<p class="price">￥25</p>
+<p class="reversetime">
+    距离秒杀结束还有
+    <span>07</span>:<span>06</span>:<span>36</span>
+</p>
+</div>
     <div class="box">
     <p class="p1">makes me feel warm and comfortable.</p>
     <p class="p2">$38.89</p>
@@ -40,8 +47,6 @@
    <p class="pcontent" v-if="item.show">{{item.content}}</p>
 </li>
 </ul>
-<p class="tuijian">猜你喜欢</p>
-<recommend></recommend>
 
 
 
@@ -157,10 +162,8 @@ showContent(n){
 
 </script>
 
-<style scoped>
-.icon-shoucang1{
-    color:red;
-}
+<style scoped lang="less">
+
 .describe{
     font-size:16px;
     position:relative;
@@ -188,11 +191,45 @@ float:left;
   bottom:.1rem;
   right:.1rem;
   font-size:30px;
+  color:white;
 
+}
+.icon-shoucang1{
+    color:red;
 }
 img{
     width:100%;
     height:100%;
+}
+.time{
+    width:100%;
+    padding:5%;
+    height:.8rem;
+    position:relative;
+    border-bottom:1px solid #cccccc;
+}
+.time .price{
+position:absolute;
+left:.2rem;
+width:60%;
+font-size:26px;
+font-weight:bold;
+
+
+}
+.time .reversetime{
+    position:absolute;
+    right:.2rem;
+    width:40%;
+    text-align:center;
+    line-height:20px;
+    span{
+        display:inline-block;
+        background:black;
+        color:white;
+        padding:2px;
+    }
+    
 }
 .box{
     width:90%;
@@ -218,7 +255,10 @@ img{
     height:.8rem;
     display:flex;
     align-items: center;
-    justify-content:flex-end;    
+    justify-content:flex-end;  
+    text-decoration: line-through;
+    color:#cccccc;
+
 }
 .choosesize{
     display:flex;
@@ -363,15 +403,7 @@ border-bottom:1px solid #EAEAEA;
 
 
 
-.tuijian{
-    margin-top:.1rem;
-    height:.4rem;
-    padding-left:5%;
-    line-height:.4rem;
-    font-size:18px;
 
-
-}
 
 
 

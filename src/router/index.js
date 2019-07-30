@@ -8,6 +8,8 @@ import My from '../my/My'
 import Describe from '../components/Describe'
 import GoodList from '../GoodList/GoodList'
 import Pay from '../GoodList/Pay'
+import SecKill from '../home/SecKill'
+import SecDescribe from '../components/SecDescribe'
 
 Vue.use(Router)
 
@@ -48,6 +50,16 @@ export default new Router({
       path: '/pay',
       name: 'pay',
       component: Pay
+    },
+    {
+      path:'/seckill',
+      name:'seckill',
+      component: SecKill
+    },
+    {
+      path:'/secdescribe',
+      name:'secdescribe',
+      component:SecDescribe
     }
     
 

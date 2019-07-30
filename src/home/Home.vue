@@ -1,27 +1,31 @@
 <template>
   <div class="home">
 <div class="swiper">
-<ul>
-  <li v-for="(item,index) in arr " :key="index">
+  <!-- <p>Infinity</p> -->
+<ul :style="style">
+  <!-- @swipleft="changeimage" -->
+  <li v-for="(item,index) in arr " :key="index" @click="$router.push('./describe')">
     <img :src="item.url" alt="图片走丢啦">
   </li>
 </ul>
 <div class="point">
   <p v-for="(item,index) in arr" :key="index"></p>
 </div>
-
 </div>
-
 <div class="recently-viewed">
   <p>Recently Viewed</p>
 <ul class="view">
-<li v-for= "(item,index) in swip2" :key="index">
+<li v-for= "(item,index) in swip2" :key="index" @click="go">
   <img :src="item.url" alt="">
   <i :class="{'icon-shoucang':true,'icon-shoucang1':item.like}" @click.stop="addclass(index)" ></i>
 </li>
 </ul>
 </div>
-<p class="a" @click="go">hahahaha</p>
+ <p class="psec">限时秒杀</p>
+<div class="sec" @click="$router.push('/seckill')">
+<img src="../assets/img/sec.jpg" alt="图片走丢啦">
+</div>
+<recommend></recommend>
 <bottom class="bottom" :n="n"></bottom>
 
 
@@ -36,14 +40,19 @@ export default {
   data () {
     return {
       n:0,
+      distance:-375,
       scrollTop:'',
-        arr:[{
+        arr:[
+        {
           url:require("../assets/img/1.jpg")
-        },{
+        },
+        {
           url:require("../assets/img/2.jpg")
-        },{
-          url:require("../assets/img/3.jpg")
-        }],
+        },
+        {
+          url:require("../assets/img/2.jpg")
+        }
+        ],
         like:false,
         swip2:[
           {
@@ -62,13 +71,21 @@ export default {
           url:"./../static/img/5.jpg",
           like:false
         }
-        ]
-
+        ],
+        style:{transform:'translate(0)'},
+       
      
 
 
     }
   },
+//   computed:{
+//     style()
+// {return {
+//   transform:'translate(${this.distance}px,0)'
+// }
+
+// }  },
   methods:{
     addclass(n){
      this.swip2[n].like=!this.swip2[n].like;
@@ -78,29 +95,24 @@ export default {
       this.$router.push({path:'/describe'})
     }
   },
-//       beforeRouteEnter (to, from, next) {
-//  document.body.scrollTop = 0;
-//    next();
-//   },
-  // beforeRouteLeave (to, from, next) {
-  //   this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  //   next()
-  // }
-
+  changeimage(){
+     this.style={
+        transform:'translate(${this.distance}px,0)'
+       }
+  }
   
  
  
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .home{
   padding-bottom:.6rem;
 }
 .bottom{
     position:fixed;
     bottom:0;
-
 }
 
 .swiper{
@@ -109,21 +121,30 @@ export default {
     border-bottom: 1px solid #cccccc;
     margin-bottom: 0.1rem;
     overflow:hidden;
-}
-.swiper ul{
+    >p{
+      position:absolute;
+      z-index:98;
+      color:white;
+      font-size:20px;
+      left:1.5rem;
+    }
+ ul{
   width:18.75rem;
   height:2.5rem;
 
-}
-.swiper ul li{
+
+ li{
   width:3.75rem;
   height:2.5rem;
   list-style:none;
   background-color:red;
   float:left;
-
+  overflow:hidden;
+ }
 
 }
+
+
 .point{
   width:100%;
   position:absolute;
@@ -135,14 +156,14 @@ export default {
   display:flex;
   justify-content: center;
 
-}
-.point p{
+ >p{
   width:.4rem;
-  height:.08rem;
+  height:.06rem;
   border-radius:.08rem;
   background-color:white;
   margin-right:.1rem;
-
+}
+}
 }
 
 
@@ -152,51 +173,62 @@ img{
 }
 .recently-viewed{
   width:100%;
-  height:2.0rem;
+  height:1.7rem;
   overflow: hidden;
-}
-.view{
-  width:800px;
-  position:relative;
-  height:1.6rem;
-  list-style:none;
-  margin-left:10px;
-}
-p{
+  p{
   height:0.4rem;
   line-height:0.4rem;
   color:black;
   margin-bottom:5px;
-  padding-left:15px;
+  padding-left:3%;
   font-size:0.16rem;
 }
+  .view{
+  width:800px;
+  position:relative;
+  height:1.25rem;
+  list-style:none;
+  margin-left:10px;
 
-.view li{
+li{
   position:relative;
   width:1.1rem;
-  height:1.4rem;
+  height:1.25rem;
   border:1px solid black;
-  border-radius:5px;
+  border-radius:.05rem;
   margin-right:0.1rem;
-  margin-bottom: .2rem;
   float:left;
-}
-.view i{
-  font-size: 25px;
+  overflow:hidden;
+   i{
+  font-size: .18rem;
   position:absolute;
-  bottom:3px;
-  right:3px;
+  bottom:.04rem;
+  right:.04rem;
+}
+}
+}
 }
 .icon-shoucang1{
   color:red;
+  }
+  .psec{
+   height:0.55rem;
+  line-height:0.55rem;
+  color:black;
+  // margin-bottom:5px;
+  padding-left:3%;
+  font-size:0.16rem;
 
-}
-.a{
-  margin-top:500px;
-  height:80px;
-  background-color:red;
+  }
+  .sec{
+    width:94%;
+    margin:auto;
+    height:2rem;
+    border-radius:.05rem;
+    overflow: hidden;
+  }
 
-}
+
 
 
 </style>
