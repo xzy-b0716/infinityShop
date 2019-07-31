@@ -1,14 +1,14 @@
 <template>
-
   <div id="my">
-    <Header :message="username" class="header"></Header>
-    <header class="top">
+    <!-- <Header :message="username" class="header"></Header> -->
+    <div class="top">
       <div>
+        <Header :message="username" class="header"></Header>
         <img class="back_img" :src="url1">
       </div>
       <img class="head_img" :src="url2">
       <p class="setence">你想要做什么？</p>
-    </header>
+    </div>
     <ul class="ul">
       <li v-for="(list,index) in lists" :key="index" class="li" @click="routeTo(index)">
           <div class="m-left">
@@ -66,9 +66,9 @@ export default {
          name:'Settings'
          }
       ],
-      url1:require('../assets/img/3.png'),
-      url2:require('../assets/img/2.png'),
-      url3:require('../assets/img/1.png'),
+      url1:require('@/assets/img/3.png'),
+      url2:require('@/assets/img/2.png'),
+      url3:require('@/assets/img/1.png'),
       username:"Jennifer"
     }
   },
@@ -76,13 +76,9 @@ export default {
     routeTo(index){
       this.$router.push(this.lists[index].link);
     }
-    // routeTo(list){
-    //   this.$router.push({
-    //     path:'/my/$(list.id)'
-    //   })
-    // }
+   
       
-    }
+  }
 }
 </script>
 
@@ -93,7 +89,7 @@ export default {
   top:0;
 }
 #my{
-  padding:.5rem 0 .6rem;
+  padding:0 0 .6rem;
   
 }
 .bottom{
@@ -107,20 +103,12 @@ export default {
   height:3rem;
   overflow:hidden;
   div{
-    display:relative;
-    .icoleft{
-      display:absolute;
-      float:left;
-      padding-left:.14rem;
-    }
-    .uname{
+    position:relative;
+    .header{
       position:absolute;
-      left:50%;
-      top:0;
-    }
-    .logout{
-      float:right;
-      padding-right:.14rem;
+      background-color:transparent;
+      border:none;
+      font-weight:bloder;
     }
     .back_img{
       height:2rem;

@@ -2,7 +2,7 @@
 <div class="seckill">
   <Header class="header" :message="message"></Header>
    <div class="img">
-     <img src="../assets/img/5.png" alt="图片走丢啦">
+     <img src="@/assets/img/5.png" alt="图片走丢啦">
    </div>
   <ul>
     <li v-for="(item,index) in seclist" :key="index" @click="$router.push('./secdescribe')">
@@ -27,43 +27,43 @@ export default {
       message:'限时秒杀',
          seclist:[
           {
-            url:"./../static/img/6.jpg",
+            url:"../../static/img/6.jpg",
           name:'欧莱雅护发精油两支',
           price:119,
           price1:178
           },
            {
-             url:"./../static/img/6.jpg",
+             url:"../../static/img/6.jpg",
           name:'雾色梦境哑光唇油',
            price:39.8,
             price1:50
           },
            {
-             url:"./../static/img/6.jpg",
+             url:"../../static/img/6.jpg",
           name:'抢半价反季羊毛绒',
            price:39,
             price1:78
           },
            {
-             url:"./../static/img/6.jpg",
+             url:"../../static/img/6.jpg",
           name:'抢半价反季羊毛绒',
            price:39,
             price1:89
           },
            {
-             url:"./../static/img/6.jpg",
+             url:"../../static/img/6.jpg",
           name:'抢半价反季羊毛绒',
            price:39,
             price1:89
           },
            {
-             url:"./../static/img/6.jpg",
+             url:"../../static/img/6.jpg",
           name:'抢半价反季羊毛绒',
            price:39,
             price1:89
           },
            {
-             url:"./../static/img/6.jpg",
+             url:"../../static/img/6.jpg",
           name:'抢半价反季羊毛绒',
            price:39,
             price1:89

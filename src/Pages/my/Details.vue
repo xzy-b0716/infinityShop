@@ -32,13 +32,13 @@ export default{
       listsa:[
         {
           word:"头像",
-          url:require('../assets/img/2.png'),
-          iconf:"icon-youjiantou"
+          url:require('@/assets/img/2.png'),
+          iconf:"icon-guifanliebiaoxiayibu"
         },
         {
           word:"个人主页背景",
-          url:require('../assets/img/3.png'),
-          iconf:"icon-youjiantou"
+          url:require('@/assets/img/3.png'),
+          iconf:"icon-guifanliebiaoxiayibu"
         } 
       ],
       listsb:[
@@ -50,32 +50,32 @@ export default{
         {
           word:"昵称",
           uword:"Jennifer",
-          iconf:"icon-youjiantou"
+          iconf:"icon-guifanliebiaoxiayibu"
         },
         {
           word:"密码",
           uword:"",
-          iconf:"icon-youjiantou"
+          iconf:"icon-guifanliebiaoxiayibu"
         },
         {
           word:"邮箱",
           uword:"",
-          iconf:"icon-youjiantou"
+          iconf:"icon-guifanliebiaoxiayibu"
         },
         {
           word:"电话",
           uword:"",
-          iconf:"icon-youjiantou"
+          iconf:"icon-guifanliebiaoxiayibu"
         },
         {
           word:"生日",
           uword:"",
-          iconf:"icon-youjiantou"
+          iconf:"icon-guifanliebiaoxiayibu"
         },
         {
           word:"性别",
           uword:"",
-          iconf:"icon-youjiantou"
+          iconf:"icon-guifanliebiaoxiayibu"
         }
 
       ]
@@ -100,7 +100,7 @@ export default{
       font-size:.20rem;
       display:flex;
       align-items: center;
-      justify-content: center;
+      justify-items: center;
       border-bottom:0.5px solid silver;
       .c-left{
         padding-left:.16rem;
@@ -116,15 +116,17 @@ export default{
         display:flex;
         align-items: center;
         justify-items: center;
+        justify-content:flex-end;
         padding-left:1.2rem;
         .imgs{
           width:.4rem;
           height:.4rem;
-         
+          margin-right:.12rem;
 
         }
         .c-uword{
           color:silver;
+          margin-right:.12rem;
 
         }
         #icon2{
