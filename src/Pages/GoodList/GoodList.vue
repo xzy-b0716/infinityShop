@@ -13,41 +13,44 @@
     </div>
     <div class="goods" v-show= "count>0">
       <ul class="list-ul">
-            <li class="list-item" v-for = "(item, index) in list" :key= "index" >
-                <div class="goods-list">
-                    <div class="service-information">
-                        <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.isCheck}"></i>
-                        <div class="name">{{item.shopname}}</div>
-                        <i class="icon-guifanliebiaoxiayibu"></i>
-                    </div>
-                    <div class="goods-information">
-                        <div class="left">
-                            <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.isCheck}"></i>
-                            <img class="img" :src= "item.imgUrl" width="1">
-                        </div>
-                        <div class="right">
-                            <div class="right-top">
-                                <div class="price">￥{{item.price}}</div>
-                                <div class="describe">{{item.describe}}</div>
-                            </div>
-                            <div class="right-middle">
-                                <div class="color"></div>
-                                <a class="color-selection" @click= "changeNum(index)">change</a>
-                            </div>
-                            <div class="right-bottom">
-                                <div class="size">
-                                    <div>{{item.size}}</div>
-                                    <i class="icon-xia" @click= "changeNum(index)"></i>
-                                </div>
-                                <div class="number">
-                                  <div>QTY:{{item.count}}</div>
-                                    <i class="icon-xia" @click= "changeNum(index)"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
+          <li class="list-item" v-for = "(item, index) in list" :key= "index" >
+              
+              <div class="goods-list" @touchstart.capture="touchStart" @touchend.capture="touchEnd" @click="skip">
+                  <div class="service-information">
+                      <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.isCheck}"></i>
+                      <div class="name">{{item.shopname}}</div>
+                      <i class="icon-guifanliebiaoxiayibu"></i>
+                  </div>
+                  <div class="goods-information">
+                      <div class="left">
+                          <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.isCheck}"></i>
+                          <img class="img" :src= "item.imgUrl" width="1">
+                      </div>
+                      <div class="right">
+                          <div class="right-top">
+                              <div class="price">￥{{item.price}}</div>
+                              <div class="describe">{{item.describe}}</div>
+                          </div>
+                          <div class="right-middle">
+                              <div class="color"></div>
+                              <a class="color-selection" @click= "changeNum(index)">change</a>
+                          </div>
+                          <div class="right-bottom">
+                              <div class="size">
+                                  <div>{{item.size}}</div>
+                                  <i class="icon-xia" @click= "changeNum(index)"></i>
+                              </div>
+                              <div class="number">
+                                <div>QTY:{{item.count}}</div>
+                                  <i class="icon-xia" @click= "changeNum(index)"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="delete" @click="deleteItem" :data-index="index">删除</div>
+          </li>
+            
         </ul>
       <div class="Foot">
         <div class="Foot-left">
@@ -120,13 +123,15 @@ export default {
       checkall: false,
       Index: '',
       Numnum: '',
+      startX : 0 ,
+      endX : 0 ,
       list: [{
           id: 0,
           price: 10,
           count: 3,
           size: "M",
           isCheck: false,
-          imgUrl: require('../assets/image/4.png'),
+          imgUrl: require('../../assets/image/4.png'),
           shopname: "韩舍家",
           describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
           
@@ -137,7 +142,7 @@ export default {
           count: 5,
           size: "M",
           isCheck: false,
-          imgUrl: require('../assets/image/4.png'),
+          imgUrl: require('../../assets/image/4.png'),
           shopname: "韩舍家",
           describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"
         },
@@ -147,7 +152,7 @@ export default {
           count: 6,
           size: "M",
           isCheck: false,
-          imgUrl: require('../assets/image/4.png'),
+          imgUrl: require('../../assets/image/4.png'),
           shopname: "韩舍家",
           describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"  
         },
@@ -157,7 +162,7 @@ export default {
           count: 6,
           size: "M",
           isCheck: false,
-          imgUrl: require('../assets/image/4.png'),
+          imgUrl: require('../../assets/image/4.png'),
           shopname: "韩舍家",
           describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"  
         },
@@ -167,7 +172,7 @@ export default {
           count: 6,
           size: "M",
           isCheck: false,
-          imgUrl: require('../assets/image/4.png'),
+          imgUrl: require('../../assets/image/4.png'),
           shopname: "韩舍家",
           describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"  
         }
@@ -240,7 +245,64 @@ export default {
     },
     closeNum(){
       this.Numshow = false;
+    },
+    skip(){
+      if( this.checkSlide() ){
+        this.restSlide();
+      }
+    },
+    //滑动开始
+    touchStart(e){
+        // 记录初始位置
+        this.startX = e.touches[0].clientX;
+    },
+    //滑动结束
+    touchEnd(e){
+        // 当前滑动的父级元素
+        let parentElement = e.currentTarget.parentElement;
+        // 记录结束位置
+        this.endX = e.changedTouches[0].clientX;
+        // 左滑
+        if( parentElement.dataset.type == 0 && this.startX - this.endX > 30 ){
+            this.restSlide();
+            parentElement.dataset.type = 1;
+        }
+        // 右滑
+        if( parentElement.dataset.type == 1 && this.startX - this.endX < -30 ){
+            this.restSlide();
+            parentElement.dataset.type = 0;
+        }
+        this.startX = 0;
+        this.endX = 0;
+    },
+    //判断当前是否有滑块处于滑动状态
+    checkSlide(){
+        let listItems = document.querySelectorAll('.list-item');
+        for( let i = 0 ; i < listItems.length ; i++){
+            if( listItems[i].dataset.type == 1 ) {
+                return true;
+            }
+        }
+        return false;
+    },
+    //复位滑动状态
+    restSlide(){
+        let listItems = document.querySelectorAll('.list-item');
+        // 复位
+        for( let i = 0 ; i < listItems.length ; i++){
+            listItems[i].dataset.type = 0;
+        }
+    },
+    //删除
+    deleteItem(e){
+        // 当前索引
+        let index = e.currentTarget.dataset.index;
+        // 复位
+        this.restSlide();
+        // 删除
+        this.list.splice(index,1);
     }
+    
   }
 }
 </script>
@@ -307,6 +369,18 @@ export default {
             height: 1.7rem;
             position: relative;
             border-bottom: 0.01rem #b2b2b2 solid;
+            .delete{
+                    width: 0.8rem;
+                    height: 1.7rem;
+                    line-height: 1.7rem;
+                    background: #e01212;
+                    font-size: .20rem;
+                    color: #fff;
+                    text-align: center;
+                    position: absolute;
+                    top:0;
+                    right: -0.8rem;
+                }
             .goods-list{
                 padding: 0.1rem;
                 .service-information{

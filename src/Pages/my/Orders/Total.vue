@@ -1,16 +1,15 @@
 <template>
-    <div class="Payment">
-        <empty v-show= "count == 0" class="empty"></empty>
-        <ul class="detial" v-show= "count > 0" >
-            <li>
+    <div class="Total">
+        <ul class="detial">
+            <li v-show= "Show1">
                 <div class="detial_name">
                     <span class="span1">天猫</span>
-                    <span class="span2">卖家已付款</span>
+                    <span class="span2">交易完成</span>
                 </div>
                 <div class="detial_content">
                     <div class="top1">
                         <div class="left">
-                            <img src="../../assets/image/4.png" >
+                            <img src="../../../assets/image/4.png" >
                         </div>
                         <div class="right">
                             <div class="describe">黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女</div>
@@ -29,35 +28,60 @@
                     <span>小计:￥<span>133</span></span>
                 </div>
                 <footer>
-                    <button class="button1" @click= "cancel">提醒发货</button>
+                    <button class="button1" @click= "cancel">删除订单</button>
+                </footer>
+            </li>
+            <li v-show= "Show1">
+                <div class="detial_name">
+                    <span class="span1">天猫</span>
+                    <span class="span2">交易完成</span>
+                </div>
+                <div class="detial_content">
+                    <div class="top1">
+                        <div class="left">
+                            <img src="../../../assets/image/4.png" >
+                        </div>
+                        <div class="right">
+                            <div class="describe">黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女</div>
+                            <div class="classify">
+                                颜色分类：黑色
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="Distribution_mode">配送方式<span>普通配送</span></div> 
+                        <div class="discount">优惠信息<span>省五元</span></div>
+                    </div>
+                </div>
+                <div class="detial_pay">
+                    <span>共<span>1</span>件</span>
+                    <span>小计:￥<span>133</span></span>
+                </div>
+                <footer>
+                    <button class="button1" @click= "cancel">删除订单</button>
                 </footer>
             </li> 
         </ul>
     </div>
 </template>
 <script>
-import Empty from './Empty'
 export default {
-    name: "Payment",
-    components:{
-        'empty': Empty
-    },
+    name: "Total",
     data(){
         return{
-            count: 2,
-            Numshow: false,
+            Show1: true
         }
     },
-    methods:{
+    methods: {
         cancel(){
-            this.Numshow = true;
+            this.Show1 = false;
         }
     }
 }
 </script>
 <style lang="less" scoped>
-.Payment{
-    .detial{
+    .Total{
+        .detial{
         width: 100%;
         padding: 0.1rem 0;
         li{
@@ -161,10 +185,7 @@ export default {
                     color: #46aaff;
                 }
             }
+            }
         }
     }
-    
-}
-   
-    
 </style>

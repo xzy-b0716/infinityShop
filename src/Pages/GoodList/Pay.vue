@@ -28,7 +28,7 @@
                     <div class="detial_content">
                         <div class="top">
                             <div class="left">
-                                <img src="../assets/image/4.png" >
+                                <img src="../../assets/image/4.png" >
                             </div>
                             
                             <div class="right">

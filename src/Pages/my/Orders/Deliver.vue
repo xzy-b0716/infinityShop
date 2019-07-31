@@ -1,16 +1,16 @@
 <template>
-    <div class="Receive">
-       <empty v-show= "count == 0" class="empty"></empty>
-        <ul class="detial" v-show= "count>0">
+    <div class="Payment">
+        <empty v-show= "count == 0" class="empty"></empty>
+        <ul class="detial" v-show= "count > 0" >
             <li>
                 <div class="detial_name">
                     <span class="span1">天猫</span>
-                    <span class="span2">卖家已发货</span>
+                    <span class="span2">卖家已付款</span>
                 </div>
                 <div class="detial_content">
                     <div class="top1">
                         <div class="left">
-                            <img src="../../assets/image/4.png" >
+                            <img src="../../../assets/image/4.png" >
                         </div>
                         <div class="right">
                             <div class="describe">黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女</div>
@@ -29,7 +29,7 @@
                     <span>小计:￥<span>133</span></span>
                 </div>
                 <footer>
-                    <button class="button1" @click= "cancel">确认收货</button>
+                    <button class="button1" @click= "cancel">提醒发货</button>
                 </footer>
             </li> 
         </ul>
@@ -38,13 +38,14 @@
 <script>
 import Empty from './Empty'
 export default {
-    name: 'Receive',
+    name: "Payment",
     components:{
         'empty': Empty
     },
     data(){
         return{
-            count: 2
+            count: 2,
+            Numshow: false,
         }
     },
     methods:{
@@ -55,6 +56,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.Payment{
     .detial{
         width: 100%;
         padding: 0.1rem 0;
@@ -161,4 +163,8 @@ export default {
             }
         }
     }
+    
+}
+   
+    
 </style>

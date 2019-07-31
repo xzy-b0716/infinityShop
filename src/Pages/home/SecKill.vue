@@ -2,7 +2,7 @@
 <div class="seckill">
   <Header class="header" :message="message"></Header>
    <div class="img">
-     <img src="../assets/img/5.png" alt="图片走丢啦">
+     <img src="../../assets/img/5.png" alt="图片走丢啦">
    </div>
   <ul>
     <li v-for="(item,index) in seclist" :key="index" @click="$router.push('./secdescribe')">

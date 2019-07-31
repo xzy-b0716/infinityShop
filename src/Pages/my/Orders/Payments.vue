@@ -10,7 +10,7 @@
                 <div class="detial_content">
                     <div class="top1">
                         <div class="left">
-                            <img src="../../assets/image/4.png" >
+                            <img src="../../../assets/image/4.png" >
                         </div>
                         <div class="right">
                             <div class="describe">黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女</div>

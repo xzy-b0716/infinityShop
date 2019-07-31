@@ -32,12 +32,12 @@ export default{
       listsa:[
         {
           word:"头像",
-          url:require('../assets/img/2.png'),
+          url:require('../../assets/img/2.png'),
           iconf:"icon-youjiantou"
         },
         {
           word:"个人主页背景",
-          url:require('../assets/img/3.png'),
+          url:require('../../assets/img/3.png'),
           iconf:"icon-youjiantou"
         } 
       ],
