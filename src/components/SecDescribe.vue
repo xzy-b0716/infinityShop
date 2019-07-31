@@ -7,13 +7,15 @@
     <i :class="{'icon-shoucang':true,'icon-shoucang1':like}" @click="changeClass"></i>
     </li>
 </ul>
+
 <div class="time">
-<p class="price">￥25</p>
+<p class="price">￥25 <span>七夕节特惠</span> </p>
 <p class="reversetime">
-    距离秒杀结束还有
-    <span>07</span>:<span>06</span>:<span>36</span>
+   距离秒杀结束还有
+    <span>{{hour}}</span>:<span>{{minute}}</span>:<span>{{second}}</span>
 </p>
 </div>
+
     <div class="box">
     <p class="p1">makes me feel warm and comfortable.</p>
     <p class="p2">$38.89</p>
@@ -33,26 +35,32 @@
         <i class="icon-guifanjieguoyeduigou" v-if="item.show"></i>
     </li>
 </ul>
-<p class="cardlist" @click="showPopup">Add to bag</p>
-<div class="popup" v-if="show1"></div>
-<!-- <transition name="PopupTS">
-<div class="Popup" v-show= "show1">
-<div class="content">
-<span>已加入购物车</span>
+<p class="cardlist" @click="$router.push('/pay')">立即购买</p>
+<hr></hr>
+<div class="comment" @click="$router.push('/comment')">
+  <p> 宝贝评价(200)</p>
+  <p class="read">查看全部 &gt;</p>
+    <ul>
+    <li>
+       <p class="username">
+           <i class="icon-zuanshi"></i>
+           Lisa</p>
+       <p class="usercomment">包包收到了，速度很快，质量很好，很喜欢，推荐购买，快快买吧</p> 
+    </li>
+  </ul>
 </div>
-</div> -->
-<ul class="product">
-<li v-for="(item,index) in product" :key="index">
-   <p class="pname" @click="showContent(index)">{{item.name}}</p>
-   <p class="pcontent" v-if="item.show">{{item.content}}</p>
-</li>
-</ul>
+<div class="information">
+  <p> 宝贝详情</p>
+  <ul>
+      <li v-for="(item,index) in information" :key="index">
+         <span class="describename">{{item.name}}</span> 
+         <span>{{item.describe}}</span>
+      </li>
+  </ul>
+    </div>
+ <recommend></recommend>
 
-
-
-
-
-  </div>
+</div>
 </template>
 
 <script>
@@ -64,8 +72,7 @@ export default {
          like:false,
          showSize:false,
          color:'',
-         show1:false,
-         size:"Choose your size",
+         size:"请选择颜色",
          colorArr:[
              {
                 color:"red",
@@ -93,27 +100,28 @@ export default {
       
    }],
    sizeList:["S","M","L"],
-   product:[
+   information:[
        {
-       name:"product details",
-       content:"Long,long ago there lived a king.He loved horses. One day he asked an artist to draw him a beautiful horse. ",
-       show:true
-   },
-   {
-       name:"product details",
-       content:"Long,long ago there lived a king.He loved horses. One day he asked an artist to draw him a beautiful horse. ",
-       show:false
-   },
-   {
-       name:"product details",
-       content:"Long,long ago there lived a king.He loved horses. One day he asked an artist to draw him a beautiful horse. ",
-       show:false
-      },
-   {
-       name:"product details",
-       content:"Long,long ago there lived a king.He loved horses. One day he asked an artist to draw him a beautiful horse. "  ,
-       show:false     
-   }],
+           name:"品牌",
+           describe:"钻尚"
+       },
+       {
+           name:"质地",
+           describe:"帆布"
+       },
+         {
+           name:"风格",
+           describe:"日韩"
+       },
+         {
+           name:"版型",
+           describe:"常规"
+       },
+   ],
+   hour:'',
+   minute:'',
+   second:'',
+
 
     }
     
@@ -140,25 +148,38 @@ export default {
           this.size=this.sizeList[n];
           this.showSize=!this.showSize;
       },
-      showPopup(){
-        this.show1=true;
-        var that = this;
-        setTimeout(function(){
-        that.show1 = false;
-        },2000)
-},
-showContent(n){
-    for(var i=0;i<4;i++){
-   this.product[i].show=false;
+       fTime(n){
+     return n<10 ? "0"+n : ""+n;
+      },   
+       fortime2(){
+    var that=this;
+    var timer=setInterval(function(){
+    var iNow = new Date();  //当前时间对象
+    var iNew =new Date(2019,7,4,23,47,12);     
+    var t = Math.floor((iNew - iNow)/1000); 
+    var iH = Math.floor(t/3600); //时
+    var iM = Math.floor(t%3600/60); //分
+    var iS =t%60; //秒  
+    var str=that.fTime(iH)+that.fTime(iM)+that.fTime(iS);
+    if(str=="000000")
+    {
+        clearInterval(timer)
     }
- 
-    this.product[n].show=true;
+    that.hour=that.fTime(iH);
+    that.minute=that.fTime(iM);
+    that.second=that.fTime(iS);  
+      
+    },1000); 
+      }
+    
+  },
+      created(){
+        this.fortime2();
+     
+      }
 }
-      },
 
-  
-
-  }
+      
 
 </script>
 
@@ -203,38 +224,47 @@ img{
 }
 .time{
     width:100%;
-    padding:5%;
+    padding:0 5%;
     height:.8rem;
     position:relative;
     border-bottom:1px solid #cccccc;
+    background-color:#FF126A;
 }
 .time .price{
 position:absolute;
 left:.2rem;
 width:60%;
-font-size:26px;
+font-size:.3rem;
 font-weight:bold;
-
+line-height:.8rem;
+color:white;
+span{
+    background:#46AAFF;
+    font-size:12px;
+    font-weight:normal;
 
 }
+}
 .time .reversetime{
+    padding-top:.1rem;
     position:absolute;
-    right:.2rem;
+    right:0;
     width:40%;
+    height:.8rem;
     text-align:center;
-    line-height:20px;
     span{
         display:inline-block;
         background:black;
         color:white;
-        padding:2px;
+        padding:.02rem;
+        margin-top:.08rem;
     }
     
 }
 .box{
     width:90%;
     height:.8rem;
-    font-size:20px;    
+    font-size:.2rem;    
     display:flex;
     align-items: center;
     margin:auto;
@@ -350,56 +380,79 @@ font-weight:bold;
     line-height:.4rem
 
 }
+hr{
+    background:rgba(192, 192, 192, 0.15);
+    margin-top:.1rem;
+    height:.1rem;
+    border:none;
+}
 
-.popup{
-    width:1rem;
-    height:.5rem;
-    background-color:black;
-    position:fixed;
-    left:50%;  
-    top:50%;
-    /* transform:translate(-0.5rem,-0.25rem); */
-}
-/* PopupTS-enter-active {
-animation-name: enterIn;
-animation-duration: 0.3s;
-animation-fill-mode: both;
-}
-.PopupTS-leave-active {
-animation-name: enterOut;
-animation-duration: 0.3s;
-animation-fill-mode: both;
-}
-@keyframes enterIn {
-0% {opacity: 0;}
-to {opacity: 0.5;}
-}
-@keyframes enterOut {
-0% {opacity: 0.5;}
-to {opacity: 0;}
-} */
-.product{
+
+.comment{
+    margin:.1rem 0;
     width:100%;
-    list-style:none;
-    margin-top:.2rem;
+    padding: 5%;
+    // background-color:rgba(192, 192, 192, 0.15);
+    position:relative;
+    .read{
+        position:absolute;
+        right:5%;
+        top:.1875rem;
+        color:#46AAFF;
+    }
+    >p{
+        height:.4rem;
+    }
+    ul{
+        list-style:none;
+        li{
+           .username
+            {
+                line-height:.4rem; 
+                .icon-zuanshi{
+                    font-size:16px;
+                    color:#FF126A;
+                }           
+        }
+        .usercomment{
+            display:inline-block;
 
+        }
+       
+    }
 }
-.product li{
-border-bottom:1px solid #EAEAEA;
+}
+.information{
+    width:100%;
+    >p{
+        height:.5rem;
+        line-height:.5rem;
+        text-align:center;
+        background-color:rgba(192, 192, 192, 0.15);
+    }
+        ul{
+            width:100%;
+            li{
+                width:100%;
+                height:.5rem;
+                padding:0 5%;    
+                border-bottom:1px solid rgba(192, 192, 192, 0.15);    
+                span{
+                    display:inline-block;
+                    margin-right:.1rem;
+                    line-height:.5rem;
+                    color:rgba(0, 0, 0, 0.76);             
+                 } 
+                .describename{
+                    margin-right:1.2rem;
+                    color:black;
+                }  }
+            }
+        }
+ 
 
-}
-.product li .pname{
-    margin:auto;
-    width:90%;
-    height:.5rem;
-    line-height:.5rem;
-    font-size:22px;
-}
-.product li .pcontent{
-    width:90%;
-    margin:auto;
-    padding-bottom:.1rem;
-}
+
+
 
 
 

@@ -66,9 +66,9 @@ export default {
          name:'Settings'
          }
       ],
-      url1:require('../assets/img/3.png'),
-      url2:require('../assets/img/2.png'),
-      url3:require('../assets/img/1.png'),
+      url1:require('@/assets/img/3.png'),
+      url2:require('@/assets/img/2.png'),
+      url3:require('@/assets/img/1.png'),
       username:"Jennifer"
     }
   },

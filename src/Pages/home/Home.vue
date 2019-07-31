@@ -23,7 +23,7 @@
 </div>
  <p class="psec">限时秒杀</p>
 <div class="sec" @click="$router.push('/seckill')">
-<img src="../assets/img/sec.jpg" alt="图片走丢啦">
+<img src="@/assets/img/sec.jpg" alt="图片走丢啦">
 </div>
 <recommend></recommend>
 <bottom class="bottom" :n="n"></bottom>
@@ -44,31 +44,31 @@ export default {
       scrollTop:'',
         arr:[
         {
-          url:require("../assets/img/1.jpg")
+          url:require("@/assets/img/1.jpg")
         },
         {
-          url:require("../assets/img/2.jpg")
+          url:require("@/assets/img/2.jpg")
         },
         {
-          url:require("../assets/img/2.jpg")
+          url:require("@/assets/img/2.jpg")
         }
         ],
         like:false,
         swip2:[
           {
-          url:"./../static/img/5.jpg",
+          url:"../../static/img/5.jpg",
           like:false
         },
         {
-          url:"./../static/img/5.jpg",
+          url:"../../static/img/5.jpg",
           like:false
         },
         {
-          url:"./../static/img/5.jpg",
+          url:"../../static/img/5.jpg",
           like:false
         },
          {
-          url:"./../static/img/5.jpg",
+          url:"../../static/img/5.jpg",
           like:false
         }
         ],
@@ -117,6 +117,7 @@ export default {
 
 .swiper{
   position:relative;
+  width:100%;
     height:2.5rem;
     border-bottom: 1px solid #cccccc;
     margin-bottom: 0.1rem;
@@ -204,6 +205,7 @@ li{
   position:absolute;
   bottom:.04rem;
   right:.04rem;
+  color:white;
 }
 }
 }
