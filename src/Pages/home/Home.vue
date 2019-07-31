@@ -117,6 +117,7 @@ export default {
 
 .swiper{
   position:relative;
+  width:100%;
     height:2.5rem;
     border-bottom: 1px solid #cccccc;
     margin-bottom: 0.1rem;
@@ -204,6 +205,7 @@ li{
   position:absolute;
   bottom:.04rem;
   right:.04rem;
+  color:white;
 }
 }
 }

@@ -17,6 +17,7 @@ import Pay from '@/Pages/GoodList/Pay'
 import Orders from '@/Pages/my/Orders/Orders'
 import SecKill from '@/Pages/home/SecKill'
 import SecDescribe from '../components/SecDescribe'
+import Comment from '../Pages/home/Comment'
 
 Vue.use(Router)
 export default new Router({
@@ -111,7 +112,7 @@ export default new Router({
       path:'/reg',
       name:'Reg',
       component:Reg
-    }
+    },
     // {
     //   path:'/login',
     //   name:'LogIn',
@@ -123,6 +124,12 @@ export default new Router({
     //   component:LogOut
     // }
 
+      {
+        path:'/comment',
+        name:'comment',
+        component:Comment
+      }
+    
 
   ],
     scrollBehavior (to, from, savedPosition) {
