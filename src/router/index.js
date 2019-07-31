@@ -17,9 +17,6 @@ import Describe from '../components/Describe'
 import GoodList from '../GoodList/GoodList'
 import Pay from '../GoodList/Pay'
 import Orders from '../my/Orders/Orders'
-import Payments from '../my/Orders/Payments'
-import Deliver from '../my/Orders/Deliver'
-import Receive from '../my/Orders/Receive'
 import SecKill from '../home/SecKill'
 import SecDescribe from '../components/SecDescribe'
 
@@ -60,11 +57,6 @@ export default new Router({
       component:Details
     },
     {
-      path:'/payments',
-      name:'Payments',
-      component: Payments
-    },
-    {
       path:'/address',
       name:'Address',
       component:Address
@@ -98,16 +90,6 @@ export default new Router({
       path: '/orders',
       name: 'orders',
       component: Orders
-    },
-    {
-      path: '/deliver',
-      name: 'deliver',
-      component: Deliver
-    },
-    {
-      path: '/receive',
-      name: 'receive',
-      component: Receive
     },{
       path:'/seckill',
       name:'seckill',
