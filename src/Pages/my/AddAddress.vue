@@ -1,31 +1,24 @@
 <template>
 <div id="add">
   <Header :message="message"></Header>
-  <div class="content">
-    <ul>
-      <li>收货人</li>
-      <li><input type="text" placeholder="收货人姓名" value="" /></li>
-    </ul>
-    <ul>
-      <li>联系方式</li>
-      <li><input type="text" placeholder="联系人手机号码" value="" /></li>
-    </ul>
-    <ul>
-      <li>所在地区</li>
-      <li><input type="text" placeholder="选择收货地址" readonly class="area" value="" /></li>
-    </ul>
-    <ul>
-      <li>详细地址</li>
-      <li><input type="text" placeholder="街道详地址" value="" /></li>
-    </ul>
-    <ul>
-      <li>设为默认地址</li>
-      <li><input type="checkbox" /></li>
-    </ul>
-    <button type="button" class="submit" @click="save">保存</button>
+  <ul class="content">
+    <li v-for="(list,index) in lists" :key="index" class="li">
+      <textarea rows="4" cols="18" wrap="hard" :placeholder="list.warning" class="init"></textarea>
+
+      <div class="c-right">
+        <i :class="list.icon" class="i"></i>
+      </div> 
+    </li>
+  </ul>
+  <div class="under">
+    <p>设为默认地址</p>
+
   </div>
-
-
+  
+  <div class="down">
+    <button class="btn" @click="save">保存</button>
+  </div>
+  
 
 
 </div>
@@ -37,12 +30,26 @@ export default{
   data(){
     return{
       message:"添加收货地址",
-
+      lists:[
+        {
+          warning:"收货人"
+        },
+        {
+          warning:"手机号码"
+        },
+        {
+          warning:"所在地区"
+        },
+        {
+          warning:"详细地址：如道路、门牌号、小区、楼栋号、单元室等"
+        }
+      ]
     }
   },
   methods:{
     save(){
-      this.$toast("保存成功");
+
+      alert(1);
     }
 
   }
@@ -50,63 +57,79 @@ export default{
 </script>
 <style scoped lang="less">
 #add{
-  width:100%;
-  overflow:hidden;
-  background-color:#FFFFFF;
   .content{
-    width:100%;
-    ul{
-      width:100%;
-      height:.5rem;
+    li{
+      list-style:none;
       border-bottom:1px solid silver;
       display:flex;
       align-items:center;
-      li{
-        list-style: none;
+      justify-items:center;
+      height:.5rem;
+      .init{
+        
+        width:85%;
+        padding-left:.16rem;
+        margin-right:.2rem;
         font-size:.18rem;
-        margin-left:.13rem;
-        li:nth-child(2){
-          width:70%;
-          height:100%;
+        height:100%;
+        overflow:hidden;
+        resize:none;
+        border: 0;  
+        outline: none;
+        
+        background-color: rgba(0, 0, 0, 0);
+
         }
-        input[type='text']{
-          outline:none;
-          border:0;
-          font-size:.18rem;
-        }
-        .area{
-          outline:none;
-          border:0;
-          font-size:.15rem !important;
-        }
-        input[type='checkbox']{
-          width:.2rem;
-          height:.2rem;
-          margin-top:.1rem;
+      .c-right{
+        width:15%;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        padding-right:.1rem;
+        .i{
+          color:silver;
+          font-size:.2rem;
+          
+
         }
 
       }
+      
 
-    }
-    .submit{
-    width:80%;
-    height:.4rem;
-    border-radius: 5px;
-    color:white;
-    font-size:.18rem;
-    background-color:#46aaff;
-    display:block;
-    margin:0 auto;
-    border:0;
-    outline:none;
-    margin-top:.3rem;
     }
   }
+  .under{
+    border:1px solid silver;
+    height:.5rem;
+    margin-top:.15rem;
+    font-size:.18rem;
+    display:flex;
+    align-items: center;
+    // justify-content: center;
+    p{
+      padding-left:.16rem;
 
+    }
 
+  }
+  .down{
+    text-align:center;
+    margin-top:.2rem;
+    .btn{
+    width:.6rem;
+    height:.4rem;
+    outline:none;
+    border-radius:.1rem;
+    background-color:rgba(126, 195, 216, 0.959);
+    color:white;
+    font-size:.2rem;
+    
+    
+  }
 
-
-
+  }
+  
+  
 }
 
 </style>
