@@ -1,19 +1,15 @@
 <template>
 <div id="add">
-  <Header :message="message"></Header>
+  <Header :message="message" class="header"></Header>
   <ul class="content">
     <li v-for="(list,index) in lists" :key="index" class="li">
-      <textarea rows="4" cols="18" wrap="hard" :placeholder="list.warning" class="init"></textarea>
-
-      <div class="c-right">
-        <i :class="list.icon" class="i"></i>
-      </div> 
+      <input type="text" :placeholder="list.warning" value="" />
     </li>
   </ul>
-  <div class="under">
-    <p>设为默认地址</p>
-
-  </div>
+  <ul>
+    <li>设为默认地址</li>
+    <li><input type="checkbox" /></li>
+  </ul>
   
   <div class="down">
     <button class="btn" @click="save">保存</button>
@@ -41,7 +37,7 @@ export default{
           warning:"所在地区"
         },
         {
-          warning:"详细地址：如道路、门牌号、小区、楼栋号、单元室等"
+          warning:"街道详细地址"
         }
       ]
     }
@@ -57,61 +53,64 @@ export default{
 </script>
 <style scoped lang="less">
 #add{
+  width:100%;
+  overflow:hidden;
+  background-color:#FFFFFF;
+  .header{
+      margin-bottom:.2rem;
+    }
   .content{
+    width:100%;
+    
+    
     li{
       list-style:none;
-      border-bottom:1px solid silver;
+      font-size:0.18rem;
+      height:.5rem;
+      width:90%;
+      margin:auto;
       display:flex;
       align-items:center;
-      justify-items:center;
-      height:.5rem;
-      .init{
-        
-        width:85%;
-        padding-left:.16rem;
-        margin-right:.2rem;
-        font-size:.18rem;
-        height:100%;
-        overflow:hidden;
-        resize:none;
-        border: 0;  
-        outline: none;
-        
-        background-color: rgba(0, 0, 0, 0);
-
-        }
-      .c-right{
-        width:15%;
-        display:flex;
-        align-items: center;
-        justify-content: center;
-        padding-right:.1rem;
-        .i{
-          color:silver;
-          font-size:.2rem;
-          
-
-        }
-
+      border:1px solid silver;
+      border-radius:.1rem;
+      margin-bottom:.2rem;
+      overflow:hidden;
+      input[type='text']{
+         margin-left:.13rem;
+          width:94%;
+          height:100%;
+          outline:none;
+          border:0;
+          font-size:.18rem;
       }
+      input[type='checkbox']{
+          width:.2rem;
+          height:.2rem;
+          margin-top:.1rem;
+          outline:none;
+          border:0;
+      }
+      // .init{
+        
+      //   width:85%;
+      //   padding-left:.16rem;
+      //   margin-right:.2rem;
+      //   font-size:.18rem;
+      //   height:100%;
+      //   overflow:hidden;
+      //   resize:none;
+      //   border: 0;  
+      //   outline: none;
+        
+      //   background-color: rgba(0, 0, 0, 0);
+
+      //   }
+      
       
 
     }
   }
-  .under{
-    border:1px solid silver;
-    height:.5rem;
-    margin-top:.15rem;
-    font-size:.18rem;
-    display:flex;
-    align-items: center;
-    // justify-content: center;
-    p{
-      padding-left:.16rem;
-
-    }
-
-  }
+  
   .down{
     text-align:center;
     margin-top:.2rem;
