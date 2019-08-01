@@ -11,15 +11,15 @@
       </div>
       <button class="button">去逛逛</button>
     </div>
-    <div class="goods" v-show= "count>0">
-      <ul class="list-ul">
-          <li class="list-item" v-for = "(item, index) in list" :key= "index" >
-              
+    <div class="goods" v-show= "count>0" style="overflow-x:hidden">
+      <div style="overflow-x:visible">
+        <ul class="list-ul">
+          <li class="list-item" v-for = "(item, index) in list" :key= "index" data-type="0">
               <div class="goods-list" @touchstart.capture="touchStart" @touchend.capture="touchEnd" @click="skip">
                   <div class="service-information">
                       <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.isCheck}"></i>
-                      <div class="name">{{item.shopname}}</div>
-                      <i class="icon-guifanliebiaoxiayibu"></i>
+                      <div class="name" @click= "Jdescribe">{{item.shopname}}</div>
+                      <i class="icon-guifanliebiaoxiayibu" @click= "Jdescribe"></i>
                   </div>
                   <div class="goods-information">
                       <div class="left">
@@ -29,7 +29,7 @@
                       <div class="right">
                           <div class="right-top">
                               <div class="price">￥{{item.price}}</div>
-                              <div class="describe">{{item.describe}}</div>
+                              <div class="describe">{{item.describe | snippet}}</div>
                           </div>
                           <div class="right-middle">
                               <div class="color"></div>
@@ -48,10 +48,12 @@
                       </div>
                   </div>
               </div>
-              <div class="delete" @click="deleteItem" :data-index="index">删除</div>
+              <div class="delete" @click="deleteItem" :data-index= "index">删除</div>
           </li>
             
-        </ul>
+      </ul>
+      </div>
+      
       <div class="Foot">
         <div class="Foot-left">
             <i class="icon-weigouxuan" @click= "checkAll()" :class= "{'icon-duigou': checkall}"></i><span>全选</span>
@@ -69,6 +71,7 @@
         </div>
       </transition>
     </div>
+    <transition name="slide">
     <div class="Numbers" v-show= "Numshow">
         <div class="numbers">
            <div class="num">
@@ -84,22 +87,29 @@
            </div>
            <div class="color">
              <div class="num_color">
-               颜色：
-               <i class="icon-weigouxuan"></i>
+               颜色分类：
              </div>
-             <ul class="color_list"></ul>
+             <ul class="color_list">
+               <li v-for="(items,index) in Colors" :key="index" class="colors" @click= "Size__Color(index)" :class= "{'Size_Color': Color == index}">
+                 {{items}}
+               </li>
+             </ul>
            </div>
            <div class="size">
-             <div class="size_num">尺码：
-               <span>M</span>
+             <div class="size_num">尺码分类：
              </div>
-             <ul class="size_left"></ul>
+             <ul class="size_left">
+               <li v-for="(items,index) in Sizes" :key="index" class="sizes" :class= "{'Size_Color': SizeColor == index}" @click= "Size_Color(index)">
+                 {{items}}
+               </li>
+             </ul>
            </div>
            <div class="define">
              <button @click= "define">确定</button>
            </div>
         </div>
     </div>
+    </transition>
     <router-view></router-view>
     <bottom class="bottom" :n="n"></bottom>
   </div>
@@ -107,6 +117,7 @@
 
 <script>
 import Pay from './Pay'
+
 export default {
   name: 'GoodList',
   components: {
@@ -125,6 +136,11 @@ export default {
       Numnum: '',
       startX : 0 ,
       endX : 0 ,
+      index1: '',
+      Colors:[],
+      Sizes:[],
+      SizeColor: 0,
+      Color: 0,
       list: [{
           id: 0,
           price: 10,
@@ -134,7 +150,8 @@ export default {
           imgUrl: require('../../assets/image/4.png'),
           shopname: "韩舍家",
           describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
-          
+          colors: ["red","yellow","green","pink"],
+          sizes: ["S","M","L","XL"]
         },
         {
           id: 1,
@@ -144,7 +161,9 @@ export default {
           isCheck: false,
           imgUrl: require('../../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"
+          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
+          colors: ["red","yellow","orange","pink"],
+          sizes: ["S","M","L","XL"]
         },
         {
           id: 2,
@@ -154,7 +173,9 @@ export default {
           isCheck: false,
           imgUrl: require('../../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"  
+          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
+          colors: ["red","yellow","green","pink"],
+          sizes: ["S","M","L","XL"] 
         },
         {
           id: 3,
@@ -164,7 +185,9 @@ export default {
           isCheck: false,
           imgUrl: require('../../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"  
+          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
+          colors: ["blue","yellow","green","pink"],
+          sizes: ["S","M","L","XL"]  
         },
         {
           id: 4,
@@ -174,11 +197,20 @@ export default {
           isCheck: false,
           imgUrl: require('../../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"  
+          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
+          colors: ["red","purple","green","pink"],
+          sizes: ["S","M","L","XL"]
         }
         ]
     }
   },
+  
+  filters:{
+    snippet(value){
+    return value.slice(0,25)+"...";
+    }
+  },
+
   methods: {
     getTotal(){
       this.totalprice = 0;
@@ -228,6 +260,14 @@ export default {
       this.Numshow = true;
       this.Index = this.list[index].id;
       this.Numnum = this.list[index].count;
+      this.Colors = this.list[index].colors;
+      this.Sizes = this.list[index].sizes;
+    },
+    Size_Color(index){
+      this.SizeColor = index;
+    },
+    Size__Color(index){
+      this.Color = index;
     },
     decrease(){
       if(this.Numnum>1){
@@ -246,63 +286,69 @@ export default {
     closeNum(){
       this.Numshow = false;
     },
+    Jdescribe(){
+      this.$router.push({path: '/describe'});
+    },
     skip(){
-      if( this.checkSlide() ){
-        this.restSlide();
+  if( this.checkSlide() ){
+  this.restSlide();
+      }else{
+  // alert('You click the slide!')
       }
-    },
-    //滑动开始
-    touchStart(e){
-        // 记录初始位置
-        this.startX = e.touches[0].clientX;
-    },
-    //滑动结束
-    touchEnd(e){
-        // 当前滑动的父级元素
-        let parentElement = e.currentTarget.parentElement;
-        // 记录结束位置
-        this.endX = e.changedTouches[0].clientX;
-        // 左滑
-        if( parentElement.dataset.type == 0 && this.startX - this.endX > 30 ){
-            this.restSlide();
-            parentElement.dataset.type = 1;
-        }
-        // 右滑
-        if( parentElement.dataset.type == 1 && this.startX - this.endX < -30 ){
-            this.restSlide();
-            parentElement.dataset.type = 0;
-        }
-        this.startX = 0;
-        this.endX = 0;
-    },
+ },
+ //滑动开始
+ touchStart(e){
+   // 记录初始位置
+  this.startX = e.touches[0].clientX;
+ },
+ //滑动结束
+ touchEnd(e){
+            // 当前滑动的父级元素
+  let parentElement = e.currentTarget.parentElement;
+  
+  
+  // 记录结束位置
+  this.endX = e.changedTouches[0].clientX;
+            // 左滑
+  if( parentElement.dataset.type == 0 && this.startX - this.endX > 30 ){
+  this.restSlide();
+  parentElement.dataset.type = 1;
+  }
+            // 右滑
+  if( parentElement.dataset.type == 1 && this.startX - this.endX < -30 ){
+  this.restSlide();
+  parentElement.dataset.type = 0;
+  }
+  this.startX = 0;
+  this.endX = 0;
+ },
     //判断当前是否有滑块处于滑动状态
     checkSlide(){
-        let listItems = document.querySelectorAll('.list-item');
-        for( let i = 0 ; i < listItems.length ; i++){
-            if( listItems[i].dataset.type == 1 ) {
-                return true;
-            }
+  let listItems = document.querySelectorAll('.list-item');
+  for( let i = 0 ; i < listItems.length ; i++){
+  if( listItems[i].dataset.type == 1 ) {
+   return true;
         }
-        return false;
+  }
+  return false;
     },
-    //复位滑动状态
-    restSlide(){
-        let listItems = document.querySelectorAll('.list-item');
-        // 复位
-        for( let i = 0 ; i < listItems.length ; i++){
-            listItems[i].dataset.type = 0;
-        }
-    },
-    //删除
-    deleteItem(e){
-        // 当前索引
-        let index = e.currentTarget.dataset.index;
-        // 复位
-        this.restSlide();
-        // 删除
-        this.list.splice(index,1);
-    }
-    
+ //复位滑动状态
+ restSlide(){
+  let listItems = document.querySelectorAll('.list-item');
+             // 复位
+  for( let i = 0 ; i < listItems.length ; i++){
+  listItems[i].dataset.type = 0;
+  }
+ },
+ //删除
+ deleteItem(e){
+   // 当前索引
+  let index = e.currentTarget.dataset.index;
+  // 复位
+  this.restSlide();
+  // 删除
+  this.list.splice(index,1);
+ }
   }
 }
 </script>
@@ -364,25 +410,23 @@ export default {
         bottom: 1.1rem;
         width: 100%;
        .list-ul{
+        width: 100%;
         .list-item{
             @color: #ccc;
+            width: 100%;
             height: 1.7rem;
             position: relative;
+            -webkit-transition: all 0.2s;
+            transition: all 0.2s;
             border-bottom: 0.01rem #b2b2b2 solid;
-            .delete{
-                    width: 0.8rem;
-                    height: 1.7rem;
-                    line-height: 1.7rem;
-                    background: #e01212;
-                    font-size: .20rem;
-                    color: #fff;
-                    text-align: center;
-                    position: absolute;
-                    top:0;
-                    right: -0.8rem;
-                }
             .goods-list{
                 padding: 0.1rem;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
                 .service-information{
                     height: 0.3rem;
                     display: flex;
@@ -444,6 +488,7 @@ export default {
                             .describe{
                                 width: 1.8rem;
                                 height: 0.4rem;
+                                display: flex;
                                 line-height: 0.2rem;
                                 font-size: 0.13rem;
                                 overflow: hidden;
@@ -495,7 +540,40 @@ export default {
                     }
                 }
             }
-			}   
+             .delete{
+                  width: 0.8rem;
+                  height: 1.7rem;
+                  line-height: 1.7rem;
+                  background: #e01212;
+                  font-size: .20rem;
+                  color: #fff;
+                  text-align: center;
+                  position: absolute;
+                  right: -0.8rem;
+                  top: 0;
+              }
+      }  
+        .list-item[data-type="0"]{
+          transform: translate3d(0,0,0);
+        }
+        .list-item[data-type="1"]{
+          transform: translate3d(-0.8rem,0,0);
+        } 
+        .list-item:after{
+          content: " ";
+          position: absolute;
+          left: 0.2rem;
+          bottom: 0;
+          right: 0;
+          height: 0.01rem;
+          border-bottom: 0.01rem solid #ccc;
+          color: #ccc;
+          -webkit-transform-origin: 0 100%;
+          transform-origin: 0 100%;
+          -webkit-transform: scaleY(0.5);
+          transform: scaleY(0.5);
+          z-index: 2;
+        }
   }
 }
     .Foot{
@@ -580,8 +658,7 @@ export default {
             line-height: 0.4rem;
             border-radius: 0.1rem;
             font-size: 0.14rem;
-            color: #fff;
-            
+            color: #fff;   
         }
      } 
     .PopupTS-enter-active {
@@ -619,13 +696,20 @@ export default {
             bottom: 0rem;
             left: 0;
             z-index: 1111;
+           
             .define{
-              height: 0.5rem;
+              width: 100%;
+              position: fixed;
+              bottom: 0rem;
+              left: 0;
+              height: 0.6rem;
               display: flex;
               justify-content: center;
               align-items: center;
+              margin-left: 0;
               button{
-                width: 90%;
+                width: 95%;
+                margin-left: 0;
               }
             }
             .num{
@@ -681,50 +765,108 @@ export default {
                   color: #ccc;
                 }
             }
+            
             .color{
               width: 100%;
-              height: 1.5rem;
+              height: 1rem;
               border-bottom: 0.01rem solid #ccc;
-              padding-left: 0.2rem;
+              padding: 0 0.2rem;
               .num_color{
                 width: 1.8rem;
-                height: 0.7rem;
+                height: 0.3rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 font-size: 0.2rem;
-                .icon-weigouxuan{
-                  width: 1rem;
-                  font-size: 0.25rem;
-                  display: inline-block;
+                }
+              .color_list{
+                list-style: none;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 0.1rem;
+                .colors{
                   height: 0.3rem;
-                  text-align: center;
-                  line-height: 0.3rem;
+                  width: 0.7rem;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  background-color: #f3f3f3;
+                  border-radius: 0.1rem;
+                  font-size: 0.16rem;
+                  // color: #666;
+                  
                 }
               }
             }
             .size{
               width: 100%;
-              height: 1.5rem;
-              padding-left: 0.2rem;
+              height: 1rem;
+              padding: 0 0.2rem;
               border-bottom: 0.01rem solid #ccc;
               .size_num{
                 width: 1.8rem;
-                height: 0.7rem;
+                height: 0.4rem;
                 font-size: 0.2rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                span{
-                  width: 1rem;
-                  height: 0.7rem;
-                  line-height: 0.7rem;
-                  text-align: center;
+              }
+              .size_left{
+                list-style: none;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .sizes{
+                  height: 0.3rem;
+                  width: 0.7rem;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  background-color: #f3f3f3;
+                  border-radius: 0.1rem;
+                  font-size: 0.18rem;
+                  // color: #666;
                 }
               }
             }
-            
+             .Size_Color{
+                border: 0.02rem #46aaff solid;
+                color: #46aaff; 
+            }
         }
     }
-    
+    .slide-enter-active {
+      animation-name: slideInUp;
+      animation-duration: 0.3s;
+      animation-fill-mode: both;
+  }
+  .slide-leave-active {
+      animation-name: slideOutDown;
+      animation-duration: 0.3s;
+      animation-fill-mode: both;
+  }
+  @keyframes slideInUp {
+      0% {
+          transform: translate3d(0, 100%, 0);
+          visibility: visible;
+      }
+
+      to {
+          transform: translateZ(0);
+      }
+  }
+  @keyframes slideOutDown {
+      0% {
+          transform: translateZ(0);
+      }
+
+      to {
+          visibility: hidden;
+          transform: translate3d(0, 100%, 0);
+      }
+  }
+
 </style>
