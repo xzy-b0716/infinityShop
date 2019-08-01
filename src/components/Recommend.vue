@@ -1,7 +1,7 @@
 <template>
   <div id="recommend"> 
     <ul>
-    <li v-for="(item,index) in arr" :key="index" @click="$router.push('./describe')">
+    <li v-for="(item,index) in arr" :key="index" @click.stop="$router.push({path:'./describe'})">
       <img :src="item.url" alt="图片走丢啦">
     <p>{{item.name}}</p>
     <p>￥{{item.price}}</p>

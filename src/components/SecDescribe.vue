@@ -36,7 +36,7 @@
     </li>
 </ul>
 <p class="cardlist" @click="$router.push('/pay')">立即购买</p>
-<hr></hr>
+<hr>
 <div class="comment" @click="$router.push('/comment')">
   <p> 宝贝评价(200)</p>
   <p class="read">查看全部 &gt;</p>
@@ -151,7 +151,7 @@ export default {
        fTime(n){
      return n<10 ? "0"+n : ""+n;
       },   
-       fortime2(){
+       fortime2(){        
     var that=this;
     var timer=setInterval(function(){
     var iNow = new Date();  //当前时间对象

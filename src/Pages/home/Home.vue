@@ -2,27 +2,26 @@
   <div class="home">
 <div class="swiper">
   <!-- <p>Infinity</p> -->
-<ul :style="style">
-  <!-- @swipleft="changeimage" -->
-  <li v-for="(item,index) in arr " :key="index" @click="$router.push('./describe')">
+<ul  :style="style"   @touchstart='touchStart' @touchend='touchEnd'>
+  <li v-for="(item,index) in arr " :key="index" @click.stop="$router.push('./describe')">
     <img :src="item.url" alt="图片走丢啦">
   </li>
 </ul>
 <div class="point">
-  <p v-for="(item,index) in arr" :key="index"></p>
-</div>
+  <p :class="{'pchecked':currentindex==index}" v-for="(item,index) in arr" :key="index"></p>
+</div> 
 </div>
 <div class="recently-viewed">
   <p>Recently Viewed</p>
 <ul class="view">
-<li v-for= "(item,index) in swip2" :key="index" @click="go">
+<li v-for= "(item,index) in swip2" :key="index" @click.stop="go">
   <img :src="item.url" alt="">
   <i :class="{'icon-shoucang':true,'icon-shoucang1':item.like}" @click.stop="addclass(index)" ></i>
 </li>
 </ul>
 </div>
  <p class="psec">限时秒杀</p>
-<div class="sec" @click="$router.push('/seckill')">
+<div class="sec" @click.stop="$router.push('/seckill')">
 <img src="@/assets/img/sec.jpg" alt="图片走丢啦">
 </div>
 <recommend></recommend>
@@ -39,8 +38,11 @@ export default {
   name: 'Home',
   data () {
     return {
+        startX:0,   //触摸位置
+        endX:0,     //结束位置
+        disX: 0, 
+        currentindex:0,
       n:0,
-      distance:-375,
       scrollTop:'',
         arr:[
         {
@@ -50,8 +52,9 @@ export default {
           url:require("@/assets/img/2.jpg")
         },
         {
-          url:require("@/assets/img/2.jpg")
+          url:require("@/assets/img/1.jpg")
         }
+
         ],
         like:false,
         swip2:[
@@ -72,37 +75,56 @@ export default {
           like:false
         }
         ],
-        style:{transform:'translate(0)'},
+        style:'',
        
      
 
 
     }
   },
-//   computed:{
-//     style()
-// {return {
-//   transform:'translate(${this.distance}px,0)'
-// }
-
-// }  },
   methods:{
+     touchStart(ev){
+                ev= ev || event
+          //tounches类数组，等于1时表示此时有只有一只手指在触摸屏幕    
+            if(ev.touches.length == 1){
+                    // 记录开始位置
+            this.startX = ev.touches[0].clientX;
+                }
+            },
+         touchEnd(ev){
+              ev = ev || event;
+              if (ev.changedTouches.length == 1) {
+              let endX = ev.changedTouches[0].clientX;
+              this.disX = this.startX - endX;
+              if ((this.disX)<0) {
+                 if(this.currentindex==0)
+             {
+             }
+             else{
+            this.currentindex-=1;      
+            this.style = 'left:'+-375*this.currentindex+'px'; 
+             }           
+              }else  if (this.disX > 0){
+             if(this.currentindex==2)
+             {
+             }else{
+            this.currentindex+=1;      
+           this.style = 'left:'+-375*this.currentindex+'px'; 
+             }
+        
+              }
+              }
+              } ,  
     addclass(n){
-     this.swip2[n].like=!this.swip2[n].like;
-   
+     this.swip2[n].like=!this.swip2[n].like;   
     },
     go(){
       this.$router.push({path:'/describe'})
     }
-  },
-  changeimage(){
-     this.style={
-        transform:'translate(${this.distance}px,0)'
-       }
-  }
+
   
- 
- 
+  
+  }
 }
 </script>
 
@@ -130,10 +152,11 @@ export default {
       left:1.5rem;
     }
  ul{
-  width:18.75rem;
+  width:11.25rem;
   height:2.5rem;
-
-
+  position:absolute;
+  left: 0;
+  transition: 0.3s;
  li{
   width:3.75rem;
   height:2.5rem;
@@ -142,10 +165,7 @@ export default {
   float:left;
   overflow:hidden;
  }
-
 }
-
-
 .point{
   width:100%;
   position:absolute;
@@ -156,22 +176,26 @@ export default {
   margin: auto;
   display:flex;
   justify-content: center;
-
- >p{
+>p{
   width:.4rem;
   height:.06rem;
   border-radius:.08rem;
-  background-color:white;
+  border:1px solid rgba(255, 255, 255, 0.65);
   margin-right:.1rem;
 }
 }
 }
+.pchecked{
+  background:red;
+}
+
 
 
 img{
   width:100%;
   height:100%;
 }
+
 .recently-viewed{
   width:100%;
   height:1.7rem;
@@ -200,19 +224,21 @@ li{
   margin-right:0.1rem;
   float:left;
   overflow:hidden;
-   i{
+
+}
+}
+}
+.icon-shoucang{
   font-size: .18rem;
   position:absolute;
   bottom:.04rem;
   right:.04rem;
   color:white;
 }
-}
-}
-}
 .icon-shoucang1{
   color:red;
   }
+
   .psec{
    height:0.55rem;
   line-height:0.55rem;

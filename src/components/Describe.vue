@@ -31,7 +31,7 @@
 <transition name="PopupTS">
 <div class="popup" v-show= "show1">已加入购物车</div>
 </transition>
-<hr></hr>
+<hr>
 <div class="comment" @click="$router.push('/comment')">
   <p> 宝贝评价(200)</p>
   <p class="read">查看全部 &gt;</p>
