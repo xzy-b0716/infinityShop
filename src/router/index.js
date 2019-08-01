@@ -11,13 +11,13 @@ import Settings from '@/Pages/my/Settings'
 import AddAddress from '@/Pages/my/AddAddress'
 import ChangeAddress from '@/Pages/my/ChangeAddress'
 import Reg from '@/Pages/my/Log/Reg'
-import Describe from '../components/Describe'
+import Describe from '@/components/Describe'
 import GoodList from '@/Pages/GoodList/GoodList'
 import Pay from '@/Pages/GoodList/Pay'
 import Orders from '@/Pages/my/Orders/Orders'
 import SecKill from '@/Pages/home/SecKill'
 import SecDescribe from '../components/SecDescribe'
-import Comment from '../Pages/home/Comment'
+import Comment from '@/Pages/home/Comment'
 
 Vue.use(Router)
 export default new Router({

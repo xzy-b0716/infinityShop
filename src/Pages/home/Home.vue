@@ -42,6 +42,7 @@ export default {
         endX:0,     //结束位置
         disX: 0, 
         currentindex:0,
+        off:true,
       n:0,
       scrollTop:'',
         arr:[
@@ -120,10 +121,55 @@ export default {
     },
     go(){
       this.$router.push({path:'/describe'})
-    }
+    }  ,
+    // autoplay(){
+    //   if(this.off){
+    //   this.currentindex++; 
+    //   this.style = 'left:'+-375*this.currentindex+'px';
+    //   if(this.currentindex==2){
+    //     this.off=false;
+    //   } 
+    //   }else{
+    //   this.currentindex--;
+    //   this.style = 'left:'+-375*this.currentindex+'px'; 
+    //     if(this.currentindex==0){
+    //     this.off=true;
+    //   } 
+    //   }
+     
 
+   
   
-  
+    
+    // },
+    play(){     
+       var that=this;
+      setInterval(function(){
+          if(that.currentindex==0){
+        that.off=true;
+      } 
+         if(that.currentindex==2){
+        that.off=false;
+      } 
+          if(that.off){
+      that.currentindex++; 
+      that.style = 'left:'+-375*that.currentindex+'px';
+      if(that.currentindex==2){
+        that.off=false;
+      } 
+      }else{
+      that.currentindex--;
+      that.style = 'left:'+-375*that.currentindex+'px'; 
+        if(that.currentindex==0){
+        that.off=true;
+      } 
+      }
+     
+      },3500)
+    }
+  },
+  created(){
+     this.play();
   }
 }
 </script>
@@ -157,6 +203,7 @@ export default {
   position:absolute;
   left: 0;
   transition: 0.3s;
+  overflow:hidden;
  li{
   width:3.75rem;
   height:2.5rem;
@@ -186,7 +233,7 @@ export default {
 }
 }
 .pchecked{
-  background:red;
+  background:#46aaff;
 }
 
 

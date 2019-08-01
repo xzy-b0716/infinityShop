@@ -144,11 +144,15 @@ export default {
           this.showSize=!this.showSize;
       },
       showPopup(){
-        this.show1=true;
-        var that = this;
-        setTimeout(function(){
-        that.show1 = false;
-        },1500)
+        // this.show1=true;
+        // var that = this;
+        // setTimeout(function(){
+        // that.show1 = false;
+        // },1500)
+        if(this.size=="Choose your size"||this.color=='')
+        this.$toast("请选择颜色或尺码")
+        else
+        this.$toast("已加入购物车")
 } 
 
   }
