@@ -16,7 +16,7 @@
     </ul>
     <ul>
       <li>详细地址</li>
-      <li><input type="text" placeholder="街道详地址" value="" /></li>
+      <li><input type="text" placeholder="街道详细地址" value="" /></li>
     </ul>
     <ul>
       <li>设为默认地址</li>
@@ -58,6 +58,7 @@ export default{
     deleteAddr(){
       this.$messagebox.confirm("确定执行此操作？").then(
          action=>{
+           
         }
       )
        

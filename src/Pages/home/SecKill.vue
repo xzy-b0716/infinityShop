@@ -117,7 +117,7 @@ export default {
       width:95%;
       margin:auto;
       display:flex;
-       height:1.35rem; 
+      height:1.35rem; 
       border-radius:.08rem;
       // border:1px solid black;
       margin-bottom:.1rem;
