@@ -117,6 +117,9 @@ export default {
          {
            name:"版型",
            describe:"常规"
+       },{
+           name:"厚薄",
+            describe:"常规"
        }
    ]    } 
  

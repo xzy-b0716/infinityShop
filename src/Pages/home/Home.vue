@@ -43,6 +43,7 @@ export default {
         disX: 0, 
         currentindex:0,
         off:true,
+         style:'',
       n:0,
       scrollTop:'',
         arr:[
@@ -76,7 +77,7 @@ export default {
           like:false
         }
         ],
-        style:'',
+       
        
      
 
@@ -205,7 +206,7 @@ export default {
   transition: 0.3s;
   overflow:hidden;
  li{
-  width:3.75rem;
+  width: 3.75rem;
   height:2.5rem;
   list-style:none;
   background-color:red;
