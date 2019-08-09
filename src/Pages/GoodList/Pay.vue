@@ -12,7 +12,7 @@
                         <div class="location">陕西省西安市长安区子午大道春天花园</div>
                         <span class="span1">收货不变时，可选择免费暂存服务</span>
                     </div>
-                    <i class="icon-guifanliebiaoxiayibu"></i>
+                    <i class="icon-guifanliebiaoxiayibu" @click="addressJ"></i>
                 </div>
             </div>
             <div class="Payment_methods">
@@ -28,12 +28,12 @@
                     <div class="detial_content">
                         <div class="top">
                             <div class="left">
-                                <img src="../../assets/image/4.png" >
+                                <img src="../../assets/image/4.png" alt="图片走丢了" @click="describeJ">
                             </div>
                             
                             <div class="right">
-                                <div class="describe">黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女</div>
-                                <div class="classify">
+                                <div class="describe" @click="describeJ">黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女</div>
+                                <div class="classify" @click="describeJ">
                                     颜色分类：黑色
                                 </div>
                             </div>
@@ -55,26 +55,27 @@
                 <i class="icon-weigouxuan" :class= "{'icon-duigou': show}" @click= "show=!show"></i>匿名购买
             </div>
         </div>
-        <div class="pay_methods" v-show= "show1">
-            <div class="methods">
-                <div class="top">
-                    支付方式
-                    <i class="icon-guanbi" @click= "show1=!show1"></i>
+        <transition name="slide">
+            <div class="pay_methods" v-show= "show1">
+                <div class="methods">
+                    <div class="top">
+                        支付方式
+                        <i class="icon-guanbi" @click= "show1=!show1"></i>
+                    </div>
+                    <ul class="bottom">
+                        <li v-for= "(item,index) in list_pay" :key= "index" @click= "changepay(index)" :class= "{'bottom_active': isShow==index}" exact>{{item}}</li>
+                    </ul>
+                    
                 </div>
-                <ul class="bottom">
-                    <li v-for= "(item,index) in list_pay" :key= "index" @click= "changepay(index)">{{item}}</li>
-                </ul>
                 
             </div>
-            
-        </div>
+        </transition>
         <footer>
             <div class="total">
                 ￥<span>12346</span>
             </div>
             <button>提交订单</button>
         </footer>
-        <router-view></router-view>
     </div>
 </template>
 <script>
@@ -82,6 +83,7 @@ export default {
     name: "Pay",
     data(){
         return{
+            isShow: 0,
             show: false,
             show1: false,
             message: "在线支付",
@@ -92,6 +94,13 @@ export default {
     methods: {
         changepay(index){
             this.message = this.list_pay[index];
+            this.isShow = index;
+        },
+        addressJ(){
+            this.$router.push({path:'/Address'})
+        },
+        describeJ(){
+            this.$router.push({path:'/Describe'})
         }
     }
 }
@@ -222,10 +231,12 @@ export default {
                                 font-size: 0.13rem;
                                 margin-left: 0.1rem;
                                 margin-top: 0.05rem;
-                                background-color: #ccc;
+                                background-color: #f3f3f3;
                                 height: 0.25rem;
-                                width: 1.0rem;
+                                width: 1.5rem;
                                 line-height: 0.25rem;
+                                text-align: center;
+                                border-radius: 0.05rem;
                             }
                         }
                     }
@@ -320,6 +331,10 @@ export default {
                 align-items: center;
                 justify-content: space-between;
                 list-style: none;
+                .bottom_active{
+                    border: 0.01rem solid #46aaff;
+                    color: #46aaff;
+                }
                 li{
                     font-size: 0.16rem;
                     width: 1rem;
@@ -329,9 +344,40 @@ export default {
                     text-align: center;
                     border: 0.01rem #ccc solid;
                 }
+                
             }
            
         }
+    }
+    .slide-enter-active {
+      animation-name: slideInUp;
+      animation-duration: 0.3s;
+      animation-fill-mode: both;
+    }
+    .slide-leave-active {
+      animation-name: slideOutDown;
+      animation-duration: 0.3s;
+      animation-fill-mode: both;
+    }
+    @keyframes slideInUp {
+      0% {
+          transform: translate3d(0, 100%, 0);
+          visibility: visible;
+      }
+
+      to {
+          transform: translateZ(0);
+      }
+    }
+    @keyframes slideOutDown {
+      0% {
+          transform: translateZ(0);
+      }
+
+      to {
+          visibility: hidden;
+          transform: translate3d(0, 100%, 0);
+      }
     }
     footer{
         position: fixed;

@@ -8,9 +8,17 @@
                 
             </ul>
         </div>
-        <div class="content">
-            <Total :is= "CurrentComp"></Total>
+
+        <div class="content" @touchstart.capture= "touchStart" @touchend.capture= "touchEnd" >
+            
+            <Total :is= "CurrentComp" ></Total> 
         </div>
+ 
+        
+       
+        
+
+       
     </div>
 </template>
 <script>
@@ -30,6 +38,9 @@ export default {
         return{
             CurrentComp: 'Total',
             Show1: true,
+            startX: 0,
+            endX: 0,
+            transitionname: '',
             listA:[{
                 name: '全部',
                 Url: '/Total',
@@ -58,6 +69,31 @@ export default {
              this.Index = index;
              this.CurrentComp = this.listA[index].comp;
             // this.$router.push({path: this.listA[index].Url});
+        },
+        touchStart(e){
+            this.startX = e.touches[0].clientX;
+        },
+        touchEnd(e){
+            this.endX = e.changedTouches[0].clientX;
+            let disX = this.endX - this.startX;
+            if(disX>0){
+                if(this.Index<=0){
+                    this.Index=0;
+                }else{
+                    this.Index = this.Index-1;
+                    this.CurrentComp = this.listA[this.Index].comp; 
+                }   
+                
+            }
+            else if(disX<0){
+                 if(this.Index>=3){
+                    this.Index=3;
+                }else{
+                    this.Index = this.Index+1;
+                    this.CurrentComp = this.listA[this.Index].comp;
+                }    
+                
+            }
         }
     }
 }
@@ -97,9 +133,11 @@ export default {
         overflow: auto;
         background-color: #f3f3f3;
         padding-top: 0.1rem;
-        
+        transition: all 0.5s ease-in;
     }
-    
-
+    .v-enter{
+        opacity: 0;
+        transform: translateX(100%)
+    }
     
 </style>

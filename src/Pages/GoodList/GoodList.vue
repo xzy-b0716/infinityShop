@@ -24,12 +24,12 @@
                   <div class="goods-information">
                       <div class="left">
                           <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.isCheck}"></i>
-                          <img class="img" :src= "item.imgUrl" width="1">
+                          <img class="img" :src= "item.imgUrl" width="1" @click= "Jdescribe">
                       </div>
                       <div class="right">
                           <div class="right-top">
                               <div class="price">￥{{item.price}}</div>
-                              <div class="describe">{{item.describe | snippet}}</div>
+                              <div class="describe" @click= "Jdescribe">{{item.describe | snippet}}</div>
                           </div>
                           <div class="right-middle">
                               <div class="color"></div>

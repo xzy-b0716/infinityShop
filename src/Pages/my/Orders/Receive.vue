@@ -10,11 +10,11 @@
                 <div class="detial_content">
                     <div class="top1">
                         <div class="left">
-                            <img src="@/assets/image/4.png" >
+                            <img src="@/assets/image/4.png" @click="describeJ" alt="图片走丢了">
                         </div>
                         <div class="right">
-                            <div class="describe">黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女</div>
-                            <div class="classify">
+                            <div class="describe" @click="describeJ">黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女</div>
+                            <div class="classify" @click="describeJ">
                                 颜色分类：黑色
                             </div>
                         </div>
@@ -50,6 +50,9 @@ export default {
     methods:{
         cancel(){
             this.Numshow = true;
+        },
+        describeJ(){
+            this.$router.push({path:'/Describe'})
         }
     }
 }
@@ -106,10 +109,12 @@ export default {
                             font-size: 0.13rem;
                             margin-left: 0.1rem;
                             margin-top: 0.05rem;
-                            background-color: #ccc;
                             height: 0.25rem;
-                            width: 1.0rem;
                             line-height: 0.25rem;
+                            width: 1.5rem;
+                            border-radius: 0.05rem;
+                            background-color: #f3f3f3;
+                            text-align: center;
                         }
                     }
                 }
