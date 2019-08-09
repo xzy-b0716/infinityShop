@@ -13,7 +13,7 @@
 </div>
 <div class="recently-viewed">
   <p>Recently Viewed</p>
-<ul class="view">
+<ul class="view" :style="style1" @touchstart='touchStart1' @touchend='touchEnd1'>
 <li v-for= "(item,index) in swip2" :key="index" @click.stop="go">
   <img :src="item.url" alt="">
   <i :class="{'icon-shoucang':true,'icon-shoucang1':item.like}" @click.stop="addclass(index)" ></i>
@@ -43,7 +43,9 @@ export default {
         disX: 0, 
         currentindex:0,
         off:true,
-         style:'',
+        style:'',
+        style1:'',
+        left:0,
       n:0,
       scrollTop:'',
         arr:[
@@ -73,6 +75,14 @@ export default {
           like:false
         },
          {
+          url:"../../static/img/5.jpg",
+          like:false
+        },
+         {
+          url:"../../static/img/5.jpg",
+          like:false
+        }
+        , {
           url:"../../static/img/5.jpg",
           like:false
         }
@@ -117,32 +127,51 @@ export default {
               }
               }
               } ,  
+              touchStart1(ev){
+                ev= ev || event
+          //tounches类数组，等于1时表示此时有只有一只手指在触摸屏幕    
+            if(ev.touches.length == 1){
+                    // 记录开始位置
+            this.startX = ev.touches[0].clientX;
+                }
+            },
+         touchEnd1(ev){
+              ev = ev || event;
+              if (ev.changedTouches.length == 1) {
+              let endX = ev.changedTouches[0].clientX;
+              this.disX = this.startX - endX;
+              if ((this.disX)<0) {
+                 if(this.left==0)
+             {
+             }
+             else{     
+            this.style1 = 'left:0'; 
+            this.left=0;
+             }           
+              }else  if (this.disX > 0){
+             if(this.left==(-3.75))
+             {
+             }
+             else{     
+           this.style1 = 'left:-3.5rem';
+           this.left=-3.75; 
+             }
+        
+              }
+              }
+              } ,  
     addclass(n){
      this.swip2[n].like=!this.swip2[n].like;   
     },
     go(){
       this.$router.push({path:'/describe'})
     }  ,
-    // autoplay(){
-    //   if(this.off){
-    //   this.currentindex++; 
-    //   this.style = 'left:'+-375*this.currentindex+'px';
-    //   if(this.currentindex==2){
-    //     this.off=false;
-    //   } 
-    //   }else{
-    //   this.currentindex--;
-    //   this.style = 'left:'+-375*this.currentindex+'px'; 
-    //     if(this.currentindex==0){
-    //     this.off=true;
-    //   } 
-    //   }
+  
      
 
    
   
     
-    // },
     play(){     
        var that=this;
       setInterval(function(){
@@ -209,7 +238,6 @@ export default {
   width: 3.75rem;
   height:2.5rem;
   list-style:none;
-  background-color:red;
   float:left;
   overflow:hidden;
  }
@@ -257,11 +285,13 @@ img{
   font-size:0.16rem;
 }
   .view{
-  width:800px;
+  width:7.2rem;
   position:relative;
   height:1.25rem;
   list-style:none;
   margin-left:10px;
+  left:0;
+  transition: 0.3s;
 
 li{
   position:relative;
