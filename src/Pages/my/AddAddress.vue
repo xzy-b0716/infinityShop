@@ -1,54 +1,114 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: Seven
+ * @Date: 2019-08-01 01:55:29
+ * @LastEditors: Seven
+ * @LastEditTime: 2019-08-10 01:52:05
+ -->
 <template>
 <div id="add">
-  <Header :message="message" class="header"></Header>
-  <ul class="content">
-    <li v-for="(list,index) in lists" :key="index" class="li">
-      <input type="text" :placeholder="list.warning" value="" />
-    </li>
-  </ul>
-  <ul>
-    <li>设为默认地址</li>
-    <li><input type="checkbox" /></li>
-  </ul>
-  
-  <div class="down">
-    <button class="btn" @click="save">保存</button>
+  <Header :message="message"></Header>
+  <div class="content">
+    <ul>
+      <li>收货人</li>
+      <li>
+        <input type="text" placeholder="收货人姓名" value="" required="required"/>
+      </li>
+    </ul>
+    <ul>
+      <li>联系方式</li>
+      <li>
+        <input type="text" placeholder="联系人手机号码" value="" required="required"/>
+        </li>
+    </ul>
+    <ul>
+      <li>所在地区</li>
+      <li>
+        <input type="text" placeholder="选择收货地址" readonly class="area" value="" required="required"/>
+      </li>
+    </ul>
+    <ul>
+      <li>详细地址</li>
+      <li>
+        <input type="text" placeholder="街道详细地址" value="" required="required"/>
+        </li>
+    </ul>
+    <ul>
+      <li>设为默认地址</li>
+      <li>
+        <input type="checkbox" />
+      </li>
+    </ul>
+    <button type="button" class="submit" @click="saveAddr">保存</button>
+    <!-- <button type="button" class="submit" @click="deleteAddr">删除</button> -->
+    
+
   </div>
+        
+  <!-- <messagebox :v-if="showCancelButton"></messagebox> -->
+
   
+
+
 
 
 </div>
 
 </template>
 <script>
+
+
 export default{
   name:"add",
+  
   data(){
     return{
-      message:"添加收货地址",
-      lists:[
-        {
-          warning:"收货人"
-        },
-        {
-          warning:"手机号码"
-        },
-        {
-          warning:"所在地区"
-        },
-        {
-          warning:"街道详细地址"
-        }
-      ]
+      message:"添加收货地址"
+      
+
     }
   },
   methods:{
-    save(){
-
-      alert(1);
-    }
+    
+    saveAddr(){
+      
+      // this.$toast("保存成功");
+      // this.$router.push('address');
+    },
+    deleteAddr(){
+      this.$messagebox.confirm("确定执行此操作？").then(
+         action=>{
+           
+        }
+      )
+       
+      
+      // MessageBox({
+      //    title: 'Notice',
+      //    message: 'Are you sure?',
+      //    showCancelButton: true
+      //    });
+    //   MessageBox({
+    //     title: '提示',
+    //     message: '确定删除该地址吗?',
+    //     // showInput:'yes',
+    //     showCancelButton: true
+    //   }).then(action=>{
+    //     if(action==='confirm'){
+    //       console.log(1)
+    //     }
+    //     if(action==='cancel'){
+    //       console.log(2)
+    //     }
+    //   }).catch(err=>{
+    //     console.log(err)
+    //   })
+     
+    // }
 
   }
+}
 }
 </script>
 <style scoped lang="less">
@@ -56,79 +116,56 @@ export default{
   width:100%;
   overflow:hidden;
   background-color:#FFFFFF;
-  .header{
-      margin-bottom:.2rem;
-    }
   .content{
     width:100%;
-    
-    
-    li{
-      list-style:none;
-      font-size:0.18rem;
+    ul{
+      width:100%;
       height:.5rem;
-      width:90%;
-      margin:auto;
+      border-bottom:1px solid silver;
       display:flex;
       align-items:center;
-      border:1px solid silver;
-      border-radius:.1rem;
-      margin-bottom:.2rem;
-      overflow:hidden;
-      input[type='text']{
-         margin-left:.13rem;
-          width:94%;
+      li{
+        list-style: none;
+        font-size:.18rem;
+        margin-left:.13rem;
+        
+        li:nth-child(2){
+          width:70%;
           height:100%;
+        }
+        input[type='text']{
           outline:none;
           border:0;
           font-size:.18rem;
-      }
-      input[type='checkbox']{
+        }
+        .area{
+          outline:none;
+          border:0;
+          font-size:.15rem !important;
+        }
+        input[type='checkbox']{
           width:.2rem;
           height:.2rem;
           margin-top:.1rem;
-          outline:none;
-          border:0;
-      }
-      // .init{
-        
-      //   width:85%;
-      //   padding-left:.16rem;
-      //   margin-right:.2rem;
-      //   font-size:.18rem;
-      //   height:100%;
-      //   overflow:hidden;
-      //   resize:none;
-      //   border: 0;  
-      //   outline: none;
-        
-      //   background-color: rgba(0, 0, 0, 0);
+        }
 
-      //   }
-      
-      
+      }
 
     }
-  }
-  
-  .down{
-    text-align:center;
-    margin-top:.2rem;
-    .btn{
-    width:.6rem;
+    .submit{
+    width:80%;
     height:.4rem;
-    outline:none;
-    border-radius:.1rem;
-    background-color:rgba(126, 195, 216, 0.959);
+    border-radius: 5px;
     color:white;
-    font-size:.2rem;
-    
-    
+    font-size:.18rem;
+    background-color:#46aaff;
+    display:block;
+    margin:0 auto;
+    border:0;
+    outline:none;
+    margin-top:.3rem;
+    }
   }
-
-  }
-  
-  
 }
 
 </style>

@@ -1,6 +1,14 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: Seven
+ * @Date: 2019-07-25 12:21:00
+ * @LastEditors: Seven
+ * @LastEditTime: 2019-08-10 01:42:29
+ -->
 <template>
   <div id="collect">
-    <Header :message="msg" class="header"></Header>
+    <Header :message="msg"></Header>
     <ul>
       <li v-for="(list,index) in lists" :key="index" @click="details">
          <img :src="list.url">
@@ -70,12 +78,7 @@ export default {
 #collect{
   background-color:rgba(212, 212, 204, 0.233);
   padding-bottom:.6rem;
-  .header{
-    margin-bottom:.1rem;
-    background-color:rgb(245, 209, 142);
-    border:none;
-  }
-
+  
   ul{
     width:100%;
     list-style:none;
@@ -123,8 +126,8 @@ export default {
         outline:none;
         border-radius:.2rem;
         background-color:transparent;
-        border:1px solid rgb(240, 204, 164);
-        color:rgb(245, 209, 142);
+        border:1px solid#46aaff;
+        color:#46aaff;
         font-size:.15rem;
         position:absolute;
         right:.1rem;
