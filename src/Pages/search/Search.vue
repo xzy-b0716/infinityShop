@@ -95,7 +95,7 @@ i{
     align-items: center;
     color: #8c8c8c;
     font-size: 0.2rem;
-    border-bottom:0.03rem solid transparent;
+    // border-bottom:0.03rem solid transparent;
   }
 }
 </style>
