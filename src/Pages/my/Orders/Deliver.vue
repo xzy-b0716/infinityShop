@@ -46,6 +46,9 @@ export default {
         return{
             count: 2,
             Numshow: false,
+            lists:{
+                
+            }
         }
     },
     methods:{

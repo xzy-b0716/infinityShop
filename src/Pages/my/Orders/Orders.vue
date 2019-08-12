@@ -13,11 +13,6 @@
             
             <Total :is= "CurrentComp" ></Total> 
         </div>
- 
-        
-       
-        
-
        
     </div>
 </template>
