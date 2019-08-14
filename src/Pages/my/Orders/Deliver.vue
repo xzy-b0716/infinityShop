@@ -2,7 +2,7 @@
     <div class="Payment">
         <empty v-show= "count == 0" class="empty"></empty>
         <ul class="detial" v-show= "count > 0" >
-            <li>
+            <li v-for="(item,index) in lists" :key="index">
                 <div class="detial_name">
                     <span class="span1">天猫</span>
                     <span class="span2">卖家已付款</span>
@@ -10,12 +10,12 @@
                 <div class="detial_content">
                     <div class="top1">
                         <div class="left">
-                            <img src="@/assets/image/4.png" @click="describeJ" alt="图片走丢了">
+                            <img :src= "item.productPicture" @click="describeJ" alt="图片走丢了">
                         </div>
                         <div class="right">
-                            <div class="describe" @click="describeJ">黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女</div>
+                            <div class="describe" @click="describeJ">{{item.productName}}</div>
                             <div class="classify" @click="describeJ">
-                                颜色分类：黑色
+                                颜色分类：<span>{{item.oiProductColor}}</span>
                             </div>
                         </div>
                     </div>
@@ -25,8 +25,8 @@
                     </div>
                 </div>
                 <div class="detial_pay">
-                    <span>共<span>1</span>件</span>
-                    <span>小计:￥<span>133</span></span>
+                    <span>共<span>{{item.oiProductNum}}</span>件</span>
+                    <span>小计:￥<span>{{item.oiTotalPrice}}</span></span>
                 </div>
                 <footer>
                     <button class="button1" @click= "cancel">提醒发货</button>
@@ -46,6 +46,13 @@ export default {
         return{
             count: 2,
             Numshow: false,
+            lists:[{
+                productPicture: require('../../../assets/image/4.png'),
+                productName: '黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女',
+                oiProductColor: '黑色',
+                oiProductNum: 1,
+                oiTotalPrice: 133
+            }]
         }
     },
     methods:{
@@ -117,6 +124,9 @@ export default {
                             border-radius: 0.05rem;
                             background-color: #f3f3f3;
                             text-align: center;
+                            span{
+                                font-size: 0.13rem;
+                            }
                         }
                     }
                 }

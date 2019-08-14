@@ -18,6 +18,7 @@ Vue.config.productionTip = false
 Vue.component("bottom",Bottom)
 Vue.component("recommend",Recommend)
 Vue.use(Mint)
+Vue.prototype.axios = axios
 
 Vue.prototype.$messagebox=MessageBox;
 Vue.prototype.$toast=Toast;
