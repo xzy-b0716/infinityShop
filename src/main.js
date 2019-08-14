@@ -9,8 +9,9 @@ import Header from './components/Header'
 import fastClick from 'fastclick'
 import Recommend from './components/Recommend'
 import {MessageBox,Toast} from 'mint-ui'
+import axios from "axios"
 
-
+Vue.prototype.$axios=axios
 fastClick.attach(document.body)
 Vue.component("Header",Header)
 Vue.config.productionTip = false

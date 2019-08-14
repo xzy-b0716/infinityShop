@@ -1,0 +1,12 @@
+{"success":false,
+    "data":
+    {"productId":2,
+        "state":-1,
+        "stateInfo":"秒杀成功","successKillPro":
+        {
+            "userId":45,
+            "seckillState":null,
+            "productId":2,"createTime":"2019-08-12 23:02:02","seckillPrice":20.0,"productPicture":"主图02","productName":"短袖"
+        }
+            },
+            "error":null}

@@ -1,0 +1,166 @@
+﻿[{"status":0,
+ "data":{
+        "productId": 2,
+        "productName": "短袖",
+        "productPicture": "主图02",
+        "productStock": 300,
+        "productComNum": 563,
+        "productPrice": 250,
+       " productDescribe": "这是一件超好看的短袖",
+        "productSuperclass": "M",
+        "productClassId": "2",
+       " productCreatetime": "2019-08-20 13:18:51",
+        "information":{    
+            "productBrand":
+             {
+            "name": "品牌",
+            "describe":"常规"
+            },
+            "productMaterial":
+            {
+              "name": "品牌",
+              "describe": "常规"
+              },
+            "productVersion":
+            {
+              "name": "品牌",
+              "describe": "常规"
+              },
+            "productStyle":
+             {
+              "name": "风格",
+              "describe": "常规"
+              },
+            "productThickness":
+             {
+              "name": "质地",
+              "describe": "常规"
+            }             
+      
+          },
+"discussCount": 200,
+"collect": true,
+"user": null,
+"carousel": [
+{
+"carouselId":1,
+"path": "./../static/img/1.jpg",
+"productId": 1
+},
+{
+  "carouselId":1,
+  "path": "./../static/img/1.jpg",
+  "productId": 1
+  },
+  {
+    "carouselId":1,
+    "path": "./../static/img/1.jpg",
+    "productId": 1
+    },
+    {
+      "carouselId":1,
+      "path": "./../static/img/1.jpg",
+      "productId": 1
+      },
+      {
+        "carouselId":1,
+        "path": "./../static/img/1.jpg",
+        "productId": 1
+        }
+
+ 
+],
+"productSizes": [
+{
+"product_size_id": null,
+"product_id": null,
+"size": "S"
+},
+{
+"product_size_id": null,
+"product_id": null,
+"size": "M"
+},
+{
+"product_size_id": null,
+"product_id": null,
+"size": "L"
+}
+],
+"productColors": [
+{
+"product_color_id": null,
+"product_id": null,
+"color": "black",
+"show": false
+},
+{
+"product_color_id":null,
+"product_id":null,
+"color":"red",
+"show":false
+},
+{
+"product_color_id": null,
+"product_id": null,
+"color": "green",
+"show": false
+},
+{
+"product_color_id": null,
+"product_id": null,
+"color": "pink",
+"show": false
+},
+{
+"product_color_id": null,
+"product_id": null,
+"color": "yellow",
+"show": false
+}
+],
+"productDiscuss": [
+{
+"user": {
+"userId": null,
+"userName": "Lisa",
+"userPassword": null,
+"userEmail": null,
+"userTel": null,
+"userBirth": null,
+"userCreat": null,
+"userReal": null,
+"userSex": null,
+"userPic": null
+},
+"productDiscussId": null,
+"producDiscussComment": "包包收到了，速度很快，质量很好，很喜欢，推荐购买，快快买吧",
+"userId": null,
+"productId": null,
+"pdCreatetime": "2019-08-06 14:33:49"
+},
+{
+"user": {
+"userId": null,
+"userName": "suoyuan",
+"userPassword": null,
+"userEmail": null,
+"userTel": null,
+"userBirth": null,
+"userCreat": null,
+"userReal": null,
+"userSex": null,
+"userPic": null
+},
+"productDiscussId": null,
+"producDiscussComment": "包包收到了，速度很快，质量很好，很喜欢，推荐购买，快快买吧",
+"userId": null,
+"productId": null,
+"pdCreatetime": "2019-08-06 14:33:49"
+}
+],
+"like": null
+ }
+}]
+
+  

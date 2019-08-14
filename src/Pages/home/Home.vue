@@ -3,7 +3,7 @@
 <div class="swiper">
   <!-- <p>Infinity</p> -->
 <ul  :style="style"   @touchstart='touchStart' @touchend='touchEnd'>
-  <li v-for="(item,index) in arr " :key="index" @click.stop="$router.push('./describe')">
+  <li v-for="(item,index) in arr " :key="index" @click.stop="$router.push('/describe')">
     <img :src="item.url" alt="图片走丢啦">
   </li>
 </ul>
@@ -46,17 +46,26 @@ export default {
         style:'',
         style1:'',
         left:0,
+        timer:null,
+       screenWidth:document.body.clientWidth,
       n:0,
       scrollTop:'',
         arr:[
         {
-          url:require("@/assets/img/1.jpg")
+          url:require("@/assets/img/1.jpg"),
+          goodsid:1
         },
         {
-          url:require("@/assets/img/2.jpg")
+          url:require("@/assets/img/2.jpg"),
+            goodsid:2
         },
         {
-          url:require("@/assets/img/1.jpg")
+          url:require("@/assets/img/1.jpg"),
+            goodsid:3
+        },
+         {
+          url:require("@/assets/img/1.jpg"),
+            goodsid:3
         }
 
         ],
@@ -114,18 +123,21 @@ export default {
              }
              else{
             this.currentindex-=1;      
-            this.style = 'left:'+-375*this.currentindex+'px'; 
+            this.style = 'left:'+(-100)*this.currentindex+'%'; 
              }           
               }else  if (this.disX > 0){
-             if(this.currentindex==2)
+             if(this.currentindex==3)
              {
              }else{
             this.currentindex+=1;      
-           this.style = 'left:'+-375*this.currentindex+'px'; 
+           this.style = 'left:'+(-100)*this.currentindex+'%'; 
              }
         
               }
               }
+              clearInterval(this.timer);
+              var that=this;
+              this.timer=setInterval(that.f,3500)
               } ,  
               touchStart1(ev){
                 ev= ev || event
@@ -165,42 +177,46 @@ export default {
     },
     go(){
       this.$router.push({path:'/describe'})
-    }  ,
-  
-     
-
-   
-  
-    
-    play(){     
-       var that=this;
-      setInterval(function(){
-          if(that.currentindex==0){
-        that.off=true;
+    },
+    f(){
+     if(this.currentindex==0){
+        this.off=true;
       } 
-         if(that.currentindex==2){
-        that.off=false;
+         if(this.currentindex==3){
+        this.off=false;
       } 
-          if(that.off){
-      that.currentindex++; 
-      that.style = 'left:'+-375*that.currentindex+'px';
-      if(that.currentindex==2){
-        that.off=false;
+          if(this.off){
+      this.currentindex++; 
+      this.style = 'left:'+-100*this.currentindex+'%';
+      if(this.currentindex==3){
+        this.off=false;
       } 
       }else{
-      that.currentindex--;
-      that.style = 'left:'+-375*that.currentindex+'px'; 
-        if(that.currentindex==0){
-        that.off=true;
+      this.currentindex--;
+      this.style = 'left:'+-100*this.currentindex+'%'; 
+        if(this.currentindex==0){
+        this.off=true;
       } 
       }
-     
-      },3500)
+    },
+    
+    play(){    
+       var that=this;    
+       this.timer=setInterval(that.f,3500)
     }
   },
   created(){
      this.play();
-  }
+  },
+ mounted () {
+      const that = this
+      window.onresize = () => {
+        return (() => {
+          window.screenWidth = document.body.clientWidth
+          that.screenWidth = window.screenWidth
+        })()
+      }
+    }
 }
 </script>
 
@@ -228,14 +244,14 @@ export default {
       left:1.5rem;
     }
  ul{
-  width:11.25rem;
+  width:400%;
   height:2.5rem;
   position:absolute;
   left: 0;
   transition: 0.3s;
   overflow:hidden;
  li{
-  width: 3.75rem;
+  width:25%;
   height:2.5rem;
   list-style:none;
   float:left;
