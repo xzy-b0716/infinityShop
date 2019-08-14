@@ -4,7 +4,7 @@
  * @Autor: Seven
  * @Date: 2019-08-01 01:55:28
  * @LastEditors: Seven
- * @LastEditTime: 2019-08-13 16:25:59
+ * @LastEditTime: 2019-08-14 20:16:49
  */
 import Vue from 'vue'
 import App from './App'
@@ -18,13 +18,14 @@ import fastClick from 'fastclick'
 import Recommend from './components/Recommend'
 import {MessageBox,Toast,Actionsheet, DatetimePicker} from 'mint-ui'
 
-
+Vue.prototype.$axios=axios
 fastClick.attach(document.body)
 Vue.component("Header",Header)
 Vue.config.productionTip = false
 Vue.component("bottom",Bottom)
 Vue.component("recommend",Recommend)
 Vue.use(Mint)
+Vue.prototype.axios = axios
 
 Vue.prototype.$messagebox=MessageBox;
 Vue.prototype.$toast=Toast;

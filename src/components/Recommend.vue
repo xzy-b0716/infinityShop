@@ -1,9 +1,9 @@
 <template>
   <div id="recommend"> 
     <ul>
-    <li v-for="(item,index) in arr" :key="index" @click.stop="$router.push({path:'./describe'})">
+    <li v-for="(item,index) in recommend" :key="index" @click.stop="$router.push({path:'./describe'})">
       <img :src="item.url" alt="图片走丢啦">
-    <p>{{item.name}}</p>
+    <p>{{item.name | snippet}}</p>
     <p>￥{{item.price}}</p>
     </li>
     </ul>
@@ -14,32 +14,39 @@
 
 export default {
   name: 'recommend',
+ props:["recommend"],
   data(){
     return{
-      arr:[
-        {
-          url:'./../static/img/1.png',
-          name:'女鞋秋季新款',
-          price:178
-        },
-         {
-          url:'./../static/img/2.png',
-          name:'韩衣都舍秋装新款',
-          price:128.4
-        },
-         {
-          url:'./../static/img/3.png',
-          name:'气质女包',
-          price:199
-        },
-         {
-          url:'./../static/img/4.png',
-          name:'新款帽子',
-          price:359
-        }
+     
+      // arr:[
+      //   {
+      //     url:'../../static/img/1.png',
+      //     name:'女鞋秋季新款女鞋秋季',
+      //     price:178
+      //   },
+      //    {
+      //     url:'../../static/img/2.png',
+      //     name:'韩衣都舍秋装新款',
+      //     price:128.4
+      //   },
+      //    {
+      //     url:'../../static/img/3.png',
+      //     name:'气质女包',
+      //     price:199
+      //   },
+      //    {
+      //     url:'../../static/img/4.png',
+      //     name:'新款帽子',
+      //     price:359
+      //   }
 
-      ]
+      // ]
     }
+  },
+    filters:{
+          "snippet":function(value){
+                return value.slice(0,10);
+           },
   }
   
 }

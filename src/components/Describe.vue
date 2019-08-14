@@ -1,15 +1,15 @@
 <template>
   <div class="describe">
-<ul class="imgList">
-    <li v-for="(item,index) in arr " :key="index">
-        <i class="icon-shangyibu" @click="back()"></i>
-        <img :src="item.url" alt="图片走丢啦">
-    <i :class="{'icon-shoucang':true,'icon-shoucang1':like}" @click="changeClass"></i>
+       <i class="icon-shangyibu" @click="back()"></i>
+        <i :class="{'icon-shoucang':true,'icon-shoucang1':goodsdetail.collect}" @click="changeClass"></i>
+<ul :style="style"  class="imgList" @touchstart='touchStart' @touchend='touchEnd'>
+    <li v-for="(item,index) in goodsdetail.carousel" :key="index">   <img :src="item.path" alt="图片走丢啦">
     </li>
 </ul>
+  <div class="number">{{currentindex+1}}/5</div>
     <div class="box">
-    <p class="p1">makes me feel warm and comfortable.</p>
-    <p class="p2">$38.89</p>
+    <p class="p1">{{goodsdetail.productName}}</p>
+    <p class="p2">￥{{goodsdetail.productPrice}}</p>
     </div>
    <div :class="{'choosesize':true,'show':showSize}">
        <span class="span">{{size}}</span> 
@@ -18,36 +18,33 @@
        </div>
    </div>
 <ul class="size" v-if="showSize">
-    <li v-for="(item,index) in sizeList" :key="index" @click="changeSpan(index)">{{item}}</li>
+    <li v-for="(item,index) in goodsdetail.productSizes" :key="index" @click="changeSpan(index)">{{item.size}}</li>
 </ul>
 <ul class="colorList">
     <p class="pcolor">Color : {{color}}</p>
-    <li v-for="(item,index) in colorArr" :key="index" :style="{'background-color':item.color}" @click="changePcolor(index)">
+    <li v-for="(item,index) in goodsdetail.productColors" :key="index" :style="{'background-color':item.color}" @click="changePcolor(index)">
         <i class="icon-guifanjieguoyeduigou" v-if="item.show"></i>
     </li>
 </ul>
 <p class="cardlist" @click="showPopup">加入购物车</p>
-
-<transition name="PopupTS">
-<div class="popup" v-show= "show1">已加入购物车</div>
-</transition>
 <hr>
-<div class="comment" @click="$router.push('/comment')">
-  <p> 宝贝评价(200)</p>
+<div class="comment" @click="$router.push({path:'/comment',query:{datas:productDiscuss}})">
+  <p> 宝贝评价({{goodsdetail.discussCount}})</p>
   <p class="read">查看全部 &gt;</p>
     <ul>
     <li>
        <p class="username">
            <i class="icon-zuanshi"></i>
-           Lisa</p>
-       <p class="usercomment">包包收到了，速度很快，质量很好，很喜欢，推荐购买，快快买吧</p> 
+          <span>{{goodsdetail.productDiscuss[0].user.userName}}</span>
+          <span class="time">{{goodsdetail.productDiscuss[0].pdCreatetime}}</span> </p>
+       <p class="usercomment"> {{goodsdetail.productDiscuss[0].producDiscussComment}}</p> 
     </li>
   </ul>
 </div>
 <div class="information">
   <p> 宝贝详情</p>
   <ul>
-      <li v-for="(item,index) in information" :key="index">
+      <li v-for="(item,index) in goodsdetail.information" :key="index">
          <span class="describename">{{item.name}}</span> 
          <span>{{item.describe}}</span>
       </li>
@@ -55,11 +52,6 @@
     </div>
 <p class="tuijian">猜你喜欢</p>
 <recommend></recommend>
-
-
-
-
-
   </div>
 </template>
 
@@ -69,95 +61,103 @@ export default {
   name: 'describe',
   data () {
     return {
-         like:false,
          showSize:false,
          color:'',
-         show1:false,
          size:"Choose your size",
-         colorArr:[
-             {
-                color:"red",
-                show:false
-             },
-              {
-                color:"yellow",
-                show:false
-             },
-              {
-                color:"pink",
-                show:false
-             },
-              {
-                color:"green",
-                show:false
-             },
-              {
-                color:"blue",
-                show:false
-             }
-                ],
-   arr:[{
-       url:require('../assets/img/1.jpg')
-      
-   }],
-   sizeList:["S","M","L"],
-   information:[
-       {
-           name:"品牌",
-           describe:"钻尚"
-       },
-       {
-           name:"质地",
-           describe:"帆布"
-       },
-         {
-           name:"风格",
-           describe:"日韩"
-       },
-         {
-           name:"版型",
-           describe:"常规"
-       },{
-           name:"厚薄",
-            describe:"常规"
-       }
-   ]    } 
- 
+         productDiscuss:null,
+         goodsdetail:null,
+        startX:0,   //触摸位置
+        disX: 0, 
+        currentindex:0,
+        style:'',
+    }
+    
  },
   methods:{
+        touchStart(ev){
+                ev= ev || event 
+            if(ev.touches.length == 1){
+            this.startX = ev.touches[0].clientX;
+                }
+            },
+         touchEnd(ev){
+              ev = ev || event;
+              if (ev.changedTouches.length == 1) {
+              let endX = ev.changedTouches[0].clientX;
+              this.disX = this.startX - endX;
+              if ((this.disX)<0) {
+                 if(this.currentindex==0)
+             {
+             }
+             else{
+            this.currentindex-=1;      
+            this.style = 'left:'+(-100)*this.currentindex+'%'; 
+             }           
+              }else  if (this.disX > 0){
+             if(this.currentindex==4)
+             {
+             }else{
+            this.currentindex+=1;      
+           this.style = 'left:'+(-100)*this.currentindex+'%' ;
+             }
+        
+              }
+              }
+               
+           
+            },
       back(){
           this.$router.go(-1);
       },
       changeClass(){
-          this.like=!this.like;
+          this.goodsdetail.collect=!this.goodsdetail.collect;
       },
       listShow(){
        this.showSize=!this.showSize;
       },
       changePcolor(n){
-          this.color= this.colorArr[n].color;
-          for(var i=0;i<this.colorArr.length;i++){
-          this.colorArr[i].show=false;
+          this.color= this.goodsdetail.productColors[n].color;
+          for(var i=0;i<this.goodsdetail.productColors.length;i++){
+         this.goodsdetail.productColors[i].show=false;
           }
-          this.colorArr[n].show=true;
+          this.goodsdetail.productColors[n].show=true;
          
       },
       changeSpan(n){
-          this.size=this.sizeList[n];
+          this.size=this.goodsdetail.productSizes[n].size;
           this.showSize=!this.showSize;
       },
       showPopup(){
-        // this.show1=true;
-        // var that = this;
-        // setTimeout(function(){
-        // that.show1 = false;
-        // },1500)
         if(this.size=="Choose your size"||this.color=='')
         this.$toast("请选择颜色或尺码")
         else
         this.$toast("已加入购物车")
 } 
 
+
+  },
+  created(){
+     this.$axios.get('./../static/mydata.json')
+     .then(
+         (res)=>{
+         return eval(res.data);
+
+         } )
+         .then((res)=>{          
+            this.goodsdetail=res[0].data;
+            this.productDiscuss=this.goodsdetail.productDiscuss;
+         
+
+         })
+         .catch(function (error) { 
+          console.log(error);
+      })
+    
+  },
+      computed:{
+      productId:function(){
+          return this.$route.params. productId
+      }
   }
 }
 
@@ -169,38 +169,59 @@ export default {
     position:relative;
     overflow: hidden;
 }
-.imgList{
-width:800px;
-height:3rem;
-list-style:none;
+.number{
+  position:absolute;
+  left:.1rem;
+  top:2.6rem;
+  width:.5rem;
+  height:.25rem;
+  line-height:.25rem;
+  text-align: center;
+  background:rgba(0, 0, 0, 0.203);
+  border-radius: .3rem;  
+  color:rgba(255, 255, 255, 0.538);
 }
-.imgList li{
-position:relative;
-width:3.75rem;
-height:3rem;
-float:left;
-overflow: hidden;
-}
+
 .icon-shangyibu{
     font-size:30px;
     position:absolute;
     left:.1rem;
     top:.1rem;
     color:#F2F3F1;
+    z-index:11;
+    
 }
 .icon-shoucang{
   position:absolute;
-  bottom:.1rem;
-  right:.1rem;
+  top:2.55rem;
+  right:.15rem;
   font-size:30px;   
   color:white;
+  z-index:11;
 }
 .icon-shoucang1{
     color:red;
 }
+.imgList{
+width:500%;
+position:relative;
+height:3rem;
+list-style:none;
+overflow: hidden;
+left:0;
+transition:0.5s;
+
+li{
+position:relative;
+width:20%;
+height:3rem;
+float:left;
+overflow: hidden;
 img{
     width:100%;
     height:100%;
+}
+}
 }
 .box{
     width:90%;
@@ -318,32 +339,6 @@ img{
     line-height:.4rem
 
 }
-
-.popup{
-    line-height:.2rem;
-    text-align:center;
-    padding:.15rem;
-    height:.5rem;   
-    background:rgba(0,0,0,0.5);
-    position:fixed;
-    color:#fff;
-    left:50%;  
-    top:50%;
-    transform:translate(-50%,0);
-    border-radius:.08rem;
-    z-index:20; 
- 
-}
-.PopupTS-enter-active,.PopupTS-leave-active {
-  transition:all 1s;
-}
-.PopupTS-enter,.PopupTS-leave-to{
-   opacity: 0;
-    }
-.PopupTS-leave,.PopupTS-enter-to{
-    opacity: 1;
-}
-
 hr{
     background:rgba(192, 192, 192, 0.15);
     margin-top:.1rem;
@@ -372,10 +367,16 @@ hr{
         li{
            .username
             {
+                position:relative;
                 line-height:.4rem; 
+                .time{
+                      position:absolute;
+                      right:1%;  
+                    }
                 .icon-zuanshi{
                     font-size:16px;
                     color:#FF126A;
+                    
                 }           
         }
         .usercomment{

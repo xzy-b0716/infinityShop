@@ -9,11 +9,11 @@
          </ul>
         </div>
         <ul class=ul>
-    <li v-for="(item,index) in arr" :key="index">
+    <li v-for="(item,index) in datas" :key="index">
        <p class="username">
            <i class="icon-zuanshi"></i>
-           {{item.name}}</p>
-       <p class="usercomment">{{item.comment}}</p> 
+           {{item.user.userName}}</p>
+       <p class="usercomment">{{item.producDiscussComment}}</p> 
     </li>
   </ul>
       </div>  
@@ -22,32 +22,16 @@
 <script>
 export default {
     name:"comment",
+    // props:["datas"],
     data(){
         return{
-            message:"宝贝评价",
-            arr:[
-              {
-                name:"Lisa",
-                comment:"包包收到了，速度很快，质量很好，很喜欢，推荐购买，快快买吧"
-              },
-               {
-                name:"Lisa",
-                comment:"包包收到了，速度很快，质量很好，很喜欢，推荐购买，快快买吧"
-              },
-               {
-                name:"Lisa",
-                comment:"包包收到了，速度很快，质量很好，很喜欢，推荐购买，快快买吧"
-              },
-               {
-                name:"Lisa",
-                comment:"包包收到了，速度很快，质量很好，很喜欢，推荐购买，快快买吧"
-              },
-               {
-                name:"Lisa",
-                comment:"包包收到了，速度很快，质量很好，很喜欢，推荐购买，快快买吧"
-              },
-            ]
+            message:"宝贝评价",           
         }
+    },
+    computed:{
+      datas(){
+        return this.$route.query.datas
+      }
     }
     
 }

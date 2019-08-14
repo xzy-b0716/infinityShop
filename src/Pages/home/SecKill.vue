@@ -6,11 +6,11 @@
    </div>
   <ul>
     <li v-for="(item,index) in seclist" :key="index" @click="$router.push('./secdescribe')">
-      <img :src="item.url" alt="图片走丢啦">      
+      <img :src="item.product.productPicture" alt="图片走丢啦">      
       <div>
-        <p>{{item.name}}</p>
-        <span class="span1">￥{{item.price}}</span>
-        <span class="span2">￥{{item.price1}}</span>
+        <p>{{item.seckillTitle}}</p>
+        <span class="span1">￥{{item.seckillPrice}}</span>
+        <span class="span2">￥{{item.product.productPrice}}</span>
         <button>马上抢</button>
 
         </div>
@@ -25,55 +25,26 @@ export default {
     data() {
     return {
       message:'限时秒杀',
-         seclist:[
-          {
-            url:"../../static/img/6.jpg",
-          name:'欧莱雅护发精油两支',
-          price:119,
-          price1:178
-          },
-           {
-             url:"../../static/img/6.jpg",
-          name:'雾色梦境哑光唇油',
-           price:39.8,
-            price1:50
-          },
-           {
-             url:"../../static/img/6.jpg",
-          name:'抢半价反季羊毛绒',
-           price:39,
-            price1:78
-          },
-           {
-             url:"../../static/img/6.jpg",
-          name:'抢半价反季羊毛绒',
-           price:39,
-            price1:89
-          },
-           {
-             url:"../../static/img/6.jpg",
-          name:'抢半价反季羊毛绒',
-           price:39,
-            price1:89
-          },
-           {
-             url:"../../static/img/6.jpg",
-          name:'抢半价反季羊毛绒',
-           price:39,
-            price1:89
-          },
-           {
-             url:"../../static/img/6.jpg",
-          name:'抢半价反季羊毛绒',
-           price:39,
-            price1:89
-          },
-
-
-        ]
+      seclist:null      
 
     }
-}
+},
+ created(){
+     this.$axios.get('./../static/seclist.json')
+     .then(
+         (res)=>{
+         return eval(res.data);
+
+         } )
+         .then((res)=>{          
+            this.seclist=res;
+
+         })
+         .catch(function (error) { 
+          console.log(error);
+      })
+    
+  },
 
 
     }
@@ -140,6 +111,7 @@ export default {
           text-align: left;
            line-height:.2rem;
            margin-top:.05rem;
+           font-size: 18px;
 
          }
          .span1{         

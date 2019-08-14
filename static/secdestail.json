@@ -1,0 +1,52 @@
+{
+    "countDiscuss":2,
+    "product":{
+        "productId":3,
+        "productName":"女包","productPicture":null,"productStock":null,"productComNum":null,"productPrice":20000.0,"productDescribe":"这是一个名牌包包你买不起",
+        "productclass":null,
+        "browse":null,
+        "productColor":[
+            {
+            "product_color_id":null,"product_id":null,
+            "color":"red",
+            "show":false
+            },
+            {"product_color_id":null,"product_id":null,"color":"green",
+                "show":false
+                },
+                {
+                    "product_color_id":null,"product_id":null,"color":"blue","show":false
+                    }
+                ],
+        "productSize":[{"product_size_id":1,"product_id":null,"size":"S"},{"product_size_id":1,"product_id":null,"size":"M"},{"product_size_id":1,"product_id":null,"size":"L"}],
+        "carousel":
+        [{"carouselId":1,
+        "path":"../../static/img/1.jpg",
+        "productId":1
+        },
+        {"carouselId":1,"path":"../../static/img/1.jpg","productId":1},{"carouselId":1,"path":"../../static/img/1.jpg","productId":1},       
+        {"carouselId":1,
+            "path":"../../static/img/1.jpg",
+            "productId":1
+            },  {"carouselId":1,
+                "path":"../../static/img/1.jpg",
+                "productId":1
+                }
+            ],
+
+        "orderitem":null,
+        "productDiscuss":
+        [
+        {
+        "user":{"userId":null,"userName":"crd","userPassword":null,"userEmail":null,"userTel":null,"userBirth":null,"userCreat":null,"userReal":null,"userSex":null,"userPic":null,"userBackground":null},"productDiscussId":null,"producDiscussComment":"好东西","userId":null,"productId":null,"pdCreatetime":"2019-08-03 16:30:31"},
+        {
+        "user":{"userId":null,"userName":"wwh","userPassword":null,"userEmail":null,"userTel":null,"userBirth":null,"userCreat":null,"userReal":null,"userSex":null,"userPic":null,"userBackground":null},"productDiscussId":null,"producDiscussComment":"good  bag","userId":null,"productId":null,"pdCreatetime":"2019-08-06 17:57:24"}],
+        "list1":null,
+        "list":null,"productSuperclass":null,"productClassId":null,"productCreatetime":null,"productBrand":null,"productMaterial":null,"productVersion":null,"productStyle":null,"productThickness":null
+        },
+
+
+        "information":{"productBrand":{"name":"品牌","describe":"CK"},"productMaterial":{"name":"质地","describe":"牛皮"},"productVersion":{"name":"版型","describe":"性感版"},"productStyle":{"name":"风格","describe":"肩带款"},"productThickness":{"name":"厚薄","describe":"正常"}},
+        
+        "seckillId":null,"seckillTitle":null,"seckillPrice":1000.0,"seckillStartTime":"2019-07-14 3:30:20","seckillEndTime":"2019-07-14 3:31:30","seckillCreateTime":null,"seckillStock":3,"productId":null
+    }

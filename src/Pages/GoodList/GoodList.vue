@@ -17,19 +17,19 @@
           <li class="list-item" v-for = "(item, index) in list" :key= "index" data-type="0">
               <div class="goods-list" @touchstart.capture="touchStart" @touchend.capture="touchEnd" @click="skip">
                   <div class="service-information">
-                      <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.isCheck}"></i>
+                      <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.ischecked}"></i>
                       <div class="name" @click= "Jdescribe">{{item.shopname}}</div>
                       <i class="icon-guifanliebiaoxiayibu" @click= "Jdescribe"></i>
                   </div>
                   <div class="goods-information">
                       <div class="left">
-                          <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.isCheck}"></i>
-                          <img class="img" :src= "item.imgUrl" width="1" @click= "Jdescribe">
+                          <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.ischecked}"></i>
+                          <img class="img" :src= "item.productPicture" width="1" @click= "Jdescribe">
                       </div>
                       <div class="right">
                           <div class="right-top">
-                              <div class="price">￥{{item.price}}</div>
-                              <div class="describe" @click= "Jdescribe">{{item.describe | snippet}}</div>
+                              <div class="price">￥{{item.productPrice}}</div>
+                              <div class="describe" @click= "Jdescribe">{{item.productName | snippet}}</div>
                           </div>
                           <div class="right-middle">
                               <div class="color"></div>
@@ -37,11 +37,11 @@
                           </div>
                           <div class="right-bottom">
                               <div class="size">
-                                  <div>{{item.size}}</div>
+                                  <div>{{item.cpProductSize}}</div>
                                   <i class="icon-xia" @click= "changeNum(index)"></i>
                               </div>
                               <div class="number">
-                                <div>QTY:{{item.count}}</div>
+                                <div>QTY:{{item.quantity}}</div>
                                   <i class="icon-xia" @click= "changeNum(index)"></i>
                               </div>
                           </div>
@@ -90,7 +90,7 @@
                颜色分类：
              </div>
              <ul class="color_list">
-               <li v-for="(items,index) in Colors" :key="index" class="colors" @click= "Size__Color(index)" :class= "{'Size_Color': Color == index}">
+               <li v-for="(items,index) in colors" :key="index" class="colors" @click= "Size__Color(index)" :class= "{'Size_Color': Color == index}">
                  {{items}}
                </li>
              </ul>
@@ -99,7 +99,7 @@
              <div class="size_num">尺码分类：
              </div>
              <ul class="size_left">
-               <li v-for="(items,index) in Sizes" :key="index" class="sizes" :class= "{'Size_Color': SizeColor == index}" @click= "Size_Color(index)">
+               <li v-for="(items,index) in sizes" :key="index" class="sizes" :class= "{'Size_Color': SizeColor == index}" @click= "Size_Color(index)">
                  {{items}}
                </li>
              </ul>
@@ -137,69 +137,64 @@ export default {
       startX : 0 ,
       endX : 0 ,
       index1: '',
-      Colors:[],
-      Sizes:[],
       SizeColor: 0,
       Color: 0,
+      colors: ["red","purple","green","pink"],
+      sizes: ["S","M","L","XL"],
       list: [{
-          id: 0,
-          price: 10,
-          count: 3,
-          size: "M",
-          isCheck: false,
-          imgUrl: require('../../assets/image/4.png'),
+          productId: 0,
+          productPrice: 10,
+          quantity: 3,
+          cpProductSize: "M",
+          ischecked: false,
+          cpProductColor: "red",
+          productPicture: require('../../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
-          colors: ["red","yellow","green","pink"],
-          sizes: ["S","M","L","XL"]
+          productName: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
         },
         {
-          id: 1,
-          price: 15,
-          count: 5,
-          size: "M",
-          isCheck: false,
-          imgUrl: require('../../assets/image/4.png'),
+          productId: 1,
+          productPrice: 15,
+          quantity: 5,
+          cpProductSize: "M",
+          ischecked: false,
+          cpProductColor: "red",
+          productPicture: require('../../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
-          colors: ["red","yellow","orange","pink"],
-          sizes: ["S","M","L","XL"]
+          productName: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
         },
         {
-          id: 2,
-          price: 3,
-          count: 6,
-          size: "M",
-          isCheck: false,
-          imgUrl: require('../../assets/image/4.png'),
+          productId: 2,
+          productPrice: 3,
+          quantity: 6,
+          cpProductSize: "M",
+          ischecked: false,
+          cpProductColor: "red",
+          productPicture: require('../../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
-          colors: ["red","yellow","green","pink"],
-          sizes: ["S","M","L","XL"] 
+          productName: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
         },
         {
-          id: 3,
-          price: 3,
-          count: 6,
-          size: "M",
-          isCheck: false,
-          imgUrl: require('../../assets/image/4.png'),
+          productId: 3,
+          productPrice: 3,
+          quantity: 6,
+          cpProductSize: "M",
+          ischecked: false,
+          cpProductColor: "red",
+          productPicture: require('../../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
-          colors: ["blue","yellow","green","pink"],
-          sizes: ["S","M","L","XL"]  
+          productName: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
         },
         {
-          id: 4,
-          price: 3,
-          count: 6,
-          size: "M",
-          isCheck: false,
-          imgUrl: require('../../assets/image/4.png'),
+          productId: 4,
+          productPrice: 3,
+          quantity: 6,
+          cpProductSize: "M",
+          ischecked: false,
+          cpProductColor: "red",
+          productPicture: require('../../assets/image/4.png'),
           shopname: "韩舍家",
-          describe: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
-          colors: ["red","purple","green","pink"],
-          sizes: ["S","M","L","XL"]
+          productName: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
         }
         ]
     }
@@ -217,29 +212,29 @@ export default {
       this.totalnum = 0;
       for(let i=0;i<this.list.length;i++){
         var _d = this.list[i];
-        if(_d.isCheck){
-          this.totalprice += _d['price']*_d['count'];
-          this.totalnum += _d['count']
+        if(_d.ischecked){
+          this.totalprice += _d['productPrice']*_d['quantity'];
+          this.totalnum += _d['quantity']
         }
       }
     },
     checkOne(index){
-      if(this.list[index].isCheck == true){
-        this.list[index].isCheck = false;
+      if(this.list[index].ischecked == true){
+        this.list[index].ischecked = false;
       }else{
-        this.list[index].isCheck = true;
+        this.list[index].ischecked = true;
       }
       this.getTotal();
     },
     checkAll(){
       if(this.checkall){
         for(let i=0;i<this.list.length;i++){
-          this.list[i].isCheck = false;
+          this.list[i].ischecked = false;
         }
         this.checkall = false;
       }else{
         for(let i=0;i<this.list.length;i++){
-          this.list[i].isCheck = true;
+          this.list[i].ischecked = true;
         }
         this.checkall = true;
       }
@@ -258,10 +253,8 @@ export default {
     },
     changeNum(index){
       this.Numshow = true;
-      this.Index = this.list[index].id;
-      this.Numnum = this.list[index].count;
-      this.Colors = this.list[index].colors;
-      this.Sizes = this.list[index].sizes;
+      this.Index = this.list[index].productId;
+      this.Numnum = this.list[index].quantity;
     },
     Size_Color(index){
       this.SizeColor = index;

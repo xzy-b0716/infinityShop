@@ -31,6 +31,9 @@ import Orders from '@/Pages/my/Orders/Orders'
 import SecKill from '@/Pages/home/SecKill'
 import SecDescribe from '../components/SecDescribe'
 import Comment from '@/Pages/home/Comment'
+import Classify from '../components/Classify'
+import searchResult from '@/Pages/search/searchResult'
+import Assortment from '@/Pages/search/Assortment'
 
 Vue.use(Router)
 export default new Router({
@@ -48,7 +51,19 @@ export default new Router({
     { 
       path:'/search',
       name:'Search',
-      component:Search
+      component:Search,
+      children:[
+        {
+          path:'/',
+          component:Assortment,
+          name:"assortment"
+        },
+        {
+          path:'/searchresult',
+          component:searchResult,
+      
+        }
+      ]
 
     },
     {
@@ -100,7 +115,8 @@ export default new Router({
     {
       path:'/describe',
       name:'Describe',
-      component:Describe
+      component:Describe,
+
     },
     {
       path: '/pay',
@@ -156,13 +172,20 @@ export default new Router({
         path:'/comment',
         name:'comment',
         component:Comment
+      },
+      {
+        path:'/classify',
+        name:'Classify',
+        component:Classify
       }
+
     
 
   ],
     scrollBehavior (to, from, savedPosition) {
       // return 期望滚动到哪个的位置
       return { x: 0, y: 0 }
-    },mode:'history'
+    },
+    mode:'history'
 })
 
