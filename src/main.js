@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: Seven
+ * @Date: 2019-08-01 01:55:28
+ * @LastEditors: Seven
+ * @LastEditTime: 2019-08-13 16:25:59
+ */
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -8,7 +16,7 @@ import 'mint-ui/lib/style.css'
 import Header from './components/Header'
 import fastClick from 'fastclick'
 import Recommend from './components/Recommend'
-import {MessageBox,Toast} from 'mint-ui'
+import {MessageBox,Toast,Actionsheet, DatetimePicker} from 'mint-ui'
 import axios from "axios"
 
 Vue.prototype.$axios=axios
@@ -22,7 +30,8 @@ Vue.prototype.axios = axios
 
 Vue.prototype.$messagebox=MessageBox;
 Vue.prototype.$toast=Toast;
-
+Vue.prototype.$actionsheet=Actionsheet;
+Vue.prototype.$datetimepicker=DatetimePicker;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

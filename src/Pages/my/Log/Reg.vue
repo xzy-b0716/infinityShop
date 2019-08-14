@@ -1,23 +1,36 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: Seven
+ * @Date: 2019-07-31 17:19:20
+ * @LastEditors: Seven
+ * @LastEditTime: 2019-08-14 03:42:11
+ -->
 <template>
 <div id="reg">
   <Header :message="message"></Header>
-  <ul class="content">
+  <form>
+    <ul class="content">
     <li v-for="(list,index) in lists" :key="index" class="li">
-      <input type="text" :placeholder="list.warning" class="init">
+      <input :type="list.type" :placeholder="list.warning" class="init" :required="list.required" :pattern="list.pattern" :title="list.title">
+    </li> 
+    <li class="li">
+      <input :type="this.registration.pwdType" class="init" placeholder="请填写密码" />
+      <img :src="this.registration.src" @click="changeType"/>
     </li>
   </ul>
   <div class="down">
-    <button class="btn" @click="save">注册</button>
+    <button class="btn">注册</button>
   </div>
-
+  </form>
   <div class="popback" v-show="popshow">
     <div class="pop">
       <div>
         <p>请选择登录方式</p>
-        <i class="icon-guanbi" @click="close"></i>
+        <i class="icon-guanbi"></i>
       </div>
-      <button @click="TelLogin">手机号登录</button>
-      <button @click="EmailLogin">邮箱登录</button>
+      <button >手机号登录</button>
+      <button >邮箱登录</button>
     </div>
   </div>
   
@@ -32,44 +45,80 @@
 export default{
   name:"reg",
   data(){
-    
+ 
     return{
       message:"注册",
       popshow:false,
+      registration:{
+        pwdType:"password",
+        src:require("@/assets/img/close_eyes.png")
+        
+    },
       lists:[
         {
-          warning:"请输入昵称"
+          type:"text",
+          warning:"请输入昵称",
+          required:"required",
+          pattern:"^[\\u4e00-\\u9fa5_a-zA-Z0-9-]{1,16}$",
+          title:""
         },
         {
-          warning:"请输入常用邮箱"
+          type:"text",
+          warning:"请输入会员名",
+          required:"required",
+          pattern:"^[\\u4e00-\\u9fa5_a-zA-Z0-9-]{1,16}$",
+          title:""
         },
         {
-          warning:"请输入手机号码"
+          type:"email",
+          warning:"请输入常用邮箱",
+          required:"required",
+          pattern:"/^[a-zA-Z0-9]{1,10}@[a-zA-Z0-9]{1,5}\.[a-zA-Z0-9]{1,5}$/",
+          title:""
+
         },
         {
-          warning:"请输入密码"
+          type:"tel",
+          warning:"请输入手机号码",
+          required:"required",
+          pattern:/^[1][3,4,5,6,7,8,9][0-9]{9}$/,
+        //   // pattern:"^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[0-3]|[5-9])|(18[0,5-9]))\d{8}$"
+       
+        title:""
         }
+        // {
+        //   type:"password",
+        //   warning:"请输入密码",
+        //   required:"required",
+        //   pattern:"/[a-zA-Z]\w[z0-9]/",
+        //   title:"由字母和数字组成，字母开头"
+        // }
       ]
     }  
   },
   methods:{
-    save(){
-      this.popshow = true;
-    },
-    TelLogin(){
-      this.popshow = false;
-      this.$router.push('tellogin')
-
-    },
-    EmailLogin(){
-      this.popshow = false;
-      this.$router.push('emaillogin')
-    
-    },
-    close(){
-      this.popshow = false;
-   
+    changeType(){
+      this.registration.pwdType=this.registration.pwdType==='password'?'text':'password';
+      this.registration.src=this.registration.src==require("@/assets/img/close_eyes.png")?require("@/assets/img/open_eyes.png"):require("@/assets/img/close_eyes.png");
     }
+    
+    // save(){
+    //   this.popshow = true;
+    // },
+    // TelLogin(){
+    //   this.popshow = false;
+    //   this.$router.push('tellogin')
+
+    // },
+    // EmailLogin(){
+    //   this.popshow = false;
+    //   this.$router.push('emaillogin')
+    
+    // },
+    // close(){
+    //   this.popshow = false;
+   
+    // }
     
 
   }
@@ -79,7 +128,9 @@ export default{
 #reg{
   width:100%;
   background-color:#FFFFFF;
-  .content{
+  form{
+    width:100%;
+    .content{
     width:80%;
     margin:0 auto;
     .li{
@@ -90,6 +141,14 @@ export default{
       height:.5rem;
       border:1px solid silver;
       border-radius:10px;
+      position:relative;
+      img{
+        position:absolute;
+        width:.3rem;
+        height:.3rem;
+        top:.1rem;
+        right:.2rem;
+      }
       .init{
         width:90%;
         outline:none;
@@ -112,6 +171,8 @@ export default{
     outline:none;
     margin-top:.3rem;
   }
+  }
+  
   .popback{
     width: 100%;
     height: 100%;
