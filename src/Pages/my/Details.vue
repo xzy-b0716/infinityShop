@@ -1,146 +1,257 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: Seven
+ * @Date: 2019-08-01 02:15:40
+ * @LastEditors: Seven
+ * @LastEditTime: 2019-08-14 01:45:11
+ -->
 <template>
 <div id="Details">
   <Header :message="message"></Header>
-  <ul class="content">
-    <li v-for="(lista,index) in listsa" :key="index +'_a'" class="li" @click="changepic">
-      <div class="c-left">
-        <p class="c-word">{{lista.word}}</p>  
-      </div>
-      <div class="c-right">
-        <img :src="lista.url" class="imgs">
-        <i :class="lista.iconf" id="icon2"></i>
-      </div>
-    </li>
-    <li v-for="(listb,index) in listsb" :key="index +'_b'" class="li">
-      <div class="c-left">
-        <p class="c-word">{{listb.word}}</p>
-      </div>
-      <div class="c-right">
-        <p class="c-uword">{{listb.uword}}</p>
-        <i :class="listb.iconf" id="icon2"></i>
-      </div>
-    </li>
-  </ul>
+  <div class="main">
+    <ul class="head">
+      <li>头像</li>
+      <li>
+        <img :src="head?head:url1" alt="" />
+        <input type="file" name="" accept="image/*" @change="headChange" id="imgehead"/>
+      </li>
+    </ul>
+    
+    <ul class="back">
+      <li>背景图片</li>
+      <li>
+        <img :src="back?back:url2" alt="" />
+        <input type="file" name="" accept="image/*" @change="backChange"/>
+      </li>
+    </ul>
+    <ul class="nickname"> 
+      <li>昵称</li>
+      <li><input type="text" placeholder="请输入昵称" :value="nickname"/></li>
+      <li class="icon-guifanliebiaoxiayibu"></li>
+    </ul>
+    <ul class="nickname">
+      <li>性别</li>
+      <li>
+        <input type="text" placeholder="请选择性别" readonly
+        @click="actionsheet" :value="sex"/>
+        </li>
+      <li class="icon-guifanliebiaoxiayibu"></li>
+    </ul>
+    <button class="btn" @click="save">保存</button>
+
+  </div>
+    <mt-actionsheet
+  :actions="actions"
+  v-model="sheetVisible">
+  </mt-actionsheet>
+
+  
+  
+    
 </div>
 </template>
 <script>
 export default{
   name:"Details",
   data(){
+    
     return{
+      head:"",
+      back:"",
       message:"个人信息",
-      listsa:[
+      sex:"",
+      nickname:"Jennifer",
+      url1:require('@/assets/img/2.png'),
+      url2:require('@/assets/img/3.png'),
+      actions:[
         {
-          word:"头像",
-          url:require('@/assets/img/2.png'),
-          iconf:"icon-guifanliebiaoxiayibu"
+          name:"男",
+          method:this.clickAction
         },
         {
-          word:"个人主页背景",
-          url:require('@/assets/img/3.png'),
-          iconf:"icon-guifanliebiaoxiayibu"
+          name:"女",
+          method:this.clickAction
         } 
       ],
-      listsb:[
-        {
-          word:"会员名",
-          uword:"lxp",
-          iconf:""
-        },
-        {
-          word:"昵称",
-          uword:"Jennifer",
-          iconf:"icon-guifanliebiaoxiayibu"
-        },
-        {
-          word:"密码",
-          uword:"",
-          iconf:"icon-guifanliebiaoxiayibu"
-        },
-        {
-          word:"邮箱",
-          uword:"",
-          iconf:"icon-guifanliebiaoxiayibu"
-        },
-        {
-          word:"电话",
-          uword:"",
-          iconf:"icon-guifanliebiaoxiayibu"
-        },
-        {
-          word:"生日",
-          uword:"",
-          iconf:"icon-guifanliebiaoxiayibu"
-        },
-        {
-          word:"性别",
-          uword:"",
-          iconf:"icon-guifanliebiaoxiayibu"
-        }
-
-      ]
+      //actionsheet默认不显示，操作sheetVisible控制显隐
+      sheetVisible:false,
       
-
+      
+      
+      
     }
   },
+  
   methods:{
-    changepic(){
-      console.log("1233")
+    actionsheet:function(){
+      //打开actionsheet
+      this.sheetVisible=true;
+    },
+    clickAction(e){
+      console.log(e);
+      this.sex=e.name;
+    },
+    //头像选择
+    headChange(e){
+      var that=this;
+      var file=e.target.files[0];
+      var reader=new FileReader();
+      reader.onload=function(e){
+        that.head=e.target.result;
+      }
+      reader.readAsDataURL(file);
+    },
+    backChange(e){
+      var that=this;
+      var file=e.target.files[0];
+      var reader=new FileReader();
+      reader.onload=function(e){
+        that.back=e.target.result;
+      }
+      reader.readAsDataURL(file);
+    },
+    save(){
+      
+      // var param=new FormData();
+      // param.append('picfile',file,file.name);
+      // // data.append('file',this.head);
+      // // data.appendTo('file',this.back);
+      // let config={
+      //   headers:{'Content-Type':'multipart/form-data'}
+      // };
+      // axios.post('url/',param,config).then(response=>{
+      //   console.log(response)
+      // })
+      
     }
-
+    
   }
 }
 </script>
 <style scoped lang="less">
 #Details{
-  .content{
-    .li{
+  font-size:.2rem;
+  .main{
+    width:100%;
+    .btn{
+      width:80%;
+    height:.4rem;
+    border-radius: 5px;
+    color:white;
+    font-size:.18rem;
+    background-color:#46aaff;
+    display:block;
+    margin:0 auto;
+    border:0;
+    outline:none;
+    margin-top:.3rem;
+    
+      
+    }
+    .head{
+      width:100%;
       list-style:none;
       height:.5rem;
       font-size:.20rem;
       display:flex;
       align-items: center;
-      justify-items: center;
-      border-bottom:0.5px solid silver;
-      .c-left{
-        padding-left:.16rem;
-        width:40%;
-        .c-word{
-          color:black;
-
-        }
+      justify-content:space-between;
+      border-bottom:1px solid silver;
+      :nth-child(1){
+        margin-left:5%;
+       
       }
-      .c-right{
-        width:60%;
-        color:silver;
-        display:flex;
-        align-items: center;
-        justify-items: center;
-        justify-content:flex-end;
-        padding-left:1.2rem;
-        .imgs{
-          width:.4rem;
-          height:.4rem;
-          margin-right:.12rem;
-
+      :nth-child(2){
+        width:.4rem;
+        height:.4rem;
+        margin-right:10%;
+        position:relative;
+        z-index:1;
+        img{
+          width:100%;
+          height:100%;
+          border-radius:100%;
         }
-        .c-uword{
-          color:silver;
-          margin-right:.12rem;
-
+        input{
+          width:100%;
+          height:100%;
+          position:absolute;
+          z-index:1;
+          left:0;
+          top:0;
+          opacity:0;
         }
-        #icon2{
-          font-size:.25rem;
-          padding-right:.16rem;
-          
-
-        }
-
-
       }
     }
+    .back{
+      width:100%;
+      list-style:none;
+      height:.5rem;
+      font-size:.20rem;
+      display:flex;
+      align-items: center;
+      justify-content:space-between;
+      border-bottom:1px solid silver;
+      :nth-child(1){
+        margin-left:5%;
+       
+      }
+      :nth-child(2){
+        width:.4rem;
+        height:.4rem;
+        margin-right:10%;
+        position:relative;
+        z-index:1;
+        img{
+          width:100%;
+          height:100%;
+          border-radius:100%;
+        }
+        input{
+          width:100%;
+          height:100%;
+          position:absolute;
+          z-index:1;
+          left:0;
+          top:0;
+          opacity:0;
+        }
+      }
+    }
+    .nickname{
+      width:100%;
+      list-style:none;
+      height:.5rem;
+      font-size:.20rem;
+      display:flex;
+      align-items: center;
+      justify-content:space-between;
+      border-bottom:1px solid silver;
+       :nth-child(1){
+        margin-left:5%;
+      }
+      :nth-child(2){
+        width:50%;
+        height:100%;
+        margin-left:10%;
+        input{
+          width:100%;
+          height:100%;
+          text-align:right;
+          border:0;
+          outline:none;
+        }
+      }
+      :nth-child(3){
+        font-size:.3rem;
+      }
+    }
+      
   }
+
 }
+
 
 </style>
 

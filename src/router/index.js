@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: Seven
+ * @Date: 2019-08-02 15:20:31
+ * @LastEditors: Seven
+ * @LastEditTime: 2019-08-14 01:57:58
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/Pages/home/Home'
@@ -6,6 +14,8 @@ import Collect from '@/Pages/collect/Collect'
 import Similar from '@/Pages/collect/Similar'
 import My from '../Pages/my/My'
 import Details from '../Pages/my/Details'
+import Changepwd from '../Pages/my/changepwd'
+
 import Address from '../Pages/my/Address'
 import Help from '@/Pages/my/Help'
 import Settings from '@/Pages/my/Settings'
@@ -56,6 +66,11 @@ export default new Router({
       path:'/details',
       name:'Details',
       component:Details
+    },
+    {
+      path:'/changepwd',
+      name:'Changepwd',
+      component:Changepwd
     },
     {
       path:'/address',

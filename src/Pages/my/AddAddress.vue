@@ -4,49 +4,47 @@
  * @Autor: Seven
  * @Date: 2019-08-01 01:55:29
  * @LastEditors: Seven
- * @LastEditTime: 2019-08-10 01:52:05
+ * @LastEditTime: 2019-08-13 17:41:32
  -->
+
 <template>
 <div id="add">
   <Header :message="message"></Header>
-  <div class="content">
+  <form class="content">
     <ul>
       <li>收货人</li>
       <li>
-        <input type="text" placeholder="收货人姓名" value="" required="required"/>
+        <input type="text" placeholder="收货人姓名" required="required">
       </li>
     </ul>
     <ul>
       <li>联系方式</li>
       <li>
-        <input type="text" placeholder="联系人手机号码" value="" required="required"/>
+        <input type="text" placeholder="联系人手机号码"  required="required">
         </li>
     </ul>
     <ul>
       <li>所在地区</li>
       <li>
-        <input type="text" placeholder="选择收货地址" readonly class="area" value="" required="required"/>
+        <input type="text" placeholder="选择收货地址" readonly class="area" required="required">
       </li>
     </ul>
     <ul>
       <li>详细地址</li>
       <li>
-        <input type="text" placeholder="街道详细地址" value="" required="required"/>
+        <input type="text" placeholder="街道详细地址" required="required">
         </li>
-    </ul>
-    <ul>
+    </ul> 
+     <ul>
       <li>设为默认地址</li>
       <li>
-        <input type="checkbox" />
+        <input type="checkbox">
       </li>
     </ul>
     <button type="button" class="submit" @click="saveAddr">保存</button>
-    <!-- <button type="button" class="submit" @click="deleteAddr">删除</button> -->
-    
-
-  </div>
+  </form>
         
-  <!-- <messagebox :v-if="showCancelButton"></messagebox> -->
+  
 
   
 
@@ -65,7 +63,38 @@ export default{
   data(){
     return{
       message:"添加收货地址"
-      
+      // lists:[
+      //   {
+      //     word:"收货人",
+      //     type:"text",
+      //     placeholder:"收货人姓名",
+      //     required:"required"
+      //   },
+      //   {
+      //     word:"联系方式",
+      //     type:"tel",
+      //     placeholder:"联系人手机号码",
+      //     required:"required"
+      //   },
+      //   {
+      //     word:"所在地区",
+      //     type:"text",
+      //     placeholder:"选择收货地址",
+      //     required:"required"
+      //   },
+      //   {
+      //     word:"详细地址",
+      //     type:"text",
+      //     placeholder:"街道详细地址",
+      //     required:"required"
+      //   },
+      //   {
+      //     word:"设为默认地址",
+      //     type:"checkbox",
+      //     placeholder:""
+      //   }
+
+      // ]
 
     }
   },
@@ -75,13 +104,7 @@ export default{
       
       // this.$toast("保存成功");
       // this.$router.push('address');
-    },
-    deleteAddr(){
-      this.$messagebox.confirm("确定执行此操作？").then(
-         action=>{
-           
-        }
-      )
+    }
        
       
       // MessageBox({
@@ -109,7 +132,7 @@ export default{
 
   }
 }
-}
+
 </script>
 <style scoped lang="less">
 #add{

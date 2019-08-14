@@ -1,136 +1,68 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: Seven
+ * @Date: 2019-07-25 12:21:00
+ * @LastEditors: Seven
+ * @LastEditTime: 2019-08-12 23:18:24
+ -->
 <template>
-<div id="add">
-  <Header :message="message"></Header>
-  <ul class="content">
-    <li v-for="(list,index) in lists" :key="index" class="li">
-      <input type="text" :placeholder="list.warning" class="init">
-      <div class="c-right">
-        <i :class="list.icon" class="i"></i>
-      </div> 
-    </li>
-  </ul>
-  <div class="under">
-    <p>设为默认地址</p>
-
-  </div>
-  <div class="down">
-    <button class="btn" @click="save">保存</button>
+<div id="setting">
+  <Header :message="msg"></Header>
+  <div>
+    <!-- <img :src="url1"/> -->
+    <button @click="login">登录</button>
+    <button @click="regin">注册</button>
   </div>
   
-
-
 </div>
-
 </template>
 <script>
 export default{
-  name:"add",
+  name:'setting',
   data(){
     return{
-      message:"添加收货地址",
-      lists:[
-        {
-          warning:"收货人",
-          icon:""
-        },
-        {
-          warning:"手机号码",
-          icon:"icon-guifanliebiaoxiayibu"
-        },
-        {
-          warning:"所在地区",
-          icon:"icon-guifanliebiaoxiayibu"
-        },
-        {
-          warning:"详细地址：如道路、门牌号、小区、楼栋号、单元室等",
-          icon:""
-        }
-      ]
+      msg:"设置",
+      url1:require('@/assets/img/3.png')
     }
   },
   methods:{
-    save(){
-      alert(1);
+    regin(){
+      this.$router.push('reg');
+    },
+    login(){
+      console.log(1);
     }
 
   }
+
 }
 </script>
-<style scoped lang="less">
-#add{
-  .content{
-    li{
-      list-style:none;
-      border-bottom:1px solid silver;
-      display:flex;
-      align-items:center;
-      justify-items:center;
-      height:.5rem;
-      .init{
-        
-        width:85%;
-        padding-left:.16rem;
-        margin-right:.2rem;
-        font-size:.18rem;
-        height:.5rem;
-        border: 0;  
-        outline: none;
-        background-color: rgba(0, 0, 0, 0);
-
-        }
-      .c-right{
-        width:15%;
-        display:flex;
-        align-items: center;
-        justify-content: center;
-        padding-right:.1rem;
-        .i{
-          color:silver;
-          font-size:.2rem;
-          
-
-        }
-
-      }
-      
-
-    }
-  }
-  .under{
-    border:1px solid silver;
-    height:.5rem;
-    margin-top:.15rem;
-    font-size:.18rem;
-    display:flex;
-    align-items: center;
-    // justify-content: center;
-    p{
-      padding-left:.16rem;
-
-    }
-
-  }
-  .down{
-    text-align:center;
-    margin-top:.2rem;
-    .btn{
-    width:.6rem;
+<style scoped lang='less'>
+#setting{
+  div{
+    width:100%;
+    // img{
+    //   background-size:100% 100%;
+    // }
+    // background:url("url1");
+    // background-image:"url(" + require('@/assets/img/3.png') + ")";
+    // background-size:100% 100%;
+    button{
+    display:block;
+    margin:0 auto;
+    width:75%;
     height:.4rem;
     outline:none;
+    border-style:none;
     border-radius:.1rem;
     background-color:rgba(126, 195, 216, 0.959);
     color:white;
     font-size:.2rem;
-    
-    
+    margin-top:.2rem;
   }
 
   }
-  
   
 }
-
 </style>
-
-
-
