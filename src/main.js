@@ -18,7 +18,12 @@ import fastClick from 'fastclick'
 import Recommend from './components/Recommend'
 import {MessageBox,Toast,Actionsheet, DatetimePicker} from 'mint-ui'
 import axios from "axios"
+import apiConfig from '../config/api.config.js'
+import Vuex from 'vuex'
 
+
+
+axios.defaults.baseURL=apiConfig.baseURL
 Vue.prototype.$axios=axios
 fastClick.attach(document.body)
 Vue.component("Header",Header)
@@ -26,7 +31,18 @@ Vue.config.productionTip = false
 Vue.component("bottom",Bottom)
 Vue.component("recommend",Recommend)
 Vue.use(Mint)
-Vue.prototype.axios = axios
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {
+    userId: 1
+  },
+  mutations: {
+    increment (state,n) {
+     return state.userId=n
+    }
+  }
+})
 
 Vue.prototype.$messagebox=MessageBox;
 Vue.prototype.$toast=Toast;
@@ -36,6 +52,7 @@ Vue.prototype.$datetimepicker=DatetimePicker;
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>',
   

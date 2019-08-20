@@ -1,7 +1,7 @@
 <template>
   <div class="describe">  
       <ul class="imgList" :style="style" @touchstart='touchStart' @touchend='touchEnd' >
-          <li v-for="(item,index) in goodsdetail.product.carousel" :key="index">
+          <li v-for="(item,index) in carousel" :key="index">
               <img :src= "item.path" alt="图片走丢啦"></li>
               </ul>  
 
@@ -23,7 +23,7 @@
        <div :class="{'choose':true,'show1':showSize}" @click="listShow">
            <i class="icon-xia"></i>
        </div>
-   </div>
+   </div> 
 <ul class="size" v-if="showSize">
     <li v-for="(item,index) in goodsdetail.product.productSize" :key="index" @click="changeSpan(index)">{{item.size}}</li>
 </ul>
@@ -38,14 +38,14 @@
 <div class="comment" @click="$router.push({path:'/comment',query:{datas:productDiscuss}})">
   <p> 宝贝评价({{goodsdetail.countDiscuss}})</p>
   <p class="read">查看全部 &gt;</p>
-   <ul>
+  <ul>
      <li>
         <p class="username">
            <i class="icon-zuanshi"></i>
-          <span>{{goodsdetail.product.productDiscuss[0].user.userName}}</span>
-        <span class="commenttime">{{goodsdetail.product.productDiscuss[0].pdCreatetime}}</span>
+          <span>{{user.userName}}</span>
+        <span class="commenttime">{{disscussOne.pdCreatetime}}</span>
            </p>
-     <p class="usercomment"> {{goodsdetail.product.productDiscuss[0].producDiscussComment}}</p> 
+     <p class="usercomment"> {{disscussOne.producDiscussComment}}</p> 
     </li>
   </ul> 
 </div>
@@ -58,7 +58,7 @@
       </li>
   </ul>
     </div>
- <recommend></recommend>
+ <recommend></recommend> 
 
 </div>
 </template>
@@ -69,6 +69,7 @@ export default {
   name: 'describe',
   data () {
     return {
+        carousel:[],
          msg:"立即购买",
          showSize:false,
          color:'',
@@ -86,7 +87,14 @@ export default {
          minute:'',
          second:'',
          timer:null,
-         goodsdetail:{},
+         disscussOne:{},
+         user:{},
+         goodsdetail:{
+             product:{
+             productName:""
+             }
+          
+         },
          seckill:{},
          nowTime:'',
          timer1:null,
@@ -104,7 +112,7 @@ export default {
            else if(this.size=="Choose your size"||this.color==''){
             this.$toast("请选择颜色或尺码")
            }else{
-            this.$axios.get('./../static/seckill.json')
+            this.$axios.get('./../static/seckill.json?productId='+this.productId+'&userId='+this.userId)
             .then(
              (res)=>{
              return eval(res.data);} )
@@ -183,8 +191,8 @@ export default {
      return n<10 ? "0"+n : ""+n;
       },   
       f(){
-          console.log("timer")
-    var iNow = new Date();  //当前时间对象
+       
+    var iNow =this.nowTime;  //当前时间对象
     var iNew = this.end;      
     var t = Math.floor((iNew - iNow)/1000); 
     var iH = Math.floor(t/3600); //时
@@ -204,7 +212,7 @@ export default {
     this.hour=this.fTime(iH);
     this.minute=this.fTime(iM);
     this.second=this.fTime(iS);  
-      
+    this.nowTime+=1000;
     },      
     fortime2(){
     this.str="距离秒杀结束还有",
@@ -231,9 +239,7 @@ export default {
   return null;
 },
 first(){    
-    console.log("timer1")
-          var iNow=new Date();
-          iNow=iNow.getTime();
+          var iNow=this.nowTime;      
           var start=this.parseToDate(this.seckillStartTime);
           var end=this.parseToDate(this.seckillEndTime);
           this.end=end;
@@ -252,6 +258,7 @@ first(){
              this.second=this.fTime(start.getSeconds());
              this.pshow=true;
              this.msg="秒杀未开始"
+              this.nowTime+=1000; 
            }else
                {
               var that=this; 
@@ -260,39 +267,46 @@ first(){
              this.pshow=true;
              this.msg="立即购买"
            }
+         
+
 }
 
   },
       created(){
-     this.$axios.get('./../static/secdestail.json')
-     .then(
-         (res)=>{
-         return eval(res.data);
-
-         } )
-         .then((res)=>{          
-            this.goodsdetail=res;
+     this.$axios.get('/queryAll?productId='+this.productId)
+         .then((res)=>{ 
+             console.log(res.data);         
+            this.goodsdetail=res.data;
+            this.carousel = this.goodsdetail.product.carousel;            
             this.productDiscuss=this. goodsdetail.product.productDiscuss;
+            this.discussOne= this.productDiscuss[0];
+            this.user= this.discussOne.user;
             this.seckillStartTime=this.goodsdetail.seckillStartTime ;
             this.seckillEndTime=this.goodsdetail.seckillEndTime;
+            this.nowTime=this.goodsdetail.nowTime;
             if(this.goodsdetail.seckillStock==0){
-            this.msg="已售空"
-          
+                this.msg="已售空"          
             }                 
             }
 
          )
          .catch(function (error) { 
           console.log(error);
-      }) 
+      })     
+      },
+      mounted(){
+         this.$nextTick(()=>{
          this.first();  
          var that=this;
         this.timer1=setInterval(that.first,1000) 
-         
-         
+      })     
      
-      },
-     
+},
+computed:{
+   productId:function(){
+       return this.$route.params.productId;
+   }
+}
 }
 
 

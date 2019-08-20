@@ -48,5 +48,7 @@
 
         "information":{"productBrand":{"name":"品牌","describe":"CK"},"productMaterial":{"name":"质地","describe":"牛皮"},"productVersion":{"name":"版型","describe":"性感版"},"productStyle":{"name":"风格","describe":"肩带款"},"productThickness":{"name":"厚薄","describe":"正常"}},
         
-        "seckillId":null,"seckillTitle":null,"seckillPrice":1000.0,"seckillStartTime":"2019-07-14 3:30:20","seckillEndTime":"2019-07-14 3:31:30","seckillCreateTime":null,"seckillStock":3,"productId":null
+        "seckillId":null,"seckillTitle":null,"seckillPrice":1000.0,"seckillStartTime":"2019-07-16 21:12:20","seckillEndTime":"2019-07-16 21:13:00",
+        "nowTime":"2019-07-16 21:11:20",
+        "seckillCreateTime":null,"seckillStock":3,"productId":null
     }

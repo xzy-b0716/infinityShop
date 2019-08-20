@@ -3,8 +3,8 @@
 <div class="swiper">
   <!-- <p>Infinity</p> -->
 <ul  :style="style"   @touchstart='touchStart' @touchend='touchEnd'>
-  <li v-for="(item,index) in arr " :key="index" @click.stop="$router.push('/describe')">
-    <img :src="item.url" alt="图片走丢啦">
+  <li v-for="(item,index) in arr " :key="index" @click.stop="$router.push('/describe/'+item.productId)">
+    <img :src="item.productPicture" alt="图片走丢啦">
   </li>
 </ul>
 <div class="point">
@@ -14,7 +14,7 @@
 <div class="recently-viewed">
   <p>Recently Viewed</p>
 <ul class="view" :style="style1" @touchstart='touchStart1' @touchend='touchEnd1'>
-<li v-for= "(item,index) in swip2" :key="index" @click.stop="go">
+<li v-for= "(item,index) in swip2" :key="index" @click.stop="$router.push({path:'/describe/'+item.productId})">
   <img :src="item.url" alt="">
   <i :class="{'icon-shoucang':true,'icon-shoucang1':item.like}" @click.stop="addclass(index)" ></i>
 </li>
@@ -50,52 +50,9 @@ export default {
        screenWidth:document.body.clientWidth,
       n:0,
       scrollTop:'',
-        arr:[
-        {
-          url:require("@/assets/img/1.jpg"),
-          goodsid:1
-        },
-        {
-          url:require("@/assets/img/2.jpg"),
-            goodsid:2
-        },
-        {
-          url:require("@/assets/img/1.jpg"),
-            goodsid:3
-        },
-         {
-          url:require("@/assets/img/1.jpg"),
-            goodsid:3
-        }
-
-        ],
+        arr:[],
         like:false,
-        swip2:[
-          {
-          url:"../../static/img/5.jpg",
-          like:false
-        },
-        {
-          url:"../../static/img/5.jpg",
-          like:false
-        },
-        {
-          url:"../../static/img/5.jpg",
-          like:false
-        },
-         {
-          url:"../../static/img/5.jpg",
-          like:false
-        },
-         {
-          url:"../../static/img/5.jpg",
-          like:false
-        }
-        , {
-          url:"../../static/img/5.jpg",
-          like:false
-        }
-        ],
+        swip2:[],
        
        
      
@@ -175,9 +132,7 @@ export default {
     addclass(n){
      this.swip2[n].like=!this.swip2[n].like;   
     },
-    go(){
-      this.$router.push({path:'/describe'})
-    },
+  
     f(){
      if(this.currentindex==0){
         this.off=true;
@@ -206,16 +161,24 @@ export default {
     }
   },
   created(){
-     this.play();
+    this.$axios.get('../../static/home.json')
+    .then((data)=>{
+      return data.data;
+     
+    }
+    
+    )
+    .then((data)=>{
+      this.arr=data.list1;
+      this.swip2=data.list2;
+     
+    })
+   
   },
  mounted () {
-      const that = this
-      window.onresize = () => {
-        return (() => {
-          window.screenWidth = document.body.clientWidth
-          that.screenWidth = window.screenWidth
-        })()
-      }
+   this.$nextTick(()=>{
+     this.play(); 
+   });
     }
 }
 </script>

@@ -29,9 +29,7 @@ export default {
        if(this.search==""){
          this.$toast("请输入搜索词")
        }else{
-         this.$axios.get("../../static/search.json",{
-           search:this.search
-         })
+         this.$axios.get("../../static/search.json?search="+this.search)
          .then((data)=>{
            return eval(data.data)
          })

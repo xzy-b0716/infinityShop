@@ -50,7 +50,6 @@ export default new Router({
     },
     { 
       path:'/search',
-      name:'Search',
       component:Search,
       children:[
         {
@@ -113,7 +112,7 @@ export default new Router({
       component:Similar
     },
     {
-      path:'/describe',
+      path:'/describe/:productId',
       name:'Describe',
       component:Describe,
 
@@ -133,7 +132,7 @@ export default new Router({
       component: SecKill
     },
     {
-      path:'/secdescribe',
+      path:'/secdescribe/:productId',
       name:'secdescribe',
       component:SecDescribe
     },

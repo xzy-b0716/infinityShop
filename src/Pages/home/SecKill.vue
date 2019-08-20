@@ -5,7 +5,7 @@
      <img src="@/assets/img/5.png" alt="图片走丢啦">
    </div>
   <ul>
-    <li v-for="(item,index) in seclist" :key="index" @click="$router.push('./secdescribe')">
+    <li v-for="(item,index) in seclist" :key="index" @click="$router.push('./secdescribe/'+item.product.productId)">
       <img :src="item.product.productPicture" alt="图片走丢啦">      
       <div>
         <p>{{item.seckillTitle}}</p>
@@ -25,7 +25,7 @@ export default {
     data() {
     return {
       message:'限时秒杀',
-      seclist:null      
+      seclist:[]      
 
     }
 },

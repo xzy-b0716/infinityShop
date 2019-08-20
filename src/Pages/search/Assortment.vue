@@ -109,9 +109,7 @@ export default{
       var dom=ev.target;
       this.index=dom.getAttribute("data-index");
       this.msg=this.arr[this.index].name;
-       this.$axios.get("../../static/search.json",{
-           number:this.arr[this.index].number
-         })
+       this.$axios.get("../../static/search.json?number="+this.arr[this.index].number)
          .then((data)=>{
            return eval(data.data)
          })

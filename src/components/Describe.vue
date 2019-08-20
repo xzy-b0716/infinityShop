@@ -35,9 +35,9 @@
     <li>
        <p class="username">
            <i class="icon-zuanshi"></i>
-          <span>{{goodsdetail.productDiscuss[0].user.userName}}</span>
-          <span class="time">{{goodsdetail.productDiscuss[0].pdCreatetime}}</span> </p>
-       <p class="usercomment"> {{goodsdetail.productDiscuss[0].producDiscussComment}}</p> 
+          <span>{{user.userName}}</span>
+          <span class="time">{{disscusOne.pdCreatetime}}</span> </p>
+       <p class="usercomment"> {{disscusOne.producDiscussComment}}</p> 
     </li>
   </ul>
 </div>
@@ -50,8 +50,10 @@
       </li>
   </ul>
     </div>
+    <!-- <button @click="aaa">点我</button> -->
 <p class="tuijian">猜你喜欢</p>
 <recommend></recommend>
+
   </div>
 </template>
 
@@ -64,16 +66,24 @@ export default {
          showSize:false,
          color:'',
          size:"Choose your size",
-         productDiscuss:null,
-         goodsdetail:null,
-        startX:0,   //触摸位置
-        disX: 0, 
-        currentindex:0,
-        style:'',
+         productDiscuss:[],
+         goodsdetail:{},
+         startX:0,   //触摸位置
+         disX: 0, 
+         currentindex:0,
+         style:'',
+         disscusOne:{},
+         user:{},
+         n:3
     }
     
  },
   methods:{
+       
+// aaa(){
+//     this.$store.commit('increment',this.n)
+//     console.log(this.userId)
+// },
         touchStart(ev){
                 ev= ev || event 
             if(ev.touches.length == 1){
@@ -132,20 +142,22 @@ export default {
         this.$toast("请选择颜色或尺码")
         else
         this.$toast("已加入购物车")
-} 
+}
 
 
   },
   created(){
-     this.$axios.get('./../static/mydata.json')
+     this.$axios.get('productAll?productId='+this.productId+'&userId=1')
      .then(
          (res)=>{
-         return eval(res.data);
+         return res.data;
 
          } )
          .then((res)=>{          
             this.goodsdetail=res[0].data;
             this.productDiscuss=this.goodsdetail.productDiscuss;
+            this.discussOne= this.productDiscuss[0];
+            this.user= this.discussOne.user;
          
 
          })
@@ -156,8 +168,12 @@ export default {
   },
       computed:{
       productId:function(){
-          return this.$route.params. productId
+          return this.$route.params.productId
+      },
+      userId(){
+         return this.$store.state.userId;
       }
+        
   }
 }
 

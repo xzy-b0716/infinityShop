@@ -1,0 +1,42 @@
+
+{"list1":[{"productId":1,
+  "productName":null,
+  "productPicture":"../../static/img/1.jpg","productStock":null,"productclass":null,"browse":null,"list1":null,"list":null,"productComNum":null,"productPrice":null,"productDescribe":null,"productSizePic":null,"productSuperclass":null,"productClassId":null,"productCreatetime":null,"productBrand":null,"productMaterial":null,"productVersion":null,"productStyle":null,"productThickness":null,"productSize":null,"productColor":null},
+  {"productId":1,"productName":"w","productPicture":"../../static/img/2.jpg","productStock":null,"productclass":null,"browse":null,"list1":null,"list":null,"productComNum":null,"productPrice":null,"productDescribe":null,"productSizePic":null,"productSuperclass":null,"productClassId":null,"productCreatetime":null,"productBrand":null,"productMaterial":null,"productVersion":null,"productStyle":null,"productThickness":null,"productSize":null,"productColor":null},
+  {"productId":1,"productName":"w","productPicture":"../../static/img/1.jpg","productStock":null,"productclass":null,"browse":null,"list1":null,"list":null,"productComNum":null,"productPrice":null,"productDescribe":null,"productSizePic":null,"productSuperclass":null,"productClassId":null,"productCreatetime":null,"productBrand":null,"productMaterial":null,"productVersion":null,"productStyle":null,"productThickness":null,"productSize":null,"productColor":null},
+  {"productId":1,"productName":"w","productPicture":"../../static/img/2.jpg","productStock":null,"productclass":null,"browse":null,"list1":null,"list":null,"productComNum":null,"productPrice":null,"productDescribe":null,"productSizePic":null,"productSuperclass":null,"productClassId":null,"productCreatetime":null,"productBrand":null,"productMaterial":null,"productVersion":null,"productStyle":null,"productThickness":null,"productSize":null,"productColor":null}
+
+],
+"list2":[
+  {
+ "url":"../../static/img/5.jpg",
+ "like":false,
+ "productId":1
+},
+{
+  "url":"../../static/img/5.jpg",
+  "like":false,
+  "productId":1
+},
+{
+  "url":"../../static/img/5.jpg",
+  "like":false,
+  "productId":1
+},
+ {
+  "url":"../../static/img/5.jpg",
+  "like":false,
+  "productId":89
+},
+ {
+  "url":"../../static/img/5.jpg",
+  "like":false,
+  "productId":1
+}
+, {
+  "url":"../../static/img/5.jpg",
+  "like":false,
+  "productId":1
+}
+]
+}

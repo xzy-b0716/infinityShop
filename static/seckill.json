@@ -1,7 +1,7 @@
 {"success":false,
     "data":
     {"productId":2,
-        "state":-1,
+        "state":-4,
         "stateInfo":"秒杀成功","successKillPro":
         {
             "userId":45,
