@@ -26,7 +26,6 @@ export default {
     return {
       message:'限时秒杀',
       seclist:null      
-
     }
 },
  created(){
@@ -38,7 +37,6 @@ export default {
          } )
          .then((res)=>{          
             this.seclist=res;
-
          })
          .catch(function (error) { 
           console.log(error);

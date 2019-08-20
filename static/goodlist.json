@@ -1,0 +1,19 @@
+[{
+    "Total": true,
+    "lists":
+        [{
+            "cartId": 4,
+            "userId": null,
+            "productId": 0,
+            "productPrice": 10,
+            "quantity": 3,
+            "cpProductSize": "M",
+            "ischecked": false,
+            "checked": 1,
+            "isAlive": 1,
+            "cpProductColor": "red",
+            "productPicture": "../../static/img/4.png",
+            "productName": "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女"
+          }]
+    
+}]

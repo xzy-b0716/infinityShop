@@ -1,0 +1,14 @@
+{
+    "total" : false,
+    "lists":[{
+        "orderitemId": 1,
+        "productId": 1,
+        "ordersId":1,
+        "productPicture": "../../../assets/image/4.png",
+        "productName": "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
+        "oiProductColor": "黑色",
+        "oiProductSize": "M",
+        "oiProductNum": 1,
+        "oiTotalPrice": 133
+    }]
+}

@@ -14,11 +14,11 @@
     <div class="goods" v-show= "count>0" style="overflow-x:hidden">
       <div style="overflow-x:visible">
         <ul class="list-ul">
-          <li class="list-item" v-for = "(item, index) in list" :key= "index" data-type="0">
+          <li class="list-item" v-for = "(item, index) in lists" :key= "index" data-type="0">
               <div class="goods-list" @touchstart.capture="touchStart" @touchend.capture="touchEnd" @click="skip">
                   <div class="service-information">
                       <i class="icon-weigouxuan" @click= "checkOne(index)" :class= "{'icon-duigou': item.ischecked}"></i>
-                      <div class="name" @click= "Jdescribe">{{item.shopname}}</div>
+                      <div class="name" @click= "Jdescribe">天猫</div>
                       <i class="icon-guifanliebiaoxiayibu" @click= "Jdescribe"></i>
                   </div>
                   <div class="goods-information">
@@ -29,10 +29,10 @@
                       <div class="right">
                           <div class="right-top">
                               <div class="price">￥{{item.productPrice}}</div>
-                              <div class="describe" @click= "Jdescribe">{{item.productName | snippet}}</div>
+                              <div class="describe" @click= "Jdescribe">{{item.productName}}</div>
                           </div>
                           <div class="right-middle">
-                              <div class="color"></div>
+                              <div class="color" :style="{'backgroundColor':item.cpProductColor}"></div>
                               <a class="color-selection" @click= "changeNum(index)">change</a>
                           </div>
                           <div class="right-bottom">
@@ -141,68 +141,27 @@ export default {
       Color: 0,
       colors: ["red","purple","green","pink"],
       sizes: ["S","M","L","XL"],
-      list: [{
-          productId: 0,
-          productPrice: 10,
-          quantity: 3,
-          cpProductSize: "M",
-          ischecked: false,
-          cpProductColor: "red",
-          productPicture: require('../../assets/image/4.png'),
-          shopname: "韩舍家",
-          productName: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
-        },
-        {
-          productId: 1,
-          productPrice: 15,
-          quantity: 5,
-          cpProductSize: "M",
-          ischecked: false,
-          cpProductColor: "red",
-          productPicture: require('../../assets/image/4.png'),
-          shopname: "韩舍家",
-          productName: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
-        },
-        {
-          productId: 2,
-          productPrice: 3,
-          quantity: 6,
-          cpProductSize: "M",
-          ischecked: false,
-          cpProductColor: "red",
-          productPicture: require('../../assets/image/4.png'),
-          shopname: "韩舍家",
-          productName: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
-        },
-        {
-          productId: 3,
-          productPrice: 3,
-          quantity: 6,
-          cpProductSize: "M",
-          ischecked: false,
-          cpProductColor: "red",
-          productPicture: require('../../assets/image/4.png'),
-          shopname: "韩舍家",
-          productName: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
-        },
-        {
-          productId: 4,
-          productPrice: 3,
-          quantity: 6,
-          cpProductSize: "M",
-          ischecked: false,
-          cpProductColor: "red",
-          productPicture: require('../../assets/image/4.png'),
-          shopname: "韩舍家",
-          productName: "黑色洋装小个子短款连衣裙荷叶边显瘦2019新款优雅小香风小礼服女",
-        }
-        ]
+      lists: null,
+      list: null
     }
   },
   
+  created(){
+   this.$axios.get('./../static/goodlist.json')
+   .then((res)=>{
+     return eval(res.data);
+   })
+   .then((res)=>{
+     this.list = res;
+     this.lists = this.list[0].lists;
+   })
+   .catch(function(error){
+    console.log(error);
+   })
+  },
   filters:{
     snippet(value){
-    return value.slice(0,25)+"...";
+    // return value.slice(0,25)+"...";
     }
   },
 
@@ -210,8 +169,8 @@ export default {
     getTotal(){
       this.totalprice = 0;
       this.totalnum = 0;
-      for(let i=0;i<this.list.length;i++){
-        var _d = this.list[i];
+      for(let i=0;i<this.lists.length;i++){
+        var _d = this.lists[i];
         if(_d.ischecked){
           this.totalprice += _d['productPrice']*_d['quantity'];
           this.totalnum += _d['quantity']
@@ -219,22 +178,22 @@ export default {
       }
     },
     checkOne(index){
-      if(this.list[index].ischecked == true){
-        this.list[index].ischecked = false;
+      if(this.lists[index].ischecked == true){
+        this.lists[index].ischecked = false;
       }else{
-        this.list[index].ischecked = true;
+        this.lists[index].ischecked = true;
       }
       this.getTotal();
     },
     checkAll(){
       if(this.checkall){
-        for(let i=0;i<this.list.length;i++){
-          this.list[i].ischecked = false;
+        for(let i=0;i<this.lists.length;i++){
+          this.lists[i].ischecked = false;
         }
         this.checkall = false;
       }else{
-        for(let i=0;i<this.list.length;i++){
-          this.list[i].ischecked = true;
+        for(let i=0;i<this.lists.length;i++){
+          this.lists[i].ischecked = true;
         }
         this.checkall = true;
       }
@@ -249,12 +208,16 @@ export default {
         this.show1 = true;
       }else{
         this.$router.push({path: '/Pay'});
+        // this.$axios.get('./../static/pay.json',{
+        //   "Totalprice" : this.totalprice,
+        //   "Totalnum" : this.totalnum
+        // })
       }
     },
     changeNum(index){
       this.Numshow = true;
-      this.Index = this.list[index].productId;
-      this.Numnum = this.list[index].quantity;
+      this.Index = this.lists[index].productId;
+      this.Numnum = this.lists[index].quantity;
     },
     Size_Color(index){
       this.SizeColor = index;
@@ -283,67 +246,68 @@ export default {
       this.$router.push({path: '/describe'});
     },
     skip(){
-  if( this.checkSlide() ){
-  this.restSlide();
+      if( this.checkSlide() ){
+        this.restSlide();
       }else{
-  // alert('You click the slide!')
+        // alert('You click the slide!')
       }
- },
- //滑动开始
- touchStart(e){
-   // 记录初始位置
-  this.startX = e.touches[0].clientX;
- },
- //滑动结束
- touchEnd(e){
-            // 当前滑动的父级元素
-  let parentElement = e.currentTarget.parentElement;
-  
-  
-  // 记录结束位置
-  this.endX = e.changedTouches[0].clientX;
-            // 左滑
-  if( parentElement.dataset.type == 0 && this.startX - this.endX > 30 ){
-  this.restSlide();
-  parentElement.dataset.type = 1;
-  }
-            // 右滑
-  if( parentElement.dataset.type == 1 && this.startX - this.endX < -30 ){
-  this.restSlide();
-  parentElement.dataset.type = 0;
-  }
-  this.startX = 0;
-  this.endX = 0;
- },
+    },
+    //滑动开始
+    touchStart(e){
+    // 记录初始位置
+      this.startX = e.touches[0].clientX;
+    },
+    //滑动结束
+    touchEnd(e){
+      // 当前滑动的父级元素
+      let parentElement = e.currentTarget.parentElement;
+      // 记录结束位置
+      this.endX = e.changedTouches[0].clientX;
+      // 左滑
+      if( parentElement.dataset.type == 0 && this.startX - this.endX > 30 ){
+        this.restSlide();
+        parentElement.dataset.type = 1;
+      }
+      // 右滑
+      if( parentElement.dataset.type == 1 && this.startX - this.endX < -30 ){
+        this.restSlide();
+        parentElement.dataset.type = 0;
+      }
+    this.startX = 0;
+    this.endX = 0;
+  },
     //判断当前是否有滑块处于滑动状态
-    checkSlide(){
-  let listItems = document.querySelectorAll('.list-item');
-  for( let i = 0 ; i < listItems.length ; i++){
-  if( listItems[i].dataset.type == 1 ) {
-   return true;
-        }
-  }
+  checkSlide(){
+    let listItems = document.querySelectorAll('.list-item');
+    for( let i = 0 ; i < listItems.length ; i++){
+      if( listItems[i].dataset.type == 1 ) {
+          return true;
+      }
+    }
   return false;
     },
- //复位滑动状态
- restSlide(){
-  let listItems = document.querySelectorAll('.list-item');
+  //复位滑动状态
+  restSlide(){
+    let listItems = document.querySelectorAll('.list-item');
              // 复位
-  for( let i = 0 ; i < listItems.length ; i++){
-  listItems[i].dataset.type = 0;
-  }
- },
- //删除
- deleteItem(e){
-   // 当前索引
-  let index = e.currentTarget.dataset.index;
-  // 复位
-  this.restSlide();
-  // 删除
-  this.list.splice(index,1);
- }
+    for( let i = 0 ; i < listItems.length ; i++){
+      listItems[i].dataset.type = 0;
+     }
+    },
+  //删除
+  deleteItem(e){
+    // 当前索引
+    let index = e.currentTarget.dataset.index;
+    // 复位
+    this.restSlide();
+    // 删除
+    this.list.splice(index,1);
+    }
   }
 }
+  
+   
+  
 </script>
 <style scoped lang="less">
     .bottom{

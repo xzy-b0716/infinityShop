@@ -72,7 +72,7 @@
         </transition>
         <footer>
             <div class="total">
-                ￥<span>12346</span>
+                ￥<span>{{totalprice}}</span>
             </div>
             <button>提交订单</button>
         </footer>
@@ -86,6 +86,8 @@ export default {
             isShow: 0,
             show: false,
             show1: false,
+            totalprice: 0,
+            Totalnum: 0,
             message: "在线支付",
             list_pay:["在线支付","货到付款","公司转账"]
         }
